@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 import { isLoggedIn, initials } from "../global/data";
@@ -40,20 +39,13 @@ class Page {
 }
 
 const page1 = new Page(
-  "Good Deals",
-  (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello");
-  }
-);
-
-const page2 = new Page(
   "Order Now",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     console.log("hello2");
   }
 );
 
-const pgClasses = [page1, page2];
+const pgClasses = [page1];
 
 class Setting {
   name: string;
@@ -208,6 +200,35 @@ function NavBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+              <Button onClick={handleOpenUserMenu} color="secondary">
+                Good Deals
+              </Button>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem
+                    component="button"
+                    key={setting.name}
+                    onClick={setting.onClick}
+                  >
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
               {pgClasses.map((page) => (
                 <Button
                   key={page.name}
@@ -241,7 +262,6 @@ function NavBar() {
                 </div>
               )}
               {isLoggedIn ? (
-                <Tooltip title="Open settings" placement="bottom">
                   <div>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
@@ -278,7 +298,6 @@ function NavBar() {
                       ))}
                     </Menu>
                   </div>
-                </Tooltip>
               ) : null}
             </Box>
           </Toolbar>
