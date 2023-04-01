@@ -40,14 +40,14 @@ class Page {
 }
 
 const page1 = new Page(
-  "hello",
+  "Good Deals",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     console.log("hello");
   }
 );
 
 const page2 = new Page(
-  "hello2",
+  "Order Now",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     console.log("hello2");
   }
@@ -195,7 +195,7 @@ function NavBar() {
               {AppName}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pgClasses.map((page) => (
+              {/* {pgClasses.map((page) => (
                 <Button
                   key={page.name}
                   // onClick={handleCloseNavMenu}
@@ -204,12 +204,25 @@ function NavBar() {
                 >
                   {page.name}
                 </Button>
-              ))}
+              ))} */}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+              {pgClasses.map((page) => (
+                <Button
+                  key={page.name}
+                  // onClick={handleCloseNavMenu}
+                  onClick={page.onClick}
+                  sx={{ color: "white" }}
+                >
+                  {page.name}
+                </Button>
+              ))}
+              <div style={{ width: 15 }}></div>
               {isLoggedIn ? null : (
-                <div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <Button
                     variant="outlined"
                     color="secondary"
@@ -217,6 +230,7 @@ function NavBar() {
                   >
                     Login
                   </Button>
+                  <div style={{ width: 10 }}></div>
                   <Button
                     variant="contained"
                     color="secondary"
