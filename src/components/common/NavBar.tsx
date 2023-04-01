@@ -38,15 +38,6 @@ class Page {
   }
 }
 
-const page1 = new Page(
-  "Order Now",
-  (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello2");
-  }
-);
-
-const pgClasses = [page1];
-
 class Setting {
   name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -59,6 +50,26 @@ class Setting {
     this.onClick = onClick;
   }
 }
+
+class Deal {
+  name: string;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
+  constructor(
+    name: string,
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  ) {
+    this.name = name;
+    this.onClick = onClick;
+  }
+}
+
+const page1 = new Page(
+  "Order Now",
+  (event: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log("hello2");
+  }
+);
 
 const setting1 = new Setting(
   "hello",
@@ -74,7 +85,23 @@ const setting2 = new Setting(
   }
 );
 
+const deal1 = new Deal(
+  "hello2",
+  (event: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log("hello2");
+  }
+);
+
+const deal2 = new Deal(
+  "hello2",
+  (event: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log("hello2");
+  }
+);
+
+const pgClasses = [page1];
 const settings = [setting1, setting2];
+const deals = [deal1, deal2]
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -219,13 +246,13 @@ function NavBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {deals.map((deal) => (
                   <MenuItem
                     component="button"
-                    key={setting.name}
-                    onClick={setting.onClick}
+                    key={deal.name}
+                    onClick={deal.onClick}
                   >
-                    <Typography textAlign="center">{setting.name}</Typography>
+                    <Typography textAlign="center">{deal.name}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
