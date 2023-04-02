@@ -88,20 +88,20 @@ const setting2 = new Setting(
 const deal1 = new Deal(
   "Close to me",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello562");
+    window.location.href = "/deals/close-to-me";
   }
 );
 
 const deal2 = new Deal(
-  "Michelin",
+  "Michelin Star",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello2");
+    window.location.href = "/deals/michelin-star";
   }
 );
 
 const pgClasses = [page1];
 const settings = [setting1, setting2];
-const deals = [deal1, deal2]
+const deals = [deal1, deal2];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -310,42 +310,39 @@ function NavBar() {
                 </div>
               )}
               {isLoggedIn ? (
-                  <div>
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar
-                        alt={initials}
-                        src="/static/images/avatar/2.jpg"
-                      />
-                    </IconButton>
-                    <Menu
-                      sx={{ mt: "45px" }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-                      {settings.map((setting) => (
-                        <MenuItem
-                          component="button"
-                          key={setting.name}
-                          onClick={setting.onClick}
-                        >
-                          <Typography textAlign="center">
-                            {setting.name}
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </div>
+                <div>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt={initials} src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem
+                        component="button"
+                        key={setting.name}
+                        onClick={setting.onClick}
+                      >
+                        <Typography textAlign="center">
+                          {setting.name}
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </div>
               ) : null}
             </Box>
           </Toolbar>
