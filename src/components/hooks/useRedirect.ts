@@ -13,7 +13,7 @@ const useRedirect = (to: string, seconds: number = 5) => {
 
   useEffect(() => {
     if (countdown === 0) {
-      window.location.href = to;
+      window.location.href = `/${to}`;
     }
   }, [countdown, to]);
 
