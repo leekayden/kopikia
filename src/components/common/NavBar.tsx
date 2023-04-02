@@ -86,14 +86,14 @@ const setting2 = new Setting(
 );
 
 const deal1 = new Deal(
-  "hello2",
+  "Close to me",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello2");
+    console.log("hello562");
   }
 );
 
 const deal2 = new Deal(
-  "hello2",
+  "Michelin",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     console.log("hello2");
   }
@@ -107,7 +107,13 @@ function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
+  const [anchorElNav2, setAnchorElNav2] = React.useState<null | HTMLElement>(
+    null
+  );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser2, setAnchorElUser2] = React.useState<null | HTMLElement>(
     null
   );
 
@@ -124,6 +130,21 @@ function NavBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleOpenNavMenu2 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav2(event.currentTarget);
+  };
+  const handleOpenUserMenu2 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser2(event.currentTarget);
+  };
+
+  const handleCloseNavMenu2 = () => {
+    setAnchorElNav2(null);
+  };
+
+  const handleCloseUserMenu2 = () => {
+    setAnchorElUser2(null);
   };
 
   return (
@@ -227,13 +248,13 @@ function NavBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              <Button onClick={handleOpenUserMenu} color="secondary">
+              <Button onClick={handleOpenUserMenu2} color="secondary">
                 Good Deals
               </Button>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
-                anchorEl={anchorElUser}
+                anchorEl={anchorElUser2}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
@@ -243,8 +264,8 @@ function NavBar() {
                   vertical: "top",
                   horizontal: "right",
                 }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                open={Boolean(anchorElUser2)}
+                onClose={handleCloseUserMenu2}
               >
                 {deals.map((deal) => (
                   <MenuItem
