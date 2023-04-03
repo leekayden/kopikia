@@ -26,6 +26,8 @@ const theme = createTheme({
   },
 });
 
+const navigate = useNavigate();
+
 class Page {
   name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -148,8 +150,6 @@ function NavBar() {
   const handleCloseUserMenu2 = () => {
     setAnchorElUser2(null);
   };
-
-  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
