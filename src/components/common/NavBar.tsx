@@ -96,7 +96,7 @@ const deal1 = new Deal(
 const deal2 = new Deal(
   "Michelin Star",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    window.location.replace = "/deals/michelin-star";
+    window.location.replace("/deals/michelin-star");
   }
 );
 
