@@ -53,25 +53,14 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
+              Take a new order (Order #)
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText
-              primary="Default notification ringtone"
-              secondary="Tethys"
-            />
-          </ListItem>
-        </List>
+        <TextField id="order-name" label="Order Name" variant="standard" />
       </Dialog>
     </div>
   );
