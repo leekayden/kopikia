@@ -70,7 +70,6 @@ export default function FullScreenDialog() {
         <TextField
           sx={{ width: "50vw" }}
           id="order-name"
-          autoFocus
           margin="dense"
           label="Order Name"
           variant="standard"
