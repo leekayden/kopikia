@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -95,7 +96,8 @@ const deal1 = new Deal(
 const deal2 = new Deal(
   "Michelin Star",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    window.location.href = "/deals/michelin-star";
+    // window.location.href = "/deals/michelin-star";
+    navigate("/deals/michelin-star");
   }
 );
 
@@ -146,6 +148,8 @@ function NavBar() {
   const handleCloseUserMenu2 = () => {
     setAnchorElUser2(null);
   };
+
+  const navigate = useNavigate();
 
   return (
     <ThemeProvider theme={theme}>
