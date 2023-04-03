@@ -1,4 +1,5 @@
 import NavBar from "./NavBar";
+import TakeOrder from "./TakeOrder";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -21,7 +22,7 @@ function Order() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={8}>
-            <Item><Button variant="contained" size="large">Take an order</Button></Item>
+            <Item><TakeOrder /></Item>
           </Grid>
           <Grid item xs={4}>
             <Item>xs=4</Item>
