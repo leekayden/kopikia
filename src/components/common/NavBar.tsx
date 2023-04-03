@@ -20,6 +20,9 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
 const theme = createTheme({
   palette: {
+    primary: {
+      main: "#795548",
+    },
     secondary: {
       main: "#FFF",
     },
