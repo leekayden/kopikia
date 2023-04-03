@@ -26,8 +26,6 @@ const theme = createTheme({
   },
 });
 
-const navigate = useNavigate();
-
 class Page {
   name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -98,8 +96,7 @@ const deal1 = new Deal(
 const deal2 = new Deal(
   "Michelin Star",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // window.location.href = "/deals/michelin-star";
-    navigate("/deals/michelin-star");
+    location.replace = "/deals/michelin-star";
   }
 );
 
