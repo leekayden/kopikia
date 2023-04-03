@@ -59,7 +59,6 @@ export default function FullScreenDialog() {
               Take a new order (Order #)
             </Typography>
             <Button
-              sx={{ width: "50vw" }}
               autoFocus
               color="inherit"
               onClick={handleClose}
@@ -69,6 +68,7 @@ export default function FullScreenDialog() {
           </Toolbar>
         </AppBar>
         <TextField
+          sx={{ width: "50vw" }}
           id="order-name"
           autoFocus
           margin="dense"
