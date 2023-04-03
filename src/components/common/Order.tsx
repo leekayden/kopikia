@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import NavBar from "./NavBar";
 
 function Order() {
   return (
-    <div>Order</div>
-  )
+    <div>
+      <NavBar />
+    </div>
+  );
 }
 
-export default Order
+export default Order;
