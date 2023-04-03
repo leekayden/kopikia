@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#795548",
