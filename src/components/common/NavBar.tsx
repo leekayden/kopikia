@@ -71,7 +71,7 @@ class Deal {
 const page1 = new Page(
   "Order Now",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello2");
+    window.location.replace("/order")
   }
 );
 
