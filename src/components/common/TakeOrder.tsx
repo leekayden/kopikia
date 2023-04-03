@@ -58,7 +58,12 @@ export default function FullScreenDialog() {
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Take a new order (Order #)
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button
+              sx={{ width: "50vw" }}
+              autoFocus
+              color="inherit"
+              onClick={handleClose}
+            >
               save
             </Button>
           </Toolbar>
