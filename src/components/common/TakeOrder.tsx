@@ -8,8 +8,9 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import TextField from "@mui/material/TextField";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 import { TransitionProps } from "@mui/material/transitions";
+import Grid from "@mui/material/Grid";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -34,13 +35,13 @@ export default function FullScreenDialog() {
       "September",
       "October",
       "November",
-      "December"
+      "December",
     ];
     const today = new Date();
     const day = today.getDate();
     const monthIndex = today.getMonth();
     const year = today.getFullYear();
-  
+
     return `${day} ${months[monthIndex]} ${year}`;
   };
 
@@ -90,14 +91,45 @@ export default function FullScreenDialog() {
             </Button>
           </Toolbar>
         </AppBar>
-        <TextField
-          sx={{ width: "50vw" }}
-          id="order-name"
-          margin="dense"
-          label="Order Name"
-          variant="standard"
-          defaultValue={currentDate}
-        />
+        <Grid container sx={{ p: 3 }}>
+          <Grid item xs={12} sx={{ mb: 2 }}>
+            <TextField
+              fullWidth
+              id="order-name"
+              margin="dense"
+              label="Order Name"
+              variant="standard"
+              defaultValue={currentDate}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
+            <TextField
+              fullWidth
+              id="first-name"
+              margin="dense"
+              label="First Name"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} sx={{ pl: 2 }}>
+            <TextField
+              fullWidth
+              id="last-name"
+              margin="dense"
+              label="Last Name"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              id="address"
+              margin="dense"
+              label="Address"
+              variant="standard"
+            />
+          </Grid>
+        </Grid>
       </Dialog>
     </div>
   );
