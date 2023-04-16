@@ -13,6 +13,8 @@ import { TransitionProps } from "@mui/material/transitions";
 import Grid from "@mui/material/Grid";
 import EditableList from "../components/EditableList";
 import { OrderList } from "../global/data";
+import StepperComponent from "./ChooseOrder";
+import Box from "@mui/material/Box";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -134,6 +136,7 @@ export default function FullScreenDialog() {
             />
           </Grid>
           <EditableList list={["item1"]} type="Orders" />
+          <StepperComponent />
         </Grid>
       </Dialog>
     </div>
