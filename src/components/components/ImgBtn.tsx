@@ -8,16 +8,19 @@ let images = [
     url: "/static/images/buttons/breakfast.jpg",
     title: "Breakfast",
     width: "40%",
+    bgUrl: "",
   },
   {
     url: "/static/images/buttons/burgers.jpg",
     title: "Burgers",
     width: "30%",
+    bgUrl: "",
   },
   {
     url: "/static/images/buttons/camera.jpg",
     title: "Camera",
     width: "30%",
+    bgUrl: "",
   },
 ];
 
@@ -86,7 +89,7 @@ const ImageMarked = styled("span")(({ theme }) => ({
 }));
 
 interface ButtonBasesProps {
-  imgLs?: { url: string; title: string; width: string }[];
+  imgLs?: { url: string; title: string; width: string; bgUrl: string; }[];
 }
 
 export default function ButtonBases({ imgLs }: ButtonBasesProps) {
@@ -111,7 +114,7 @@ export default function ButtonBases({ imgLs }: ButtonBasesProps) {
           }}
           onClick={() => handleImageClick(image.url)} // Add onClick handler
         >
-          {/* <ImageSrc style={{ backgroundImage: url(${image.url}) }} /> */}
+          <ImageSrc style={{ backgroundImage: image.bgUrl }} />
           <Image style={{ zIndex: 1 }}>
             <Typography
               component="span"
