@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -12,9 +12,10 @@ import SaveIcon from "@mui/icons-material/Save";
 import { TransitionProps } from "@mui/material/transitions";
 import Grid from "@mui/material/Grid";
 import EditableList from "../components/EditableList";
-import { OrderList } from "../global/data";
 import StepperComponent from "./ChooseOrder";
-import Box from "@mui/material/Box";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -25,7 +26,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function TakeOrder() {
   const getCurrentDate = () => {
     const months = [
       "January",
@@ -61,6 +62,17 @@ export default function FullScreenDialog() {
     setOpen(false);
   };
 
+  const [ordersEnabled, setOrdersEnabled] = useState(true);
+  const [budgetEnabled, setBudgetEnabled] = useState(false);
+
+  const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOrdersEnabled(event.target.checked);
+  };
+
+  const handleBudgetToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBudgetEnabled(event.target.checked);
+  };
+
   return (
     <div>
       <Button variant="contained" size="large" onClick={handleClickOpen}>
@@ -83,7 +95,7 @@ export default function FullScreenDialog() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Take a new order (Order #)
+              {"Take a new order (Order #)"}
             </Typography>
             <Button
               autoFocus
@@ -96,6 +108,20 @@ export default function FullScreenDialog() {
           </Toolbar>
         </AppBar>
         <Grid container sx={{ p: 3 }}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch checked={ordersEnabled} onChange={handleOrdersToggle} />
+              }
+              label={ordersEnabled ? "Orders Enabled" : "Orders Disabled"}
+            />
+            <FormControlLabel
+              control={
+                <Switch checked={budgetEnabled} onChange={handleBudgetToggle} disabled />
+              }
+              label={budgetEnabled ? "Budget Enabled" : "Budget Disabled"}
+            />
+          </FormGroup>
           <Grid item xs={12} sx={{ mb: 2 }}>
             <TextField
               fullWidth
@@ -103,7 +129,7 @@ export default function FullScreenDialog() {
               margin="dense"
               label="Order Name"
               variant="filled"
-              defaultValue={currentDate}
+              defaultValue={`Order ${currentDate}`}
               helperText="Feel free to change this"
             />
           </Grid>
@@ -112,8 +138,14 @@ export default function FullScreenDialog() {
               fullWidth
               id="first-name"
               margin="dense"
-              label="First Name"
+              label="Number of orders"
               variant="filled"
+              helperText={
+                ordersEnabled
+                  ? "How many people are eating together?"
+                  : "You've disabled orders."
+              }
+              disabled={!ordersEnabled}
             />
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pl: 2 }}>
@@ -121,8 +153,15 @@ export default function FullScreenDialog() {
               fullWidth
               id="last-name"
               margin="dense"
-              label="Last Name"
+              label="Budget"
               variant="filled"
+              helperText={
+                budgetEnabled
+                  ? "Set a spending limit. Currently not available."
+                  : "Set a spending limit. Currently not available."
+                  // : "You've disabled budgets."
+              }
+              disabled={!budgetEnabled}
             />
           </Grid>
           <Grid item xs={12}>
