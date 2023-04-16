@@ -11,6 +11,8 @@ import TextField from "@mui/material/TextField";
 import SaveIcon from "@mui/icons-material/Save";
 import { TransitionProps } from "@mui/material/transitions";
 import Grid from "@mui/material/Grid";
+import EditableList from "../components/EditableList";
+import { OrderList } from "../global/data";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -98,8 +100,9 @@ export default function FullScreenDialog() {
               id="order-name"
               margin="dense"
               label="Order Name"
-              variant="standard"
+              variant="filled"
               defaultValue={currentDate}
+              helperText="Feel free to change this"
             />
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
@@ -108,7 +111,7 @@ export default function FullScreenDialog() {
               id="first-name"
               margin="dense"
               label="First Name"
-              variant="standard"
+              variant="filled"
             />
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pl: 2 }}>
@@ -117,18 +120,20 @@ export default function FullScreenDialog() {
               id="last-name"
               margin="dense"
               label="Last Name"
-              variant="standard"
+              variant="filled"
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              id="address"
+              id="location"
               margin="dense"
-              label="Address"
-              variant="standard"
+              label="Location"
+              variant="filled"
+              helperText="This can be anywhere, it's for your own reference :D"
             />
           </Grid>
+          <EditableList list={["item1"]} type="Orders" />
         </Grid>
       </Dialog>
     </div>
