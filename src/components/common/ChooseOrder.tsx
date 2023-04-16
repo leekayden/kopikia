@@ -27,15 +27,27 @@ const drinks: Drink[] = [
 ];
 
 const foods: Food[] = [
-  { name: "Nasi Lemak", variations: ["With Chicken", "With Beef", "Vegetarian"] },
-  { name: "Hainanese Chicken Rice", variations: ["Steamed Chicken", "Roasted Chicken"] },
+  {
+    name: "Nasi Lemak",
+    variations: ["With Chicken", "With Beef", "Vegetarian"],
+  },
+  {
+    name: "Hainanese Chicken Rice",
+    variations: ["Steamed Chicken", "Roasted Chicken"],
+  },
   {
     name: "Roti Prata",
     variations: ["Plain Prata", "Egg Prata", "Cheese Prata"],
   },
   { name: "Laksa", variations: ["With Prawn", "With Chicken", "Vegetarian"] },
-  { name: "Nasi Goreng", variations: ["With Chicken", "With Beef", "Vegetarian"] },
-  { name: "Mee Goreng", variations: ["With Chicken", "With Beef", "Vegetarian"] },
+  {
+    name: "Nasi Goreng",
+    variations: ["With Chicken", "With Beef", "Vegetarian"],
+  },
+  {
+    name: "Mee Goreng",
+    variations: ["With Chicken", "With Beef", "Vegetarian"],
+  },
 ];
 
 const StepperComponent = () => {
@@ -99,84 +111,80 @@ const StepperComponent = () => {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-};
+  };
 
-const handleReset = () => {
-setActiveStep(0);
-setSelectedDrink(null);
-setSelectedFood(null);
-setSelectedVariation(null);
-};
+  const handleReset = () => {
+    setActiveStep(0);
+    setSelectedDrink(null);
+    setSelectedFood(null);
+    setSelectedVariation(null);
+  };
 
-return (
-<Box sx={{ width: "100%" }}>
-<Stepper activeStep={activeStep} alternativeLabel>
-{steps.map((label) => (
-<Step key={label}>
-<StepButton onClick={handleStep(steps.indexOf(label))}>
-{label}
-</StepButton>
-</Step>
-))}
-</Stepper>
-{activeStep === 0 && (
-<Box sx={{ mt: 2 }}>
-<Autocomplete
-options={[...drinks, ...foods]}
-getOptionLabel={(option) => option.name}
-renderInput={(params) => (
-<TextField {...params} label="Select drink or food" />
-)}
-onChange={
-selectedDrink?.variations === undefined
-? handleFoodChange
-: handleDrinkChange
-}
-value={selectedDrink ?? selectedFood}
-/>
-<Box sx={{ mt: 2 }}>
-<Button variant="contained" onClick={handleNext}>
-Next
-</Button>
-</Box>
-</Box>
-)}
-{activeStep === 1 && (
-<Box sx={{ mt: 2 }}>
-<Typography>Select variation</Typography>
-<Autocomplete
-options={getVariations()}
-getOptionLabel={(option) => option}
-renderInput={(params) => (
-<TextField {...params} label="Select variation" />
-)}
-onChange={handleVariationChange}
-value={selectedVariation}
-/>
-<Box sx={{ mt: 2 }}>
-<Button variant="contained" onClick={handleBack}>
-Back
-</Button>
-<Button
-variant="contained"
-onClick={handleReset}
-sx={{ ml: 2 }}
->
-Reset
-</Button>
-<Button
-variant="contained"
-onClick={handleNext}
-disabled={!selectedVariation && isVariationStepDisabled()}
-sx={{ ml: 2 }}
->
-Finish
-</Button>
-</Box>
-</Box>
-)}
-</Box>
-);
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepButton onClick={handleStep(steps.indexOf(label))}>
+              {label}
+            </StepButton>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === 0 && (
+        <Box sx={{ mt: 2 }}>
+          <Autocomplete
+            options={[...drinks, ...foods]}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => (
+              <TextField {...params} label="Select drink or food" />
+            )}
+            onChange={
+              selectedDrink?.variations === undefined
+                ? handleFoodChange
+                : handleDrinkChange
+            }
+            value={selectedDrink ?? selectedFood}
+          />
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleNext}>
+              Next
+            </Button>
+          </Box>
+        </Box>
+      )}
+      {activeStep === 1 && (
+        <Box sx={{ mt: 2 }}>
+          <Typography>Select variation</Typography>
+          <Autocomplete
+            options={getVariations()}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => (
+              <TextField {...params} label="Select variation" />
+            )}
+            onChange={handleVariationChange}
+            value={selectedVariation}
+          />
+          <Box sx={{ mt: 2 }}>
+            <Button variant="contained" onClick={handleBack}>
+              Back
+            </Button>
+            <Button variant="contained" onClick={handleReset} sx={{ ml: 2 }}>
+              Reset
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleNext}
+              disabled={!selectedVariation && isVariationStepDisabled()}
+              sx={{ ml: 2 }}
+            >
+              Finish
+            </Button>
+          </Box>
+        </Box>
+      )}
+    </Box>
+  );
 };
 
 export default StepperComponent;
