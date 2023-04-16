@@ -93,6 +93,11 @@ export default function ButtonBases({ imgLs }: ButtonBasesProps) {
   if (imgLs) {
     images = imgLs;
   }
+
+  const handleImageClick = (url: string) => {
+    window.location.href = url;
+  };
+
   return (
     <Box
       sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
@@ -104,25 +109,27 @@ export default function ButtonBases({ imgLs }: ButtonBasesProps) {
           style={{
             width: image.width,
           }}
+          onClick={() => handleImageClick(image.url)} // Add onClick handler
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Image>
+          {/* <ImageSrc style={{ backgroundImage: url(${image.url}) }} /> */}
+          <Image style={{ zIndex: 1 }}>
             <Typography
               component="span"
               variant="subtitle1"
               color="inherit"
               sx={{
                 position: "relative",
-                p: 4,
-                pt: 2,
-                pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                pl: 1,
+                pr: 1,
               }}
             >
               {image.title}
               <ImageMarked className="MuiImageMarked-root" />
             </Typography>
           </Image>
+          <ImageBackdrop className="MuiImageBackdrop-root" />
         </ImageButton>
       ))}
     </Box>

@@ -3,7 +3,7 @@ import ImgBtn from "../components/ImgBtn";
 
 let images = [
   {
-    url: "",
+    url: "/order",
     title: "Take Orders",
     width: "25%",
   },
