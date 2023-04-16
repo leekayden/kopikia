@@ -16,6 +16,12 @@ import StepperComponent from "./ChooseOrder";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import {
+  budgetEnabledByDefault,
+  getNextOrderId,
+  orderAutoname,
+  ordersEnabledByDefault,
+} from "../global/data";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -62,8 +68,11 @@ export default function TakeOrder() {
     setOpen(false);
   };
 
-  const [ordersEnabled, setOrdersEnabled] = useState(true);
-  const [budgetEnabled, setBudgetEnabled] = useState(false);
+  const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
+  const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
+  const [orderName, setOrderName] = useState(
+    orderAutoname ? `Order ${currentDate}` : ""
+  );
 
   const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrdersEnabled(event.target.checked);
@@ -71,6 +80,10 @@ export default function TakeOrder() {
 
   const handleBudgetToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBudgetEnabled(event.target.checked);
+  };
+
+  const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOrderName(event.target.value);
   };
 
   return (
@@ -95,7 +108,9 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {"Take a new order (Order #)"}
+              {`Take a new order (Order #${getNextOrderId()} ${
+                orderName ? `- ${orderName}` : null
+              })`}
             </Typography>
             <Button
               autoFocus
@@ -117,7 +132,11 @@ export default function TakeOrder() {
             />
             <FormControlLabel
               control={
-                <Switch checked={budgetEnabled} onChange={handleBudgetToggle} disabled />
+                <Switch
+                  checked={budgetEnabled}
+                  onChange={handleBudgetToggle}
+                  disabled
+                />
               }
               label={budgetEnabled ? "Budget Enabled" : "Budget Disabled"}
             />
@@ -129,8 +148,13 @@ export default function TakeOrder() {
               margin="dense"
               label="Order Name"
               variant="filled"
-              defaultValue={`Order ${currentDate}`}
-              helperText="Feel free to change this"
+              value={orderName}
+              onChange={handleOrderChange}
+              helperText={
+                orderAutoname
+                  ? "This autofills as autonaming of orders is on. Please visit the settings page to turn off."
+                  : undefined
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
@@ -159,7 +183,7 @@ export default function TakeOrder() {
                 budgetEnabled
                   ? "Set a spending limit. Currently not available."
                   : "Set a spending limit. Currently not available."
-                  // : "You've disabled budgets."
+                // : "You've disabled budgets."
               }
               disabled={!budgetEnabled}
             />
