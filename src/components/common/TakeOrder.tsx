@@ -177,7 +177,7 @@ export default function TakeOrder() {
               onChange={handleOrderValueChange}
               helperText={
                 orderValue > 20
-                  ? "We have an order limit of 20"
+                  ? "We have an order limit of 20, sorry :("
                   : ordersEnabled
                   ? "How many people are eating together?"
                   : "You've disabled orders."
