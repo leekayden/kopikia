@@ -165,7 +165,7 @@ export default function TakeOrder() {
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
             <TextField
-              error
+              error={orderValue > 20}
               fullWidth
               id="order-value"
               margin="dense"
@@ -176,7 +176,9 @@ export default function TakeOrder() {
               value={orderValue}
               onChange={handleOrderValueChange}
               helperText={
-                ordersEnabled
+                orderValue > 20
+                  ? "We have an order limit of 20"
+                  : ordersEnabled
                   ? "How many people are eating together?"
                   : "You've disabled orders."
               }
