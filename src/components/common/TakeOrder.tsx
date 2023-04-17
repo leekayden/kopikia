@@ -159,6 +159,7 @@ export default function TakeOrder() {
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
             <TextField
+              error={true}
               fullWidth
               id="first-name"
               margin="dense"
