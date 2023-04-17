@@ -194,8 +194,8 @@ export default function TakeOrder() {
               variant="filled"
               helperText={
                 budgetEnabled
-                  ? "Set a spending limit. Currently not available."
-                  : "Set a spending limit. Currently not available."
+                  ? "Set a budget. Currently not available."
+                  : "Set a budget. Currently not available."
                 // : "You've disabled budgets."
               }
               disabled={!budgetEnabled}
