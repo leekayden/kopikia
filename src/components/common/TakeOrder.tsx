@@ -87,7 +87,7 @@ export default function TakeOrder() {
     setOrderName(event.target.value);
   };
 
-  const handleOrderValueChange = (event) => {
+  const handleOrderValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
     setOrderValue(value);
   };
