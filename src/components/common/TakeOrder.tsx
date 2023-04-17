@@ -73,6 +73,7 @@ export default function TakeOrder() {
   const [orderName, setOrderName] = useState(
     orderAutoname ? `Order ${currentDate}` : ""
   );
+  const [orderValue, setOrderValue] = useState(0);
 
   const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrdersEnabled(event.target.checked);
@@ -84,6 +85,11 @@ export default function TakeOrder() {
 
   const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrderName(event.target.value);
+  };
+
+  const handleOrderValueChange = (event) => {
+    const value = Number(event.target.value);
+    setOrderValue(value);
   };
 
   return (
@@ -159,12 +165,16 @@ export default function TakeOrder() {
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
             <TextField
-              error={true}
+              error
               fullWidth
-              id="first-name"
+              id="order-value"
               margin="dense"
               label="Number of orders"
               variant="filled"
+              type="number" // set type to "number"
+              inputProps={{ min: 0 }} // set minimum value to 0
+              value={orderValue}
+              onChange={handleOrderValueChange}
               helperText={
                 ordersEnabled
                   ? "How many people are eating together?"
