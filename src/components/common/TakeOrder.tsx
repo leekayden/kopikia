@@ -174,7 +174,7 @@ export default function TakeOrder() {
               type="number" // set type to "number"
               inputProps={{ min: 0 }} // set minimum value to 0
               value={!ordersEnabled ? 1 : orderValue}
-              onChange={handleOrderValueChange}
+              onChange={!ordersEnabled ? undefined : handleOrderValueChange}
               helperText={
                 orderValue > 20
                   ? "We have an order limit of 20, sorry :("
