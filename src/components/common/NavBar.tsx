@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
-import { isLoggedIn, initials } from "../global/data";
+import { isLoggedIn, initials, ownerId } from "../global/data";
 import { AppName } from "../global/definitions";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -76,16 +76,16 @@ const page1 = new Page(
 );
 
 const setting1 = new Setting(
-  "hello",
+  "Settings",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello");
+    window.location.pathname = "settings"
   }
 );
 
 const setting2 = new Setting(
-  "hello2",
+  "Logout",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log("hello2");
+    window.location.pathname = `logout?uid=${ownerId}`
   }
 );
 
