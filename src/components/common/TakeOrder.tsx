@@ -173,7 +173,7 @@ export default function TakeOrder() {
               variant="filled"
               type="number" // set type to "number"
               inputProps={{ min: 0 }} // set minimum value to 0
-              value={orderValue}
+              value={!ordersEnabled ? 1 : orderValue}
               onChange={handleOrderValueChange}
               helperText={
                 orderValue > 20
