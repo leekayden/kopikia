@@ -73,7 +73,7 @@ export default function TakeOrder() {
   const [orderName, setOrderName] = useState(
     orderAutoname ? `Order ${currentDate}` : ""
   );
-  const [orderValue, setOrderValue] = useState(Number);
+  const [orderValue, setOrderValue] = useState(ordersEnabled ? 1 : Number);
 
   const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrdersEnabled(event.target.checked);
