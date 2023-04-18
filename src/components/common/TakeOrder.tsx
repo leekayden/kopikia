@@ -92,6 +92,8 @@ export default function TakeOrder() {
     setOrderValue(value);
   };
 
+  const orderError = orderValue > 20
+
   return (
     <div>
       <Button variant="contained" size="large" onClick={handleClickOpen}>
@@ -123,6 +125,7 @@ export default function TakeOrder() {
               color="inherit"
               onClick={handleClose}
               startIcon={<SaveIcon />}
+              disabled={orderError}
             >
               save
             </Button>
@@ -165,7 +168,7 @@ export default function TakeOrder() {
           </Grid>
           <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
             <TextField
-              error={orderValue > 20}
+              error={orderError}
               fullWidth
               id="order-value"
               margin="dense"
@@ -176,7 +179,7 @@ export default function TakeOrder() {
               value={!ordersEnabled ? 1 : orderValue}
               onChange={!ordersEnabled ? undefined : handleOrderValueChange}
               helperText={
-                orderValue > 20
+                orderError
                   ? "We have an order limit of 20, sorry :("
                   : ordersEnabled
                   ? "How many people are eating together?"
