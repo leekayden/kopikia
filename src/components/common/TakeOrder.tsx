@@ -116,8 +116,8 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {`Take a new order (Order #${getNextOrderId()} ${
-                orderName ? `- ${orderName}` : null
+              {`Take a new order (Order #${getNextOrderId()}${
+                orderName ? ` - ${orderName}` : ""
               })`}
             </Typography>
             <Button
