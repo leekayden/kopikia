@@ -22,6 +22,7 @@ import {
   orderAutoname,
   ordersEnabledByDefault,
 } from "../global/data";
+import TabsSelector from "./TabsSelector";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -214,8 +215,9 @@ export default function TakeOrder() {
               helperText="This can be anywhere, it's for your own reference :D"
             />
           </Grid>
-          <EditableList list={["item1"]} type="Orders" />
-          <StepperComponent />
+          {/* <EditableList list={["item1"]} type="Orders" /> */}
+          {/* <StepperComponent /> */}
+          <TabsSelector />
         </Grid>
       </Dialog>
     </div>
