@@ -1,11 +1,11 @@
-import * as React from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import SwipeableViews from "react-swipeable-views";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -37,7 +37,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
@@ -54,7 +54,7 @@ export default function TabsSelector() {
   };
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
+    <Box sx={{ bgcolor: "background.paper", width: 500 }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -62,15 +62,17 @@ export default function TabsSelector() {
           indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
+        //   variant="scrollable"
+          scrollButtons
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Kopi" {...a11yProps(0)} />
+          <Tab label="Teh" {...a11yProps(1)} />
+          <Tab label="Milo" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
