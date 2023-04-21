@@ -19,6 +19,7 @@ import Switch from "@mui/material/Switch";
 import {
   budgetEnabledByDefault,
   getNextOrderId,
+  isOnlySpaces,
   orderAutoname,
   ordersEnabledByDefault,
 } from "../global/data";
@@ -117,9 +118,7 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {`Take a new order (Order #${getNextOrderId()}${
-                orderName ? ` - ${orderName}` : ""
-              })`}
+              {`Take a new order (Order #${getNextOrderId()})${orderName && !isOnlySpaces(orderName) ? ` | ${orderName}` : ""}`}
             </Typography>
             <Button
               autoFocus

@@ -9,6 +9,10 @@ export const orderAutoname = true;
 export const ordersEnabledByDefault = true;
 export const budgetEnabledByDefault = false;
 
+export function isOnlySpaces(str: string) {
+  return str.trim().length === 0;
+}
+
 type OrderType = {
   name: string;
   basePrice: number;
