@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -90,14 +90,31 @@ export default function TakeOrder() {
     setOrderName(event.target.value);
   };
 
-  const handleOrderValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOrderValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = Number(event.target.value);
     setOrderValue(value);
   };
 
-  const orderError = orderValue > 20
+  const orderError = orderValue > 20;
 
-  const [count, setCount] = useState(0);
+  const [countX, setCountX] = useState(0);
+  const [countY, setCountY] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+    if(!orderName || !orderValue) {
+      event.preventDefault();
+      event.returnValue = "You have unsaved changes. Are you sure you want to leave?"
+    }
+  }
 
   return (
     <div>
@@ -121,7 +138,9 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {`Take a new order (Order #${getNextOrderId()})${orderName && !isOnlySpaces(orderName) ? ` | ${orderName}` : ""}`}
+              {`Take a new order (Order #${getNextOrderId()})${
+                orderName && !isOnlySpaces(orderName) ? ` | ${orderName}` : ""
+              }`}
             </Typography>
             <Button
               autoFocus
@@ -220,8 +239,19 @@ export default function TakeOrder() {
           {/* <EditableList list={["item1"]} type="Orders" /> */}
           {/* <StepperComponent /> */}
           <TabsSelector />
-          <PlusMinusTextField text="Count" state={count} setState={setCount} />
-          <p>{`The count is currently ${count}.`}</p>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Count X"
+              count={countX}
+              setState={setCountX}
+            />
+            <PlusMinusTextField
+              label="Count Y"
+              count={countY}
+              setState={setCountY}
+            />
+          </div>
+          <p>{`The count is currently ${countX} and ${countY}.`}</p>
         </Grid>
       </Dialog>
     </div>
