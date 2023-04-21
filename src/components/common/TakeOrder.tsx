@@ -24,6 +24,7 @@ import {
   ordersEnabledByDefault,
 } from "../global/data";
 import TabsSelector from "./TabsSelector";
+import PlusMinusTextField from "../components/PlusMinusTextfield";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -95,6 +96,8 @@ export default function TakeOrder() {
   };
 
   const orderError = orderValue > 20
+
+  const [count, setCount] = useState(0);
 
   return (
     <div>
@@ -217,6 +220,8 @@ export default function TakeOrder() {
           {/* <EditableList list={["item1"]} type="Orders" /> */}
           {/* <StepperComponent /> */}
           <TabsSelector />
+          <PlusMinusTextField text="Count" state={count} setState={setCount} />
+          <p>{`The count is currently ${count}.`}</p>
         </Grid>
       </Dialog>
     </div>
