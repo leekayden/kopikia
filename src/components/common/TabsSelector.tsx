@@ -155,11 +155,11 @@ export default function TabsSelector() {
   const [type, setType] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
   const [thickness, setThickness] = useState<
     "" | "Po" | "Gau" | "Di Lo" | "Normal"
-  >("");
+  >("Normal");
   const [sugar, setSugar] = useState<
     "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
-  >("");
-  const [temp, setTemp] = useState<"" | "Hot" | "Peng" | "Lukewarm">("");
+  >("Normal");
+  const [temp, setTemp] = useState<"" | "Hot" | "Peng" | "Lukewarm">("Hot");
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setType(event.target.value as "" | "Kopi-O" | "Kopi" | "Kopi-C");
@@ -467,7 +467,7 @@ export default function TabsSelector() {
               >
                 {item.type}{" "}
                 {item.thickness === "Normal" ? null : item.thickness}{" "}
-                {item.sugar === "Normal" ? null : item.thickness} {item.temp}{" "}
+                {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
                 <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
                   x{item.count}
                 </Typography>
