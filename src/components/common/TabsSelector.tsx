@@ -331,9 +331,9 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         },
       ]);
       setType("");
-      setThickness("");
-      setSugar("");
-      setTemp("");
+      setThickness("Normal");
+      setSugar("Normal");
+      setTemp("Hot");
       console.log(orderList);
     } else {
       let unfilled = [];
