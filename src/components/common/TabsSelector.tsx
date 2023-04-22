@@ -167,7 +167,7 @@ export default function TabsSelector() {
     ? data.map((item) =>
         item.value !== 0 ? `${item.name} (${item.value})` : null
       )
-    : ["No items with non-zero values"];
+    : ["Nothing here yet, adjust the amounts away from zero, then it will show here :D"];
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: 500 }}>
