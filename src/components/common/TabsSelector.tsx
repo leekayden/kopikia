@@ -104,14 +104,27 @@ export default function TabsSelector() {
     setValue(index);
   };
 
-  const [kopiohot, setKopiohot] = useState(0);
-  const [kopiocold, setKopiocold] = useState(0);
-  const [kopiosdhot, setKopiosdhot] = useState(0);
-  const [kopiosdcold, setKopiosdcold] = useState(0);
-  const [tehohot, setTehohot] = useState(0);
-  const [tehocold, setTehocold] = useState(0);
-  const [tehosdhot, setTehosdhot] = useState(0);
-  const [tehosdcold, setTehosdcold] = useState(0);
+  const [kopioHot, setKopioHot] = useState(0);
+  const [kopiOCold, setKopiOCold] = useState(0);
+  const [kopiOGauHot, setKopiOGauHot] = useState(0);
+  const [kopiOGauPeng, setKopiOGauPeng] = useState(0);
+  const [kopiOPoHot, setKopiOPoHot] = useState(0);
+  const [kopiOPoCold, setKopiOPoCold] = useState(0);
+  const [kopiOSiewDaiHot, setKopiOSiewDaiHot] = useState(0);
+  const [kopiOSiewDaiCold, setKopiOSiewDaiCold] = useState(0);
+  const [kopiOGahDaiHot, setKopiOGahDaiHot] = useState(0);
+  const [kopiOGahDaiCold, setKopiOGahDaiCold] = useState(0);
+  const [kopiOCHot, setKopiOCHot] = useState(0);
+  const [tehOHHot, setTehOHHot] = useState(0);
+  const [tehOHCold, setTehOHCold] = useState(0);
+  const [tehOSiewDaiHot, setTehOSiewDaiHot] = useState(0);
+  const [tehOSiewDaiCold, setTehOSiewDaiCold] = useState(0);
+  const [tehOGahDaiHot, setTehOGahDaiHot] = useState(0);
+  const [tehOGahDaiCold, setTehOGahDaiCold] = useState(0);
+  const [tehOCHot, setTehOCHot] = useState(0);
+  const [tehOCold, setTehOCold] = useState(0);
+  const [tehOGauHot, setTehOGauHot] = useState(0);
+  const [tehOGauCold, setTehOGauCold] = useState(0);
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: 500 }}>
@@ -140,51 +153,140 @@ export default function TabsSelector() {
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
               label="Kopi-O (Hot)"
-              count={kopiohot}
-              setState={setKopiohot}
+              count={kopioHot}
+              setState={setKopioHot}
             />
             <PlusMinusTextField
               label="Kopi-O (Ice)"
-              count={kopiocold}
-              setState={setKopiocold}
+              count={kopiOCold}
+              setState={setKopiOCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Teh-O (Hot)"
+              count={tehOHHot}
+              setState={setTehOHHot}
+            />
+            <PlusMinusTextField
+              label="Teh-O (Ice)"
+              count={tehOHCold}
+              setState={setTehOHCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Gau (Hot)"
+              count={kopiOGauHot}
+              setState={setKopiOGauHot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Gau Peng (Ice)"
+              count={kopiOGauPeng}
+              setState={setKopiOGauPeng}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Po (Hot)"
+              count={kopiOPoHot}
+              setState={setKopiOPoHot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Po (Ice)"
+              count={kopiOPoCold}
+              setState={setKopiOPoCold}
             />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
               label="Kopi-O Siew Dai (Hot)"
-              count={kopiosdhot}
-              setState={setKopiosdhot}
+              count={kopiOSiewDaiHot}
+              setState={setKopiOSiewDaiHot}
             />
             <PlusMinusTextField
               label="Kopi-O Siew Dai (Ice)"
-              count={kopiosdcold}
-              setState={setKopiosdcold}
+              count={kopiOSiewDaiCold}
+              setState={setKopiOSiewDaiCold}
             />
           </div>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Gah Dai (Hot)"
+              count={kopiOGahDaiHot}
+              setState={setKopiOGahDaiHot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Gah Dai (Ice)"
+              count={kopiOGahDaiCold}
+              setState={setKopiOGahDaiCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-C (Hot)"
+              count={kopiOCHot}
+              setState={setKopiOCHot}
+            />
+          </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
               label="Teh-O (Hot)"
-              count={tehohot}
-              setState={setTehohot}
+              count={tehOHHot}
+              setState={setTehOHHot}
             />
             <PlusMinusTextField
               label="Teh-O (Ice)"
-              count={tehocold}
-              setState={setTehocold}
+              count={tehOHCold}
+              setState={setTehOHCold}
             />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
               label="Teh-O Siew Dai (Hot)"
-              count={tehosdhot}
-              setState={setTehosdhot}
+              count={tehOSiewDaiHot}
+              setState={setTehOSiewDaiHot}
             />
             <PlusMinusTextField
               label="Teh-O Siew Dai (Ice)"
-              count={tehosdcold}
-              setState={setTehosdcold}
+              count={tehOSiewDaiCold}
+              setState={setTehOSiewDaiCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Teh-O Gah Dai (Hot)"
+              count={tehOGahDaiHot}
+              setState={setTehOGahDaiHot}
+            />
+            <PlusMinusTextField
+              label="Teh-O Gah Dai (Ice)"
+              count={tehOGahDaiCold}
+              setState={setTehOGahDaiCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Teh-C (Hot)"
+              count={tehOCHot}
+              setState={setTehOCHot}
+            />
+            <PlusMinusTextField
+              label="Teh-C (Ice)"
+              count={tehOCold}
+              setState={setTehOCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Teh-O Gau (Hot)"
+              count={tehOGauHot}
+              setState={setTehOGauHot}
+            />
+            <PlusMinusTextField
+              label="Teh-O Gau (Ice)"
+              count={tehOGauCold}
+              setState={setTehOGauCold}
             />
           </div>
         </TabPanel>
@@ -200,16 +302,7 @@ export default function TabsSelector() {
           <Typography>Generated Order</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            {kopiohot !== 0 && <p>Kopi-O Hot: [{kopiohot}]</p>}
-            {kopiocold !== 0 && <p>Kopi-O Cold: [{kopiocold}]</p>}
-            {kopiosdhot !== 0 && <p>Kopi-O Siew Dai Hot: [{kopiosdhot}]</p>}
-            {kopiosdcold !== 0 && <p>Kopi-O Siew Dai Cold: [{kopiosdcold}]</p>}
-            {tehohot !== 0 && <p>Teh-O Hot: [{tehohot}]</p>}
-            {tehocold !== 0 && <p>Teh-O Cold: [{tehocold}]</p>}
-            {tehosdhot !== 0 && <p>Teh-O Siew Dai Hot: [{tehosdhot}]</p>}
-            {tehosdcold !== 0 && <p>Teh-O Siew Dai Cold: [{tehosdcold}]</p>}
-          </Typography>
+          <Typography>Nothing yet...</Typography>
         </AccordionDetails>
       </Accordion>
     </Box>
