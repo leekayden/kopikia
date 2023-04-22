@@ -14,6 +14,7 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import { Divider } from "@mui/material";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -115,6 +116,7 @@ export default function TabsSelector() {
   const [kopiOGahDaiHot, setKopiOGahDaiHot] = useState(0);
   const [kopiOGahDaiCold, setKopiOGahDaiCold] = useState(0);
   const [kopiOCHot, setKopiOCHot] = useState(0);
+  const [kopiOCCold, setKopiOCCold] = useState(0);
   const [tehOHHot, setTehOHHot] = useState(0);
   const [tehOHCold, setTehOHCold] = useState(0);
   const [tehOSiewDaiHot, setTehOSiewDaiHot] = useState(0);
@@ -125,6 +127,39 @@ export default function TabsSelector() {
   const [tehOCold, setTehOCold] = useState(0);
   const [tehOGauHot, setTehOGauHot] = useState(0);
   const [tehOGauCold, setTehOGauCold] = useState(0);
+
+  const data = [
+    { name: "Kopi-O (Hot)", value: kopioHot },
+    { name: "Kopi-O (Cold)", value: kopiOCold },
+    { name: "Kopi-O Gau (Hot)", value: kopiOGauHot },
+    { name: "Kopi-O Gau (Peng)", value: kopiOGauPeng },
+    { name: "Kopi-O Po (Hot)", value: kopiOPoHot },
+    { name: "Kopi-O Po (Cold)", value: kopiOPoCold },
+    { name: "Kopi-O Siew Dai (Hot)", value: kopiOSiewDaiHot },
+    { name: "Kopi-O Siew Dai (Cold)", value: kopiOSiewDaiCold },
+    { name: "Kopi-O Gah Dai (Hot)", value: kopiOGahDaiHot },
+    { name: "Kopi-O Gah Dai (Cold)", value: kopiOGahDaiCold },
+    { name: "Kopi-C (Hot)", value: kopiOCHot },
+    { name: "Kopi-C (Cold)", value: kopiOCCold },
+    { name: "Teh-O (Hot)", value: tehOHHot },
+    { name: "Teh-O (Cold)", value: tehOHCold },
+    { name: "Teh-O Siew Dai (Hot)", value: tehOSiewDaiHot },
+    { name: "Teh-O Siew Dai (Cold)", value: tehOSiewDaiCold },
+    { name: "Teh-O Gah Dai (Hot)", value: tehOGahDaiHot },
+    { name: "Teh-O Gah Dai (Cold)", value: tehOGahDaiCold },
+    { name: "Teh-C (Hot)", value: tehOCHot },
+    { name: "Teh-C (Cold)", value: tehOCold },
+    { name: "Teh-O Gau (Hot)", value: tehOGauHot },
+    { name: "Teh-O Gau (Cold)", value: tehOGauCold },
+  ];
+
+  const hasNonZeroValue = data.some((item) => item.value !== 0);
+
+  const displayItems = hasNonZeroValue
+    ? data.map((item) =>
+        item.value !== 0 ? `${item.name} (${item.value})` : null
+      )
+    : ["No items with non-zero values"];
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: 500 }}>
@@ -228,7 +263,14 @@ export default function TabsSelector() {
               count={kopiOCHot}
               setState={setKopiOCHot}
             />
+            <PlusMinusTextField
+              label="Kopi-C (Ice)"
+              count={kopiOCCold}
+              setState={setKopiOCCold}
+            />
           </div>
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
               label="Teh-O (Hot)"
@@ -290,10 +332,8 @@ export default function TabsSelector() {
             />
           </div>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
       </SwipeableViews>
+      <Divider />
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handlePanelChange("panel1")}
@@ -302,7 +342,11 @@ export default function TabsSelector() {
           <Typography>Generated Order</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Nothing yet...</Typography>
+          <Typography>
+            {displayItems.map(
+              (item, index) => item && <div key={index}>{item}</div>
+            )}
+          </Typography>
         </AccordionDetails>
       </Accordion>
     </Box>
