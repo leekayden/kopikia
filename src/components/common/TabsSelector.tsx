@@ -119,6 +119,8 @@ export default function TabsSelector() {
   const [kopiOCCold, setKopiOCCold] = useState(0);
   const [kopiOKosongHot, setKopiOKosongHot] = useState(0);
   const [kopiOKosongCold, setKopiOKosongCold] = useState(0);
+  const [kopiOGauKosongHot, setKopiOGauKosongHot] = useState(0);
+  const [kopiOGauKosongCold, setKopiOGauKosongCold] = useState(0);
   const [tehOHHot, setTehOHHot] = useState(0);
   const [tehOHCold, setTehOHCold] = useState(0);
   const [tehOSiewDaiHot, setTehOSiewDaiHot] = useState(0);
@@ -145,6 +147,8 @@ export default function TabsSelector() {
     { name: "Kopi-C (Cold)", value: kopiOCCold },
     { name: "Kopi-O Kosong (Hot)", value: kopiOKosongHot },
     { name: "Kopi-O Kosong (Cold)", value: kopiOKosongCold },
+    { name: "Kopi-O Gau Kosong (Hot)", value: kopiOGauKosongHot },
+    { name: "Kopi-O Gau Kosong (Cold)", value: kopiOGauKosongCold },
     { name: "Teh-O (Hot)", value: tehOHHot },
     { name: "Teh-O (Cold)", value: tehOHCold },
     { name: "Teh-O Siew Dai (Hot)", value: tehOSiewDaiHot },
@@ -271,6 +275,18 @@ export default function TabsSelector() {
               label="Kopi-O Kosong (Ice)"
               count={kopiOKosongCold}
               setState={setKopiOKosongCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Gau Kosong (Hot)"
+              count={kopiOGauKosongHot}
+              setState={setKopiOGauKosongHot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Gau Kosong (Ice)"
+              count={kopiOGauKosongCold}
+              setState={setKopiOGauKosongCold}
             />
           </div>
         </TabPanel>
