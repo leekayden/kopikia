@@ -116,7 +116,7 @@ export default function TakeOrder() {
   return (
     <div>
       <Button variant="contained" size="large" onClick={handleClickOpen}>
-        Take an order
+        Take new order
       </Button>
       <Dialog
         fullScreen

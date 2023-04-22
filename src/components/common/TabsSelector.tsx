@@ -14,7 +14,6 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import { Divider } from "@mui/material";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -165,12 +164,12 @@ export default function TabsSelector() {
 
   const displayItems = hasNonZeroValue
     ? data.map((item) =>
-        item.value !== 0 ? `${item.name} (${item.value})` : null
+        item.value !== 0 ? `${item.name} [${item.value}]` : null
       )
     : ["Nothing here yet, adjust the amounts away from zero, then it will show here :D"];
 
   return (
-    <Box sx={{ bgcolor: "background.paper", width: 500 }}>
+    <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -184,6 +183,7 @@ export default function TabsSelector() {
           <Tab label="Kopi" {...a11yProps(0)} />
           <Tab label="Teh" {...a11yProps(1)} />
           <Tab label="Milo" {...a11yProps(2)} />
+          <Tab label="House" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -352,7 +352,7 @@ export default function TabsSelector() {
           </div>
         </TabPanel>
       </SwipeableViews>
-      <Divider />
+      <br />
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handlePanelChange("panel1")}
