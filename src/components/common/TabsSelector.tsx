@@ -199,18 +199,6 @@ export default function TabsSelector() {
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <PlusMinusTextField
-              label="Teh-O (Hot)"
-              count={tehOHHot}
-              setState={setTehOHHot}
-            />
-            <PlusMinusTextField
-              label="Teh-O (Ice)"
-              count={tehOHCold}
-              setState={setTehOHCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
               label="Kopi-O Gau (Hot)"
               count={kopiOGauHot}
               setState={setKopiOGauHot}
