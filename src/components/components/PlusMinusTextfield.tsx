@@ -32,10 +32,10 @@ const PlusMinusTextField: React.FC<Props> = ({
         marginBottom: lineBreakAfter ? "1rem" : 0,
       }}
     >
-      <IconButton onClick={handleDecrement}>
+      <IconButton onClick={handleDecrement} disabled={count === 0}>
         <RemoveIcon />
       </IconButton>
-      <TextField label={label} value={count} />
+      <TextField label={label} value={count} variant="filled" />
       <IconButton onClick={handleIncrement}>
         <AddIcon />
       </IconButton>
