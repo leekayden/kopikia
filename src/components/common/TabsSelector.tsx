@@ -6,6 +6,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import PlusMinusTextField from "../components/PlusMinusTextfield";
+import { useState } from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -53,6 +55,11 @@ export default function TabsSelector() {
     setValue(index);
   };
 
+  const [kopiohot, setKopiohot] = useState(0);
+  const [kopiocold, setKopiocold] = useState(0);
+  const [kopiosdhot, setKopiosdhot] = useState(0);
+  const [kopiosdcold, setKopiosdcold] = useState(0);
+
   return (
     <Box sx={{ bgcolor: "background.paper", width: 500 }}>
       <AppBar position="static">
@@ -62,7 +69,7 @@ export default function TabsSelector() {
           indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
-        //   variant="scrollable"
+          //   variant="scrollable"
           scrollButtons
           aria-label="full width tabs example"
         >
@@ -77,7 +84,30 @@ export default function TabsSelector() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O (Hot)"
+              count={kopiohot}
+              setState={setKopiohot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O (Ice)"
+              count={kopiocold}
+              setState={setKopiocold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Siew Dai (Hot)"
+              count={kopiosdhot}
+              setState={setKopiosdhot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Siew Dai (Ice)"
+              count={kopiosdcold}
+              setState={setKopiosdcold}
+            />
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           Item Two

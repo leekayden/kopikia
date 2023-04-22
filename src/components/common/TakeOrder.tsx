@@ -239,19 +239,6 @@ export default function TakeOrder() {
           {/* <EditableList list={["item1"]} type="Orders" /> */}
           {/* <StepperComponent /> */}
           <TabsSelector />
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Count X"
-              count={countX}
-              setState={setCountX}
-            />
-            <PlusMinusTextField
-              label="Count Y"
-              count={countY}
-              setState={setCountY}
-            />
-          </div>
-          <p>{`The count is currently ${countX} and ${countY}.`}</p>
         </Grid>
       </Dialog>
     </div>
