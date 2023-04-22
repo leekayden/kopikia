@@ -117,6 +117,8 @@ export default function TabsSelector() {
   const [kopiOGahDaiCold, setKopiOGahDaiCold] = useState(0);
   const [kopiOCHot, setKopiOCHot] = useState(0);
   const [kopiOCCold, setKopiOCCold] = useState(0);
+  const [kopiOKosongHot, setKopiOKosongHot] = useState(0);
+  const [kopiOKosongCold, setKopiOKosongCold] = useState(0);
   const [tehOHHot, setTehOHHot] = useState(0);
   const [tehOHCold, setTehOHCold] = useState(0);
   const [tehOSiewDaiHot, setTehOSiewDaiHot] = useState(0);
@@ -255,6 +257,18 @@ export default function TabsSelector() {
               label="Kopi-C (Ice)"
               count={kopiOCCold}
               setState={setKopiOCCold}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <PlusMinusTextField
+              label="Kopi-O Kosong (Hot)"
+              count={kopiOKosongHot}
+              setState={setKopiOKosongHot}
+            />
+            <PlusMinusTextField
+              label="Kopi-O Kosong (Ice)"
+              count={kopiOKosongCold}
+              setState={setKopiOKosongCold}
             />
           </div>
         </TabPanel>
