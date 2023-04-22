@@ -25,7 +25,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { Add } from "@mui/icons-material";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -179,27 +180,55 @@ export default function TabsSelector() {
 
   const rows = [
     createData(
-      <Typography>Kopi-O</Typography>,
-      <Typography>Po</Typography>,
-      <Typography>Gah Dai</Typography>,
-      <Typography>Hot</Typography>
+      <Typography color={type === "Kopi-O" ? "secondary" : undefined}>
+        Kopi-O
+      </Typography>,
+      <Typography color={thickness === "Po" ? "secondary" : undefined}>
+        Po
+      </Typography>,
+      <Typography color={sugar === "Gah Dai" ? "secondary" : undefined}>
+        Gah Dai
+      </Typography>,
+      <Typography color={temp === "Hot" ? "secondary" : undefined}>
+        Hot
+      </Typography>
     ),
     createData(
-      <Typography>Kopi</Typography>,
-      <Typography>Gau</Typography>,
-      <Typography>Siew Dai</Typography>,
-      <Typography>Peng</Typography>
+      <Typography color={type === "Kopi" ? "secondary" : undefined}>
+        Kopi
+      </Typography>,
+      <Typography color={thickness === "Gau" ? "secondary" : undefined}>
+        Gau
+      </Typography>,
+      <Typography color={sugar === "Siew Dai" ? "secondary" : undefined}>
+        Siew Dai
+      </Typography>,
+      <Typography color={temp === "Peng" ? "secondary" : undefined}>
+        Peng
+      </Typography>
     ),
     createData(
-      <Typography>Kopi-C</Typography>,
-      <Typography>Di Lo</Typography>,
-      <Typography>Kosong</Typography>,
-      <Typography>Half</Typography>
+      <Typography color={type === "Kopi-C" ? "secondary" : undefined}>
+        Kopi-C
+      </Typography>,
+      <Typography color={thickness === "Di Lo" ? "secondary" : undefined}>
+        Di Lo
+      </Typography>,
+      <Typography color={sugar === "Kosong" ? "secondary" : undefined}>
+        Kosong
+      </Typography>,
+      <Typography color={temp === "Half" ? "secondary" : undefined}>
+        Half
+      </Typography>
     ),
     createData(
       null,
-      <Typography>Normal</Typography>,
-      <Typography>Normal</Typography>,
+      <Typography color={thickness === "Normal" ? "secondary" : undefined}>
+        Normal
+      </Typography>,
+      <Typography color={sugar === "Normal" ? "secondary" : undefined}>
+        Normal
+      </Typography>,
       null
     ),
     createData(
@@ -211,7 +240,7 @@ export default function TabsSelector() {
         variant="filled"
         sx={{ width: 250 }}
       >
-        <MenuItem disabled selected>
+        <MenuItem value="" disabled selected>
           <em>Select</em>
         </MenuItem>
         {defineTypes
@@ -228,7 +257,7 @@ export default function TabsSelector() {
         variant="filled"
         sx={{ width: 250 }}
       >
-        <MenuItem disabled selected>
+        <MenuItem value="" disabled selected>
           <em>Select</em>
         </MenuItem>
         {defineThickness
@@ -245,7 +274,7 @@ export default function TabsSelector() {
         variant="filled"
         sx={{ width: 250 }}
       >
-        <MenuItem disabled selected>
+        <MenuItem value="" disabled selected>
           <em>Select</em>
         </MenuItem>
         {defineSugar
@@ -262,7 +291,7 @@ export default function TabsSelector() {
         variant="filled"
         sx={{ width: 250 }}
       >
-        <MenuItem disabled selected>
+        <MenuItem value="" disabled selected>
           <em>Select</em>
         </MenuItem>
         {defineTemp
@@ -273,6 +302,52 @@ export default function TabsSelector() {
       </TextField>
     ),
   ];
+
+  interface orderListType {
+    type: string;
+    thickness: string;
+    sugar: string;
+    temp: string;
+  }
+
+  let orderList: orderListType[] = [];
+
+  const [error, setError] = useState("");
+
+  function createItem() {
+    if (type !== "" && thickness !== "" && sugar !== "" && temp !== "") {
+      setError("");
+      orderList.push({
+        type: type,
+        thickness: thickness,
+        sugar: sugar,
+        temp: temp,
+      });
+      console.log(orderList);
+    } else {
+      let unfilled = [];
+      if (type === "") {
+        unfilled.push("Types");
+      }
+      if (thickness === "") {
+        unfilled.push("Thickness Level");
+      }
+      if (sugar === "") {
+        unfilled.push("Sugar Level");
+      }
+      if (temp === "") {
+        unfilled.push("Temperature");
+      }
+      setError(
+        `Please fill up all of the following fields: ${unfilled.join(", ")}`
+      );
+    }
+
+    setType("");
+    setThickness("");
+    setSugar("");
+    setTemp("");
+  }
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
@@ -330,6 +405,24 @@ export default function TabsSelector() {
               </TableBody>
             </Table>
           </TableContainer>
+          <br />
+          <div>
+            <Button
+              sx={{
+                display: "flex",
+                margin: "auto",
+              }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createItem}
+            >
+              Add Item
+            </Button>
+            <Typography color="error" sx={{ textAlign: "center", marginTop: 1.5 }}>
+              {error}
+            </Typography>
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           null
@@ -345,9 +438,11 @@ export default function TabsSelector() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {/* {displayItems.map(
-              (item, index) => item && <div key={index}>{item}</div>
-            )} */}
+            {orderList.map((item, index) => (
+              <Typography key={index} variant="body1">
+                {item.type}, {item.thickness}, {item.sugar}, {item.temp}
+              </Typography>
+            ))}
           </Typography>
         </AccordionDetails>
       </Accordion>
