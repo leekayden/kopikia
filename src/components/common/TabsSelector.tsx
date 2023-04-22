@@ -310,19 +310,26 @@ export default function TabsSelector() {
     temp: string;
   }
 
-  let orderList: orderListType[] = [];
+  const [orderList, setOrderList] = useState<orderListType[]>([]);
 
   const [error, setError] = useState("");
 
   function createItem() {
     if (type !== "" && thickness !== "" && sugar !== "" && temp !== "") {
       setError("");
-      orderList.push({
-        type: type.toString(),
-        thickness: thickness.toString(),
-        sugar: sugar.toString(),
-        temp: temp.toString(),
-      });
+      setOrderList([
+        ...orderList,
+        {
+          type: type.toString(),
+          thickness: thickness.toString(),
+          sugar: sugar.toString(),
+          temp: temp.toString(),
+        },
+      ]);
+      setType("");
+      setThickness("");
+      setSugar("");
+      setTemp("");
       console.log(orderList);
     } else {
       let unfilled = [];
@@ -338,16 +345,27 @@ export default function TabsSelector() {
       if (temp === "") {
         unfilled.push("Temperature");
       }
-      setError(
-        `Please fill up the following fields: ${unfilled.join(", ")}`
-      );
+      setError(`Please fill up the following fields: ${unfilled.join(", ")}`);
     }
-
-    setType("");
-    setThickness("");
-    setSugar("");
-    setTemp("");
   }
+
+  const combinedOrderList = orderList.reduce((acc, curr) => {
+    const foundIndex = acc.findIndex(
+      (item) =>
+        item.type === curr.type &&
+        item.thickness === curr.thickness &&
+        item.sugar === curr.sugar &&
+        item.temp === curr.temp
+    );
+    if (foundIndex === -1) {
+      // If order not found, add it with count 1
+      acc.push({ ...curr, count: 1 });
+    } else {
+      // If order found, increase its count
+      acc[foundIndex].count++;
+    }
+    return acc;
+  }, [] as Array<orderListType & { count: number }>);
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
@@ -419,7 +437,10 @@ export default function TabsSelector() {
             >
               Add Item
             </Button>
-            <Typography color="error" sx={{ textAlign: "center", marginTop: 1.5 }}>
+            <Typography
+              color="error"
+              sx={{ textAlign: "center", marginTop: 1.5 }}
+            >
               {error}
             </Typography>
           </div>
@@ -438,9 +459,16 @@ export default function TabsSelector() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {orderList.map((item, index) => (
-              <Typography key={index} variant="body1">
-                {item.type}, {item.thickness}, {item.sugar}, {item.temp}
+            {combinedOrderList.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                {item.type} {item.thickness} {item.sugar} {item.temp}{" "}
+                <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+                  x{item.count}
+                </Typography>
               </Typography>
             ))}
           </Typography>
