@@ -392,7 +392,7 @@ export default function TabsSelector() {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ overflowX: "scroll" }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="center">Types</StyledTableCell>
