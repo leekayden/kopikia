@@ -45,7 +45,7 @@ const PlusMinusDropdown: React.FC<Props> = ({
         value={value}
         onChange={handleCountChange}
         variant="filled"
-        sx={{ width: "80%" }}
+        sx={{ width: 250 }}
       >
         <MenuItem disabled selected><em>Select</em></MenuItem>
         {values?.map((item) => (
