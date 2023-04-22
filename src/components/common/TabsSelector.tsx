@@ -178,7 +178,6 @@ export default function TabsSelector() {
           indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
-          //   variant="scrollable"
           scrollButtons
           aria-label="full width tabs example"
         >
