@@ -25,7 +25,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import PlusMinusDropdown from "../components/DropdownOptions";
+import { TextField } from "@mui/material";
+
+const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
+const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
+const defineSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
+const defineTemp = ["", "Hot", "Peng", "Half"];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -145,112 +150,129 @@ export default function TabsSelector() {
     setValue(index);
   };
 
-  const [kopioHot, setKopioHot] = useState(0);
-  const [kopiOCold, setKopiOCold] = useState(0);
-  const [kopiOGauHot, setKopiOGauHot] = useState(0);
-  const [kopiOGauPeng, setKopiOGauPeng] = useState(0);
-  const [kopiOPoHot, setKopiOPoHot] = useState(0);
-  const [kopiOPoCold, setKopiOPoCold] = useState(0);
-  const [kopiOSiewDaiHot, setKopiOSiewDaiHot] = useState(0);
-  const [kopiOSiewDaiCold, setKopiOSiewDaiCold] = useState(0);
-  const [kopiOGahDaiHot, setKopiOGahDaiHot] = useState(0);
-  const [kopiOGahDaiCold, setKopiOGahDaiCold] = useState(0);
-  const [kopiOCHot, setKopiOCHot] = useState(0);
-  const [kopiOCCold, setKopiOCCold] = useState(0);
-  const [kopiOKosongHot, setKopiOKosongHot] = useState(0);
-  const [kopiOKosongCold, setKopiOKosongCold] = useState(0);
-  const [kopiOGauKosongHot, setKopiOGauKosongHot] = useState(0);
-  const [kopiOGauKosongCold, setKopiOGauKosongCold] = useState(0);
-  const [tehOHHot, setTehOHHot] = useState(0);
-  const [tehOHCold, setTehOHCold] = useState(0);
-  const [tehOSiewDaiHot, setTehOSiewDaiHot] = useState(0);
-  const [tehOSiewDaiCold, setTehOSiewDaiCold] = useState(0);
-  const [tehOGahDaiHot, setTehOGahDaiHot] = useState(0);
-  const [tehOGahDaiCold, setTehOGahDaiCold] = useState(0);
-  const [tehOCHot, setTehOCHot] = useState(0);
-  const [tehOCold, setTehOCold] = useState(0);
-  const [tehOGauHot, setTehOGauHot] = useState(0);
-  const [tehOGauCold, setTehOGauCold] = useState(0);
-
   // new states
   const [type, setType] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
-  const [thickness, setThickness] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">(
-    ""
-  );
-  const [sugar, setSugar] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
-  const [temp, setTemp] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
+  const [thickness, setThickness] = useState<
+    "" | "Po" | "Gau" | "Di Lo" | "Normal"
+  >("");
+  const [sugar, setSugar] = useState<
+    "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
+  >("");
+  const [temp, setTemp] = useState<"" | "Hot" | "Peng" | "Half">("");
 
-  const data = [
-    { name: "Kopi-O (Hot)", value: kopioHot },
-    { name: "Kopi-O (Cold)", value: kopiOCold },
-    { name: "Kopi-O Gau (Hot)", value: kopiOGauHot },
-    { name: "Kopi-O Gau (Peng)", value: kopiOGauPeng },
-    { name: "Kopi-O Po (Hot)", value: kopiOPoHot },
-    { name: "Kopi-O Po (Cold)", value: kopiOPoCold },
-    { name: "Kopi-O Siew Dai (Hot)", value: kopiOSiewDaiHot },
-    { name: "Kopi-O Siew Dai (Cold)", value: kopiOSiewDaiCold },
-    { name: "Kopi-O Gah Dai (Hot)", value: kopiOGahDaiHot },
-    { name: "Kopi-O Gah Dai (Cold)", value: kopiOGahDaiCold },
-    { name: "Kopi-C (Hot)", value: kopiOCHot },
-    { name: "Kopi-C (Cold)", value: kopiOCCold },
-    { name: "Kopi-O Kosong (Hot)", value: kopiOKosongHot },
-    { name: "Kopi-O Kosong (Cold)", value: kopiOKosongCold },
-    { name: "Kopi-O Gau Kosong (Hot)", value: kopiOGauKosongHot },
-    { name: "Kopi-O Gau Kosong (Cold)", value: kopiOGauKosongCold },
-    { name: "Teh-O (Hot)", value: tehOHHot },
-    { name: "Teh-O (Cold)", value: tehOHCold },
-    { name: "Teh-O Siew Dai (Hot)", value: tehOSiewDaiHot },
-    { name: "Teh-O Siew Dai (Cold)", value: tehOSiewDaiCold },
-    { name: "Teh-O Gah Dai (Hot)", value: tehOGahDaiHot },
-    { name: "Teh-O Gah Dai (Cold)", value: tehOGahDaiCold },
-    { name: "Teh-C (Hot)", value: tehOCHot },
-    { name: "Teh-C (Cold)", value: tehOCold },
-    { name: "Teh-O Gau (Hot)", value: tehOGauHot },
-    { name: "Teh-O Gau (Cold)", value: tehOGauCold },
-  ];
+  const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setType(event.target.value as "" | "Kopi-O" | "Kopi" | "Kopi-C");
+  };
+  const handleThicknessChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setThickness(event.target.value as "" | "Po" | "Gau" | "Di Lo" | "Normal");
+  };
+  const handleSugarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSugar(
+      event.target.value as "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
+    );
+  };
+  const handleTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTemp(event.target.value as "" | "Hot" | "Peng" | "Half");
+  };
 
   const rows = [
-    createData(<p>Kopi-O</p>, <p>Po</p>, <p>Gah Dai</p>, <p>Hot</p>),
-    createData(<p>Kopi</p>, <p>Gau</p>, <p>Siew Dai</p>, <p>Peng</p>),
-    createData(<p>Kopi-C</p>, <p>Di Lo</p>, <p>Kosong</p>, <p>Half</p>),
-    createData(null, <em>Normal</em>, <em>Normal</em>, null),
     createData(
-      <PlusMinusDropdown
-        label="Type"
+      <Typography>Kopi-O</Typography>,
+      <Typography>Po</Typography>,
+      <Typography>Gah Dai</Typography>,
+      <Typography>Hot</Typography>
+    ),
+    createData(
+      <Typography>Kopi</Typography>,
+      <Typography>Gau</Typography>,
+      <Typography>Siew Dai</Typography>,
+      <Typography>Peng</Typography>
+    ),
+    createData(
+      <Typography>Kopi-C</Typography>,
+      <Typography>Di Lo</Typography>,
+      <Typography>Kosong</Typography>,
+      <Typography>Half</Typography>
+    ),
+    createData(
+      null,
+      <Typography>Normal</Typography>,
+      <Typography>Normal</Typography>,
+      null
+    ),
+    createData(
+      <TextField
+        select
+        label={"Types"}
         value={type}
-        setState={setType}
-        type="types"
-      />,
-      <PlusMinusDropdown
-        label="Thickness Level"
-        value={type}
-        setState={setType}
-        type="thickness"
-      />,
-      <PlusMinusDropdown
-        label="Sugar Level"
-        value={type}
-        setState={setType}
-        type="sugar"
-      />,
-      <PlusMinusDropdown
-        label="Temperature"
-        value={type}
-        setState={setType}
-        type="temp"
-      />
+        onChange={handleTypeChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTypes
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Thickness Level"}
+        value={thickness}
+        onChange={handleThicknessChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineThickness
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Sugar Level"}
+        value={sugar}
+        onChange={handleSugarChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineSugar
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Temperature"}
+        value={temp}
+        onChange={handleTempChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTemp
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>
     ),
   ];
-
-  const hasNonZeroValue = data.some((item) => item.value !== 0);
-
-  const displayItems = hasNonZeroValue
-    ? data.map((item) =>
-        item.value !== 0 ? `${item.name} [${item.value}]` : null
-      )
-    : [
-        "Nothing here yet, adjust the amounts away from zero, then it will show here :D",
-      ];
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
@@ -310,66 +332,7 @@ export default function TabsSelector() {
           </TableContainer>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Teh-O (Hot)"
-              count={tehOHHot}
-              setState={setTehOHHot}
-            />
-            <PlusMinusTextField
-              label="Teh-O (Ice)"
-              count={tehOHCold}
-              setState={setTehOHCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Teh-O Siew Dai (Hot)"
-              count={tehOSiewDaiHot}
-              setState={setTehOSiewDaiHot}
-            />
-            <PlusMinusTextField
-              label="Teh-O Siew Dai (Ice)"
-              count={tehOSiewDaiCold}
-              setState={setTehOSiewDaiCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Teh-O Gah Dai (Hot)"
-              count={tehOGahDaiHot}
-              setState={setTehOGahDaiHot}
-            />
-            <PlusMinusTextField
-              label="Teh-O Gah Dai (Ice)"
-              count={tehOGahDaiCold}
-              setState={setTehOGahDaiCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Teh-C (Hot)"
-              count={tehOCHot}
-              setState={setTehOCHot}
-            />
-            <PlusMinusTextField
-              label="Teh-C (Ice)"
-              count={tehOCold}
-              setState={setTehOCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Teh-O Gau (Hot)"
-              count={tehOGauHot}
-              setState={setTehOGauHot}
-            />
-            <PlusMinusTextField
-              label="Teh-O Gau (Ice)"
-              count={tehOGauCold}
-              setState={setTehOGauCold}
-            />
-          </div>
+          null
         </TabPanel>
       </SwipeableViews>
       <br />
@@ -382,9 +345,9 @@ export default function TabsSelector() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {displayItems.map(
+            {/* {displayItems.map(
               (item, index) => item && <div key={index}>{item}</div>
-            )}
+            )} */}
           </Typography>
         </AccordionDetails>
       </Accordion>
