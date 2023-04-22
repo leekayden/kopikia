@@ -71,12 +71,17 @@ export default function TakeOrder() {
     setOpen(false);
   };
 
+  const [verboseEnabled, setVerboseEnabled] = useState(true);
   const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
   const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
   const [orderName, setOrderName] = useState(
     orderAutoname ? `Order ${currentDate}` : ""
   );
   const [orderValue, setOrderValue] = useState(ordersEnabled ? 1 : Number);
+
+  const handleVerboseToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVerboseEnabled(event.target.checked);
+  };
 
   const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrdersEnabled(event.target.checked);
@@ -100,18 +105,19 @@ export default function TakeOrder() {
   const orderError = orderValue > 20;
 
   useEffect(() => {
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
   const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-    if(!orderName || !orderValue) {
+    if (!orderName || !orderValue) {
       event.preventDefault();
-      event.returnValue = "You have unsaved changes. Are you sure you want to leave?"
+      event.returnValue =
+        "You have unsaved changes. Are you sure you want to leave?";
     }
-  }
+  };
 
   return (
     <div>
@@ -152,6 +158,12 @@ export default function TakeOrder() {
         </AppBar>
         <Grid container sx={{ p: 3 }}>
           <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch checked={verboseEnabled} onChange={handleVerboseToggle} />
+              }
+              label={verboseEnabled ? "Verbose Enabled" : "Verbose Disabled"}
+            />
             <FormControlLabel
               control={
                 <Switch checked={ordersEnabled} onChange={handleOrdersToggle} />
@@ -235,7 +247,7 @@ export default function TakeOrder() {
           </Grid>
           {/* <EditableList list={["item1"]} type="Orders" /> */}
           {/* <StepperComponent /> */}
-          <TabsSelector />
+          <TabsSelector verbose={verboseEnabled} />
         </Grid>
       </Dialog>
     </div>

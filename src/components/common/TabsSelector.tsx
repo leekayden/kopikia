@@ -132,7 +132,11 @@ function a11yProps(index: number) {
   };
 }
 
-export default function TabsSelector() {
+interface TabsSelectorProps {
+  verbose?: boolean;
+}
+
+export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
   const handlePanelChange =
@@ -369,30 +373,13 @@ export default function TabsSelector() {
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="inherit"
-          variant="fullWidth"
-          scrollButtons
-          aria-label="full width tabs example"
-        >
-          <Tab label="Kopi" {...a11yProps(0)} />
-          <Tab label="Teh" {...a11yProps(1)} />
-          <Tab label="Milo" {...a11yProps(2)} />
-          <Tab label="House" {...a11yProps(3)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
+      {verbose ? (
+        <div>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650, overflowX: "scroll" }} aria-label="simple table">
+            <Table
+              sx={{ minWidth: 650, overflowX: "scroll" }}
+              aria-label="simple table"
+            >
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="center">Types</StyledTableCell>
@@ -444,11 +431,79 @@ export default function TabsSelector() {
               {error}
             </Typography>
           </div>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          null
-        </TabPanel>
-      </SwipeableViews>
+        </div>
+      ) : (
+        <div style={{ display: "block" }}>
+          <TextField
+            select
+            label={"Types"}
+            value={type}
+            onChange={handleTypeChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTypes
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Thickness Level"}
+            value={thickness}
+            onChange={handleThicknessChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineThickness
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Sugar Level"}
+            value={sugar}
+            onChange={handleSugarChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineSugar
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Temperature"}
+            value={temp}
+            onChange={handleTempChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTemp
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+        </div>
+      )}
       <br />
       <Accordion
         expanded={expanded === "panel1"}
