@@ -465,7 +465,9 @@ export default function TabsSelector() {
                 variant="body1"
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                {item.type} {item.thickness} {item.sugar} {item.temp}{" "}
+                {item.type}{" "}
+                {item.thickness === "Normal" ? null : item.thickness}{" "}
+                {item.sugar === "Normal" ? null : item.thickness} {item.temp}{" "}
                 <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
                   x{item.count}
                 </Typography>
