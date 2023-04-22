@@ -14,6 +14,47 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import PlusMinusDropdown from "../components/DropdownOptions";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function createData(
+  types: JSX.Element | null,
+  thicknessLvl: JSX.Element | null,
+  sugarLvl: JSX.Element | null,
+  temp: JSX.Element | null
+) {
+  return { types, thicknessLvl, sugarLvl, temp };
+}
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -131,6 +172,14 @@ export default function TabsSelector() {
   const [tehOGauHot, setTehOGauHot] = useState(0);
   const [tehOGauCold, setTehOGauCold] = useState(0);
 
+  // new states
+  const [type, setType] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
+  const [thickness, setThickness] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">(
+    ""
+  );
+  const [sugar, setSugar] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
+  const [temp, setTemp] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
+
   const data = [
     { name: "Kopi-O (Hot)", value: kopioHot },
     { name: "Kopi-O (Cold)", value: kopiOCold },
@@ -160,13 +209,48 @@ export default function TabsSelector() {
     { name: "Teh-O Gau (Cold)", value: tehOGauCold },
   ];
 
+  const rows = [
+    createData(<p>Kopi-O</p>, <p>Po</p>, <p>Gah Dai</p>, <p>Hot</p>),
+    createData(<p>Kopi</p>, <p>Gau</p>, <p>Siew Dai</p>, <p>Peng</p>),
+    createData(<p>Kopi-C</p>, <p>Di Lo</p>, <p>Kosong</p>, <p>Half</p>),
+    createData(null, <em>Normal</em>, <em>Normal</em>, null),
+    createData(
+      <PlusMinusDropdown
+        label="Type"
+        value={type}
+        setState={setType}
+        type="types"
+      />,
+      <PlusMinusDropdown
+        label="Thickness Level"
+        value={type}
+        setState={setType}
+        type="thickness"
+      />,
+      <PlusMinusDropdown
+        label="Sugar Level"
+        value={type}
+        setState={setType}
+        type="sugar"
+      />,
+      <PlusMinusDropdown
+        label="Temperature"
+        value={type}
+        setState={setType}
+        type="temp"
+      />
+    ),
+  ];
+
   const hasNonZeroValue = data.some((item) => item.value !== 0);
 
   const displayItems = hasNonZeroValue
     ? data.map((item) =>
         item.value !== 0 ? `${item.name} [${item.value}]` : null
       )
-    : ["Nothing here yet, adjust the amounts away from zero, then it will show here :D"];
+    : [
+        "Nothing here yet, adjust the amounts away from zero, then it will show here :D",
+      ];
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
@@ -192,102 +276,38 @@ export default function TabsSelector() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O (Hot)"
-              count={kopioHot}
-              setState={setKopioHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O (Ice)"
-              count={kopiOCold}
-              setState={setKopiOCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Gau (Hot)"
-              count={kopiOGauHot}
-              setState={setKopiOGauHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Gau Peng (Ice)"
-              count={kopiOGauPeng}
-              setState={setKopiOGauPeng}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Po (Hot)"
-              count={kopiOPoHot}
-              setState={setKopiOPoHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Po (Ice)"
-              count={kopiOPoCold}
-              setState={setKopiOPoCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Siew Dai (Hot)"
-              count={kopiOSiewDaiHot}
-              setState={setKopiOSiewDaiHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Siew Dai (Ice)"
-              count={kopiOSiewDaiCold}
-              setState={setKopiOSiewDaiCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Gah Dai (Hot)"
-              count={kopiOGahDaiHot}
-              setState={setKopiOGahDaiHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Gah Dai (Ice)"
-              count={kopiOGahDaiCold}
-              setState={setKopiOGahDaiCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-C (Hot)"
-              count={kopiOCHot}
-              setState={setKopiOCHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-C (Ice)"
-              count={kopiOCCold}
-              setState={setKopiOCCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Kosong (Hot)"
-              count={kopiOKosongHot}
-              setState={setKopiOKosongHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Kosong (Ice)"
-              count={kopiOKosongCold}
-              setState={setKopiOKosongCold}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <PlusMinusTextField
-              label="Kopi-O Gau Kosong (Hot)"
-              count={kopiOGauKosongHot}
-              setState={setKopiOGauKosongHot}
-            />
-            <PlusMinusTextField
-              label="Kopi-O Gau Kosong (Ice)"
-              count={kopiOGauKosongCold}
-              setState={setKopiOGauKosongCold}
-            />
-          </div>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">Types</StyledTableCell>
+                  <StyledTableCell align="center">
+                    Thickness Level
+                  </StyledTableCell>
+                  <StyledTableCell align="center">Sugar Level</StyledTableCell>
+                  <StyledTableCell align="center">Hot/Cold</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <StyledTableCell align="center">
+                      {row.types}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.thicknessLvl}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.sugarLvl}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">{row.temp}</StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div style={{ display: "flex", flexDirection: "row" }}>
