@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField, IconButton } from "@mui/material";
 import { Remove as RemoveIcon, Add as AddIcon } from "@mui/icons-material";
+import { defaultDecrement, defaultIncrement } from "../global/data";
 
 interface Props {
   label: string;
@@ -16,11 +17,11 @@ const PlusMinusTextField: React.FC<Props> = ({
   lineBreakAfter = true,
 }) => {
   const handleDecrement = () => {
-    setState((prev) => prev - 1);
+    setState((prev) => prev - defaultDecrement);
   };
 
   const handleIncrement = () => {
-    setState((prev) => prev + 1);
+    setState((prev) => prev + defaultIncrement);
   };
 
   return (
@@ -32,7 +33,7 @@ const PlusMinusTextField: React.FC<Props> = ({
         marginBottom: lineBreakAfter ? "1rem" : 0,
       }}
     >
-      <IconButton onClick={handleDecrement} disabled={count === 0}>
+      <IconButton onClick={handleDecrement} disabled={count <= 0}>
         <RemoveIcon />
       </IconButton>
       <TextField label={label} value={count} variant="filled" />

@@ -8,6 +8,8 @@ export const ownerId = 0;
 export const orderAutoname = true;
 export const ordersEnabledByDefault = true;
 export const budgetEnabledByDefault = false;
+export const defaultIncrement = 1;
+export const defaultDecrement = 1;
 
 export function isOnlySpaces(str: string) {
   return str.trim().length === 0;
