@@ -143,6 +143,8 @@ export default function TabsSelector() {
     { name: "Kopi-O Gah Dai (Cold)", value: kopiOGahDaiCold },
     { name: "Kopi-C (Hot)", value: kopiOCHot },
     { name: "Kopi-C (Cold)", value: kopiOCCold },
+    { name: "Kopi-O Kosong (Hot)", value: kopiOKosongHot },
+    { name: "Kopi-O Kosong (Cold)", value: kopiOKosongCold },
     { name: "Teh-O (Hot)", value: tehOHHot },
     { name: "Teh-O (Cold)", value: tehOHCold },
     { name: "Teh-O Siew Dai (Hot)", value: tehOSiewDaiHot },
