@@ -31,7 +31,7 @@ import { Add } from "@mui/icons-material";
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
-const defineTemp = ["", "Hot", "Peng", "Half"];
+const defineTemp = ["", "Hot", "Peng", "Lukewarm"];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -159,7 +159,7 @@ export default function TabsSelector() {
   const [sugar, setSugar] = useState<
     "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
   >("");
-  const [temp, setTemp] = useState<"" | "Hot" | "Peng" | "Half">("");
+  const [temp, setTemp] = useState<"" | "Hot" | "Peng" | "Lukewarm">("");
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setType(event.target.value as "" | "Kopi-O" | "Kopi" | "Kopi-C");
@@ -175,7 +175,7 @@ export default function TabsSelector() {
     );
   };
   const handleTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTemp(event.target.value as "" | "Hot" | "Peng" | "Half");
+    setTemp(event.target.value as "" | "Hot" | "Peng" | "Lukewarm");
   };
 
   const rows = [
@@ -217,8 +217,8 @@ export default function TabsSelector() {
       <Typography color={sugar === "Kosong" ? "secondary" : undefined}>
         Kosong
       </Typography>,
-      <Typography color={temp === "Half" ? "secondary" : undefined}>
-        Half
+      <Typography color={temp === "Lukewarm" ? "secondary" : undefined}>
+        Lukewarm
       </Typography>
     ),
     createData(
