@@ -99,9 +99,6 @@ export default function TakeOrder() {
 
   const orderError = orderValue > 20;
 
-  const [countX, setCountX] = useState(0);
-  const [countY, setCountY] = useState(0);
-
   useEffect(() => {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => {
