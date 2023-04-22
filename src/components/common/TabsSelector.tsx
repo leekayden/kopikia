@@ -502,6 +502,23 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 <MenuItem value={item}>{item}</MenuItem>
               ))}
           </TextField>
+          <div>
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createItem}
+            >
+              Add Item
+            </Button>
+            <Typography
+              sx={{ marginTop: 1.5 }}
+              color="error"
+            >
+              {error}
+            </Typography>
+          </div>
         </div>
       )}
       <br />
