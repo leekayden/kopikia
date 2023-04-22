@@ -318,10 +318,10 @@ export default function TabsSelector() {
     if (type !== "" && thickness !== "" && sugar !== "" && temp !== "") {
       setError("");
       orderList.push({
-        type: type,
-        thickness: thickness,
-        sugar: sugar,
-        temp: temp,
+        type: type.toString(),
+        thickness: thickness.toString(),
+        sugar: sugar.toString(),
+        temp: temp.toString(),
       });
       console.log(orderList);
     } else {
@@ -339,7 +339,7 @@ export default function TabsSelector() {
         unfilled.push("Temperature");
       }
       setError(
-        `Please fill up all of the following fields: ${unfilled.join(", ")}`
+        `Please fill up the following fields: ${unfilled.join(", ")}`
       );
     }
 
