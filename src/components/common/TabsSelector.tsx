@@ -350,7 +350,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       if (temp === "") {
         unfilled.push("Temperature");
       }
-      setError(`Please fill up the following fields: ${unfilled.join(", ")}`);
+      setError(`Please fill up the following field(s): ${unfilled.join(", ")}`);
     }
   }
 
