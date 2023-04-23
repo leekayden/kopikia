@@ -26,7 +26,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Button, IconButton, TextField } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
@@ -325,10 +325,10 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       setOrderList([
         ...orderList,
         {
-          type: type.toString(),
-          thickness: thickness.toString(),
-          sugar: sugar.toString(),
-          temp: temp.toString(),
+          type: type,
+          thickness: thickness,
+          sugar: sugar,
+          temp: temp,
         },
       ]);
       setType("");
@@ -352,6 +352,18 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       }
       setError(`Please fill up the following fields: ${unfilled.join(", ")}`);
     }
+  }
+
+  function addNewSameItem(item: orderListType & { count: number }) {
+    console.log(item.type);
+    setType("");
+    setType(item.type as "" | "Kopi-O" | "Kopi" | "Kopi-C");
+    setThickness(item.thickness as "" | "Po" | "Gau" | "Di Lo" | "Normal");
+    setSugar(item.sugar as "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal");
+    setTemp(item.temp as "" | "Hot" | "Peng" | "Lukewarm");
+    setError("");
+    console.log(item.type, item.thickness, item.sugar, item.temp);
+    createItem();
   }
 
   const combinedOrderList = orderList.reduce((acc, curr) => {
@@ -529,7 +541,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {combinedOrderList.map((item, index) => (
+            {combinedOrderList.length > 0 ? (combinedOrderList.map((item, index) => (
               <Typography
                 key={index}
                 variant="body1"
@@ -537,34 +549,28 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               >
                 <IconButton
                   onClick={() => {
-                    setType(item.type as "" | "Kopi-O" | "Kopi" | "Kopi-C");
-                    setThickness(
-                      item.thickness as "" | "Po" | "Gau" | "Di Lo" | "Normal"
-                    );
-                    setSugar(
-                      item.sugar as
-                        | ""
-                        | "Gah Dai"
-                        | "Siew Dai"
-                        | "Kosong"
-                        | "Normal"
-                    );
-                    setTemp(item.temp as "" | "Hot" | "Peng" | "Lukewarm");
-                    setError("");
-                    console.log(type, thickness, sugar, temp)
-                    createItem();
+                    addNewSameItem(item);
                   }}
                 >
-                  <ContentCopyIcon />
+                  <Add />
+                </IconButton>
+                <IconButton
+                  onClick={() => {
+                    let orderListCopy = [...orderList]
+                    orderListCopy.splice(index, 1)
+                    setOrderList(orderListCopy)
+                  }}
+                >
+                  <Delete />
                 </IconButton>{" "}
-                {item.type}{" "}
+                [{index + 1}] {item.type}{" "}
                 {item.thickness === "Normal" ? null : item.thickness}{" "}
                 {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
                 <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
                   x{item.count}
                 </Typography>
               </Typography>
-            ))}
+            ))) : <div>Nothing here yet...</div> }
           </Typography>
         </AccordionDetails>
       </Accordion>
