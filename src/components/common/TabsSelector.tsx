@@ -541,36 +541,48 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {combinedOrderList.length > 0 ? (combinedOrderList.map((item, index) => (
-              <Typography
-                key={index}
-                variant="body1"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <IconButton
-                  onClick={() => {
-                    addNewSameItem(item);
-                  }}
+            {combinedOrderList.length > 0 ? (
+              combinedOrderList.map((item, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Add />
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    let orderListCopy = [...orderList]
-                    orderListCopy.splice(index, 1)
-                    setOrderList(orderListCopy)
-                  }}
-                >
-                  <Delete />
-                </IconButton>{" "}
-                [{index + 1}] {item.type}{" "}
-                {item.thickness === "Normal" ? null : item.thickness}{" "}
-                {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
-                <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
-                  x{item.count}
+                  <IconButton
+                    onClick={() => {
+                      addNewSameItem(item);
+                    }}
+                  >
+                    <Add />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      let orderListCopy = [...orderList];
+                      orderListCopy.splice(index, 1);
+                      setOrderList(orderListCopy);
+                    }}
+                  >
+                    <Delete />
+                  </IconButton>{" "}
+                  {item.type}{" "}
+                  {item.thickness === "Normal" ? null : item.thickness}{" "}
+                  {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
+                  <Typography
+                    sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}
+                  >
+                    x{item.count}
+                  </Typography>
                 </Typography>
-              </Typography>
-            ))) : <div>Nothing here yet...</div> }
+              ))
+            ) : (
+              <div>Nothing here yet...</div>
+            )}
+            <hr />
+            <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+              {orderList.length === 0 ? "No" : orderList.length} order
+              {orderList.length === 1 ? "" : "s"}{" "}
+              {orderList.length === 0 ? "yet..." : ""}
+            </Typography>
           </Typography>
         </AccordionDetails>
       </Accordion>
