@@ -25,8 +25,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Button, IconButton, TextField } from "@mui/material";
-import { Add, Delete } from "@mui/icons-material";
+import { Button, IconButton, TextField, Tooltip } from "@mui/material";
+import { Add, Delete, Remove } from "@mui/icons-material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
@@ -553,22 +553,26 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                   variant="body1"
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <IconButton
-                    onClick={() => {
-                      addNewSameItem(item);
-                    }}
-                  >
-                    <Add />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => {
-                      let orderListCopy = [...orderList];
-                      orderListCopy.splice(index, 1);
-                      setOrderList(orderListCopy);
-                    }}
-                  >
-                    <Delete />
-                  </IconButton>{" "}
+                  <Tooltip title="Increase Amount">
+                    <IconButton
+                      onClick={() => {
+                        addNewSameItem(item);
+                      }}
+                    >
+                      <Add />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Decrease Amount">
+                    <IconButton
+                      onClick={() => {
+                        let orderListCopy = [...orderList];
+                        orderListCopy.splice(index, 1);
+                        setOrderList(orderListCopy);
+                      }}
+                    >
+                      <Remove />
+                    </IconButton>
+                  </Tooltip>{" "}
                   {item.type}{" "}
                   {item.thickness === "Normal" ? null : item.thickness}{" "}
                   {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
