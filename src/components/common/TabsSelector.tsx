@@ -355,15 +355,20 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function addNewSameItem(item: orderListType & { count: number }) {
-    console.log(item.type);
-    setType("");
-    setType(item.type as "" | "Kopi-O" | "Kopi" | "Kopi-C");
-    setThickness(item.thickness as "" | "Po" | "Gau" | "Di Lo" | "Normal");
-    setSugar(item.sugar as "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal");
-    setTemp(item.temp as "" | "Hot" | "Peng" | "Lukewarm");
-    setError("");
     console.log(item.type, item.thickness, item.sugar, item.temp);
-    createItem();
+    setOrderList([
+      ...orderList,
+      {
+        type: item.type,
+        thickness: item.thickness,
+        sugar: item.sugar,
+        temp: item.temp,
+      },
+    ]);
+    setType("");
+    setThickness("Normal");
+    setSugar("Normal");
+    setTemp("Hot");
   }
 
   const combinedOrderList = orderList.reduce((acc, curr) => {
