@@ -25,8 +25,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import { Add } from "@mui/icons-material";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -512,10 +513,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             >
               Add Item
             </Button>
-            <Typography
-              sx={{ marginTop: 1.5 }}
-              color="error"
-            >
+            <Typography sx={{ marginTop: 1.5 }} color="error">
               {error}
             </Typography>
           </div>
@@ -537,6 +535,28 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 variant="body1"
                 sx={{ display: "flex", alignItems: "center" }}
               >
+                <IconButton
+                  onClick={() => {
+                    setType(item.type as "" | "Kopi-O" | "Kopi" | "Kopi-C");
+                    setThickness(
+                      item.thickness as "" | "Po" | "Gau" | "Di Lo" | "Normal"
+                    );
+                    setSugar(
+                      item.sugar as
+                        | ""
+                        | "Gah Dai"
+                        | "Siew Dai"
+                        | "Kosong"
+                        | "Normal"
+                    );
+                    setTemp(item.temp as "" | "Hot" | "Peng" | "Lukewarm");
+                    setError("");
+                    console.log(type, thickness, sugar, temp)
+                    createItem();
+                  }}
+                >
+                  <ContentCopyIcon />
+                </IconButton>{" "}
                 {item.type}{" "}
                 {item.thickness === "Normal" ? null : item.thickness}{" "}
                 {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
