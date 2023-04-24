@@ -19,6 +19,7 @@ import Switch from "@mui/material/Switch";
 import {
   budgetEnabledByDefault,
   getNextOrderId,
+  isMobileDevice,
   isOnlySpaces,
   orderAutoname,
   ordersEnabledByDefault,
@@ -71,7 +72,10 @@ export default function TakeOrder() {
     setOpen(false);
   };
 
-  const [verboseEnabled, setVerboseEnabled] = useState(true);
+  // const isMobile = isMobileDevice();
+  // setVerboseEnabled(!isMobile)
+
+  const [verboseEnabled, setVerboseEnabled] = useState(!isMobileDevice());
   const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
   const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
   const [orderName, setOrderName] = useState(

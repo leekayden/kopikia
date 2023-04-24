@@ -11,6 +11,26 @@ export const budgetEnabledByDefault = false;
 export const defaultIncrement = 1;
 export const defaultDecrement = 1;
 
+export function isMobileDevice() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const mobileKeywords = [
+    "mobile",
+    "android",
+    "iphone",
+    "ipod",
+    "ipad",
+    "windows phone",
+  ];
+
+  for (let i = 0; i < mobileKeywords.length; i++) {
+    if (userAgent.includes(mobileKeywords[i])) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function isOnlySpaces(str: string) {
   return str.trim().length === 0;
 }
