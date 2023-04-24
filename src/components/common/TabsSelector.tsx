@@ -28,6 +28,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Button, IconButton, TextField, Tooltip } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -66,6 +67,15 @@ function createData(
   temp: JSX.Element | null
 ) {
   return { types, thicknessLvl, sugarLvl, temp };
+}
+
+function createTehData(
+  tehTypes: JSX.Element | null,
+  tehThicknessLvl: JSX.Element | null,
+  tehSugarLvl: JSX.Element | null,
+  tehTemp: JSX.Element | null
+) {
+  return { tehTypes, tehThicknessLvl, tehSugarLvl, tehTemp };
 }
 
 const Accordion = styled((props: AccordionProps) => (
@@ -161,7 +171,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     setValue(index);
   };
 
-  // new states
   const [type, setType] = useState<"" | "Kopi-O" | "Kopi" | "Kopi-C">("");
   const [thickness, setThickness] = useState<
     "" | "Po" | "Gau" | "Di Lo" | "Normal"
@@ -186,6 +195,37 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   };
   const handleTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTemp(event.target.value as "" | "Hot" | "Peng" | "Lukewarm");
+  };
+
+  const [tehType, setTehType] = useState<"" | "Teh-O" | "Teh" | "Teh-C">("");
+  const [tehThickness, setTehThickness] = useState<
+    "" | "Po" | "Gau" | "Di Lo" | "Normal"
+  >("Normal");
+  const [tehSugar, setTehSugar] = useState<
+    "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
+  >("Normal");
+  const [tehTemp, setTehTemp] = useState<"" | "Hot" | "Peng" | "Lukewarm">(
+    "Hot"
+  );
+
+  const handleTehTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTehType(event.target.value as "" | "Teh-O" | "Teh" | "Teh-C");
+    console.log(tehType);
+  };
+  const handleTehThicknessChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTehThickness(
+      event.target.value as "" | "Po" | "Gau" | "Di Lo" | "Normal"
+    );
+  };
+  const handleTehSugarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTehSugar(
+      event.target.value as "" | "Gah Dai" | "Siew Dai" | "Kosong" | "Normal"
+    );
+  };
+  const handleTehTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTehTemp(event.target.value as "" | "Hot" | "Peng" | "Lukewarm");
   };
 
   const rows = [
@@ -313,6 +353,131 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     ),
   ];
 
+  const tehRows = [
+    createTehData(
+      <Typography color={tehType === "Teh-O" ? "secondary" : undefined}>
+        Teh-O
+      </Typography>,
+      <Typography color={tehThickness === "Po" ? "secondary" : undefined}>
+        Po
+      </Typography>,
+      <Typography color={tehSugar === "Gah Dai" ? "secondary" : undefined}>
+        Gah Dai
+      </Typography>,
+      <Typography color={tehTemp === "Hot" ? "secondary" : undefined}>
+        Hot
+      </Typography>
+    ),
+    createTehData(
+      <Typography color={tehType === "Teh" ? "secondary" : undefined}>
+        Teh
+      </Typography>,
+      <Typography color={tehThickness === "Gau" ? "secondary" : undefined}>
+        Gau
+      </Typography>,
+      <Typography color={tehSugar === "Siew Dai" ? "secondary" : undefined}>
+        Siew Dai
+      </Typography>,
+      <Typography color={tehTemp === "Peng" ? "secondary" : undefined}>
+        Peng
+      </Typography>
+    ),
+    createTehData(
+      <Typography color={tehType === "Teh-C" ? "secondary" : undefined}>
+        Teh-C
+      </Typography>,
+      <Typography color={tehThickness === "Di Lo" ? "secondary" : undefined}>
+        Di Lo
+      </Typography>,
+      <Typography color={tehSugar === "Kosong" ? "secondary" : undefined}>
+        Kosong
+      </Typography>,
+      <Typography color={tehTemp === "Lukewarm" ? "secondary" : undefined}>
+        Lukewarm
+      </Typography>
+    ),
+    createTehData(
+      null,
+      <Typography color={tehThickness === "Normal" ? "secondary" : undefined}>
+        Normal
+      </Typography>,
+      <Typography color={tehSugar === "Normal" ? "secondary" : undefined}>
+        Normal
+      </Typography>,
+      null
+    ),
+    createTehData(
+      <TextField
+        select
+        label={"Types"}
+        value={tehType}
+        onChange={handleTehTypeChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem value="" disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTehTypes
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Thickness Level"}
+        value={tehThickness}
+        onChange={handleTehThicknessChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem value="" disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTehThickness
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Sugar Level"}
+        value={tehSugar}
+        onChange={handleTehSugarChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem value="" disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTehSugar
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>,
+      <TextField
+        select
+        label={"Temperature"}
+        value={tehTemp}
+        onChange={handleTehTempChange}
+        variant="filled"
+        sx={{ width: 250 }}
+      >
+        <MenuItem value="" disabled selected>
+          <em>Select</em>
+        </MenuItem>
+        {defineTehTemp
+          .filter((item) => item !== "")
+          ?.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+      </TextField>
+    ),
+  ];
+
   interface orderListType {
     type: string;
     thickness: string;
@@ -321,8 +486,10 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   const [orderList, setOrderList] = useState<orderListType[]>([]);
+  const [tehOrderList, setTehOrderList] = useState<orderListType[]>([]);
 
   const [error, setError] = useState("");
+  const [tehError, setTehError] = useState("");
 
   function createItem() {
     if (type !== "" && thickness !== "" && sugar !== "" && temp !== "") {
@@ -376,7 +543,84 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     setTemp("Hot");
   }
 
+  function createTehItem() {
+    if (
+      tehType !== "" &&
+      tehThickness !== "" &&
+      tehSugar !== "" &&
+      tehTemp !== ""
+    ) {
+      setTehError("");
+      setTehOrderList([
+        ...tehOrderList,
+        {
+          type: tehType,
+          thickness: tehThickness,
+          sugar: tehSugar,
+          temp: tehTemp,
+        },
+      ]);
+      setTehType("");
+      setTehThickness("Normal");
+      setTehSugar("Normal");
+      setTehTemp("Hot");
+      console.log(tehOrderList);
+    } else {
+      let unfilledTeh = [];
+      if (type === "") {
+        unfilledTeh.push("Types");
+      }
+      if (thickness === "") {
+        unfilledTeh.push("Thickness Level");
+      }
+      if (sugar === "") {
+        unfilledTeh.push("Sugar Level");
+      }
+      if (temp === "") {
+        unfilledTeh.push("Temperature");
+      }
+      setTehError(
+        `Please fill up the following field(s): ${unfilledTeh.join(", ")}`
+      );
+    }
+  }
+
+  function addNewSameTehItem(item: orderListType & { count: number }) {
+    console.log(item.type, item.thickness, item.sugar, item.temp);
+    setTehOrderList([
+      ...tehOrderList,
+      {
+        type: item.type,
+        thickness: item.thickness,
+        sugar: item.sugar,
+        temp: item.temp,
+      },
+    ]);
+    setTehType("");
+    setTehThickness("Normal");
+    setTehSugar("Normal");
+    setTehTemp("Hot");
+  }
+
   const combinedOrderList = orderList.reduce((acc, curr) => {
+    const foundIndex = acc.findIndex(
+      (item) =>
+        item.type === curr.type &&
+        item.thickness === curr.thickness &&
+        item.sugar === curr.sugar &&
+        item.temp === curr.temp
+    );
+    if (foundIndex === -1) {
+      // If order not found, add it with count 1
+      acc.push({ ...curr, count: 1 });
+    } else {
+      // If order found, increase its count
+      acc[foundIndex].count++;
+    }
+    return acc;
+  }, [] as Array<orderListType & { count: number }>);
+
+  const combinedTehOrderList = tehOrderList.reduce((acc, curr) => {
     const foundIndex = acc.findIndex(
       (item) =>
         item.type === curr.type &&
@@ -559,20 +803,22 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {tehRows.map((row) => (
                   <StyledTableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <StyledTableCell align="center">
-                      {row.types}
+                      {row.tehTypes}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.thicknessLvl}
+                      {row.tehThicknessLvl}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.sugarLvl}
+                      {row.tehSugarLvl}
                     </StyledTableCell>
-                    <StyledTableCell align="center">{row.temp}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.tehTemp}
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -588,7 +834,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               variant="contained"
               size="large"
               startIcon={<Add />}
-              onClick={createItem}
+              onClick={createTehItem}
             >
               Add Item
             </Button>
@@ -596,7 +842,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               color="error"
               sx={{ textAlign: "center", marginTop: 1.5 }}
             >
-              {error}
+              {tehError}
             </Typography>
           </div>
         </div>
@@ -605,8 +851,8 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
           <TextField
             select
             label={"Types"}
-            value={type}
-            onChange={handleTypeChange}
+            value={tehType}
+            onChange={handleTehTypeChange}
             variant="filled"
             sx={{ width: 250 }}
           >
@@ -622,8 +868,8 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
           <TextField
             select
             label={"Thickness Level"}
-            value={thickness}
-            onChange={handleThicknessChange}
+            value={tehThickness}
+            onChange={handleTehThicknessChange}
             variant="filled"
             sx={{ width: 250 }}
           >
@@ -639,8 +885,8 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
           <TextField
             select
             label={"Sugar Level"}
-            value={sugar}
-            onChange={handleSugarChange}
+            value={tehSugar}
+            onChange={handleTehSugarChange}
             variant="filled"
             sx={{ width: 250 }}
           >
@@ -656,8 +902,8 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
           <TextField
             select
             label={"Temperature"}
-            value={temp}
-            onChange={handleTempChange}
+            value={tehTemp}
+            onChange={handleTehTempChange}
             variant="filled"
             sx={{ width: 250 }}
           >
@@ -676,12 +922,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               variant="contained"
               size="large"
               startIcon={<Add />}
-              onClick={createItem}
+              onClick={createTehItem}
             >
               Add Item
             </Button>
             <Typography sx={{ marginTop: 1.5 }} color="error">
-              {error}
+              {tehError}
             </Typography>
           </div>
         </div>
@@ -716,6 +962,54 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                     <IconButton
                       onClick={() => {
                         let orderListCopy = [...orderList];
+                        orderListCopy.splice(index, 1);
+                        setOrderList(orderListCopy);
+                      }}
+                    >
+                      <Remove />
+                    </IconButton>
+                  </Tooltip>{" "}
+                  {item.type}{" "}
+                  {item.thickness === "Normal" ? null : item.thickness}{" "}
+                  {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
+                  <Typography
+                    sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}
+                  >
+                    x{item.count}
+                  </Typography>
+                </Typography>
+              ))
+            ) : (
+              <div>Nothing here yet...</div>
+            )}
+            <hr />
+            <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+              {/* {orderList.length === 0 ? "No" : orderList.length} order
+              {orderList.length === 1 ? "" : "s"}{" "}
+              {orderList.length === 0 ? "yet..." : ""} */}
+            </Typography>
+          </Typography>
+          <Typography>
+            {combinedTehOrderList.length > 0 ? (
+              combinedTehOrderList.map((item, index) => (
+                <Typography
+                  key={index}
+                  variant="body1"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Tooltip title="Increase Amount">
+                    <IconButton
+                      onClick={() => {
+                        addNewSameTehItem(item);
+                      }}
+                    >
+                      <Add />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Decrease Amount">
+                    <IconButton
+                      onClick={() => {
+                        let orderListCopy = [...tehOrderList];
                         orderListCopy.splice(index, 1);
                         setOrderList(orderListCopy);
                       }}
