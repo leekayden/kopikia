@@ -34,6 +34,11 @@ const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
 const defineTemp = ["", "Hot", "Peng", "Lukewarm"];
 
+const defineTehTypes = ["", "Teh-O", "Teh", "Teh-C"];
+const defineTehThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
+const defineTehSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
+const defineTehTemp = ["", "Hot", "Peng", "Lukewarm"];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -515,6 +520,151 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               <em>Select</em>
             </MenuItem>
             {defineTemp
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <div>
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createItem}
+            >
+              Add Item
+            </Button>
+            <Typography sx={{ marginTop: 1.5 }} color="error">
+              {error}
+            </Typography>
+          </div>
+        </div>
+      )}
+      {verbose ? (
+        <div>
+          <TableContainer component={Paper}>
+            <Table
+              sx={{ minWidth: 650, overflowX: "scroll" }}
+              aria-label="simple table"
+            >
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">Types</StyledTableCell>
+                  <StyledTableCell align="center">
+                    Thickness Level
+                  </StyledTableCell>
+                  <StyledTableCell align="center">Sugar Level</StyledTableCell>
+                  <StyledTableCell align="center">Hot/Cold</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <StyledTableCell align="center">
+                      {row.types}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.thicknessLvl}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.sugarLvl}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">{row.temp}</StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <br />
+          <div>
+            <Button
+              sx={{
+                display: "flex",
+                margin: "auto",
+              }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createItem}
+            >
+              Add Item
+            </Button>
+            <Typography
+              color="error"
+              sx={{ textAlign: "center", marginTop: 1.5 }}
+            >
+              {error}
+            </Typography>
+          </div>
+        </div>
+      ) : (
+        <div style={{ display: "block" }}>
+          <TextField
+            select
+            label={"Types"}
+            value={type}
+            onChange={handleTypeChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTehTypes
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Thickness Level"}
+            value={thickness}
+            onChange={handleThicknessChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTehThickness
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Sugar Level"}
+            value={sugar}
+            onChange={handleSugarChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTehSugar
+              .filter((item) => item !== "")
+              ?.map((item) => (
+                <MenuItem value={item}>{item}</MenuItem>
+              ))}
+          </TextField>
+          <TextField
+            select
+            label={"Temperature"}
+            value={temp}
+            onChange={handleTempChange}
+            variant="filled"
+            sx={{ width: 250 }}
+          >
+            <MenuItem value="" disabled selected>
+              <em>Select</em>
+            </MenuItem>
+            {defineTehTemp
               .filter((item) => item !== "")
               ?.map((item) => (
                 <MenuItem value={item}>{item}</MenuItem>
