@@ -29,6 +29,7 @@ import { Button, IconButton, TextField, Tooltip } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -39,6 +40,8 @@ const defineTehTypes = ["", "Teh-O", "Teh", "Teh-C"];
 const defineTehThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineTehSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
 const defineTehTemp = ["", "Hot", "Peng", "Lukewarm"];
+
+const houseDrinks = ["Milo"];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -162,6 +165,14 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+
+  const [selectedHouseDrink, setSelectedHouseDrink] = useState<string | null>(
+    null
+  );
+
+  const handleSelect = (event: React.ChangeEvent<{}>, value: string | null) => {
+    setSelectedHouseDrink(value);
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -640,298 +651,351 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
-      {verbose ? (
-        <div>
-          <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 650, overflowX: "scroll" }}
-              aria-label="simple table"
-            >
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="center">Types</StyledTableCell>
-                  <StyledTableCell align="center">
-                    Thickness Level
-                  </StyledTableCell>
-                  <StyledTableCell align="center">Sugar Level</StyledTableCell>
-                  <StyledTableCell align="center">Hot/Cold</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      <Box sx={{ bgcolor: "background.paper" }}>
+        <AppBar position="static">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant="fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab label="Kopi" {...a11yProps(0)} />
+            <Tab label="Teh" {...a11yProps(1)} />
+            <Tab label="House" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            {verbose ? (
+              <div>
+                <TableContainer component={Paper}>
+                  <Table
+                    sx={{ minWidth: 650, overflowX: "scroll" }}
+                    aria-label="simple table"
                   >
-                    <StyledTableCell align="center">
-                      {row.types}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.thicknessLvl}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.sugarLvl}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">{row.temp}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <br />
-          <div>
-            <Button
-              sx={{
-                display: "flex",
-                margin: "auto",
-              }}
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              onClick={createItem}
-            >
-              Add Item
-            </Button>
-            <Typography
-              color="error"
-              sx={{ textAlign: "center", marginTop: 1.5 }}
-            >
-              {error}
-            </Typography>
-          </div>
-        </div>
-      ) : (
-        <div style={{ display: "block" }}>
-          <TextField
-            select
-            label={"Types"}
-            value={type}
-            onChange={handleTypeChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTypes
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Thickness Level"}
-            value={thickness}
-            onChange={handleThicknessChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineThickness
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Sugar Level"}
-            value={sugar}
-            onChange={handleSugarChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineSugar
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Temperature"}
-            value={temp}
-            onChange={handleTempChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTemp
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <div>
-            <Button
-              sx={{ marginTop: 1.5 }}
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              onClick={createItem}
-            >
-              Add Item
-            </Button>
-            <Typography sx={{ marginTop: 1.5 }} color="error">
-              {error}
-            </Typography>
-          </div>
-        </div>
-      )}
-      {verbose ? (
-        <div>
-          <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 650, overflowX: "scroll" }}
-              aria-label="simple table"
-            >
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="center">Types</StyledTableCell>
-                  <StyledTableCell align="center">
-                    Thickness Level
-                  </StyledTableCell>
-                  <StyledTableCell align="center">Sugar Level</StyledTableCell>
-                  <StyledTableCell align="center">Hot/Cold</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tehRows.map((row) => (
-                  <StyledTableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell align="center">Types</StyledTableCell>
+                        <StyledTableCell align="center">
+                          Thickness Level
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          Sugar Level
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          Hot/Cold
+                        </StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <StyledTableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <StyledTableCell align="center">
+                            {row.types}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.thicknessLvl}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.sugarLvl}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.temp}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <br />
+                <div>
+                  <Button
+                    sx={{
+                      display: "flex",
+                      margin: "auto",
+                    }}
+                    variant="contained"
+                    size="large"
+                    startIcon={<Add />}
+                    onClick={createItem}
                   >
-                    <StyledTableCell align="center">
-                      {row.tehTypes}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.tehThicknessLvl}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.tehSugarLvl}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.tehTemp}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <br />
-          <div>
-            <Button
-              sx={{
-                display: "flex",
-                margin: "auto",
-              }}
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              onClick={createTehItem}
-            >
-              Add Item
-            </Button>
-            <Typography
-              color="error"
-              sx={{ textAlign: "center", marginTop: 1.5 }}
-            >
-              {tehError}
-            </Typography>
-          </div>
-        </div>
-      ) : (
-        <div style={{ display: "block" }}>
-          <TextField
-            select
-            label={"Types"}
-            value={tehType}
-            onChange={handleTehTypeChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTehTypes
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Thickness Level"}
-            value={tehThickness}
-            onChange={handleTehThicknessChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTehThickness
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Sugar Level"}
-            value={tehSugar}
-            onChange={handleTehSugarChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTehSugar
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <TextField
-            select
-            label={"Temperature"}
-            value={tehTemp}
-            onChange={handleTehTempChange}
-            variant="filled"
-            sx={{ width: 250 }}
-          >
-            <MenuItem value="" disabled selected>
-              <em>Select</em>
-            </MenuItem>
-            {defineTehTemp
-              .filter((item) => item !== "")
-              ?.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
-          </TextField>
-          <div>
-            <Button
-              sx={{ marginTop: 1.5 }}
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              onClick={createTehItem}
-            >
-              Add Item
-            </Button>
-            <Typography sx={{ marginTop: 1.5 }} color="error">
-              {tehError}
-            </Typography>
-          </div>
-        </div>
-      )}
+                    Add Item
+                  </Button>
+                  <Typography
+                    color="error"
+                    sx={{ textAlign: "center", marginTop: 1.5 }}
+                  >
+                    {error}
+                  </Typography>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "block" }}>
+                <TextField
+                  select
+                  label={"Types"}
+                  value={type}
+                  onChange={handleTypeChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTypes
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Thickness Level"}
+                  value={thickness}
+                  onChange={handleThicknessChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineThickness
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Sugar Level"}
+                  value={sugar}
+                  onChange={handleSugarChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineSugar
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Temperature"}
+                  value={temp}
+                  onChange={handleTempChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTemp
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <div>
+                  <Button
+                    sx={{ marginTop: 1.5 }}
+                    variant="contained"
+                    size="large"
+                    startIcon={<Add />}
+                    onClick={createItem}
+                  >
+                    Add Item
+                  </Button>
+                  <Typography sx={{ marginTop: 1.5 }} color="error">
+                    {error}
+                  </Typography>
+                </div>
+              </div>
+            )}
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            {verbose ? (
+              <div>
+                <TableContainer component={Paper}>
+                  <Table
+                    sx={{ minWidth: 650, overflowX: "scroll" }}
+                    aria-label="simple table"
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell align="center">Types</StyledTableCell>
+                        <StyledTableCell align="center">
+                          Thickness Level
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          Sugar Level
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          Hot/Cold
+                        </StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {tehRows.map((row) => (
+                        <StyledTableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <StyledTableCell align="center">
+                            {row.tehTypes}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.tehThicknessLvl}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.tehSugarLvl}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {row.tehTemp}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <br />
+                <div>
+                  <Button
+                    sx={{
+                      display: "flex",
+                      margin: "auto",
+                    }}
+                    variant="contained"
+                    size="large"
+                    startIcon={<Add />}
+                    onClick={createTehItem}
+                  >
+                    Add Item
+                  </Button>
+                  <Typography
+                    color="error"
+                    sx={{ textAlign: "center", marginTop: 1.5 }}
+                  >
+                    {tehError}
+                  </Typography>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "block" }}>
+                <TextField
+                  select
+                  label={"Types"}
+                  value={tehType}
+                  onChange={handleTehTypeChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTehTypes
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Thickness Level"}
+                  value={tehThickness}
+                  onChange={handleTehThicknessChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTehThickness
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Sugar Level"}
+                  value={tehSugar}
+                  onChange={handleTehSugarChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTehSugar
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                  select
+                  label={"Temperature"}
+                  value={tehTemp}
+                  onChange={handleTehTempChange}
+                  variant="filled"
+                  sx={{ width: 250 }}
+                >
+                  <MenuItem value="" disabled selected>
+                    <em>Select</em>
+                  </MenuItem>
+                  {defineTehTemp
+                    .filter((item) => item !== "")
+                    ?.map((item) => (
+                      <MenuItem value={item}>{item}</MenuItem>
+                    ))}
+                </TextField>
+                <div>
+                  <Button
+                    sx={{ marginTop: 1.5 }}
+                    variant="contained"
+                    size="large"
+                    startIcon={<Add />}
+                    onClick={createTehItem}
+                  >
+                    Add Item
+                  </Button>
+                  <Typography sx={{ marginTop: 1.5 }} color="error">
+                    {tehError}
+                  </Typography>
+                </div>
+              </div>
+            )}
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={houseDrinks}
+              value={selectedHouseDrink}
+              onChange={handleSelect}
+              sx={{ minHeight: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="House Drink" />
+              )}
+            />
+          </TabPanel>
+        </SwipeableViews>
+      </Box>
       <br />
       <Accordion
         expanded={expanded === "panel1"}
@@ -942,47 +1006,44 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {combinedOrderList.length > 0 ? (
-              combinedOrderList.map((item, index) => (
-                <Typography
-                  key={index}
-                  variant="body1"
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <Tooltip title="Increase Amount">
-                    <IconButton
-                      onClick={() => {
-                        addNewSameItem(item);
-                      }}
-                    >
-                      <Add />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Decrease Amount">
-                    <IconButton
-                      onClick={() => {
-                        let orderListCopy = [...orderList];
-                        orderListCopy.splice(index, 1);
-                        setOrderList(orderListCopy);
-                      }}
-                    >
-                      <Remove />
-                    </IconButton>
-                  </Tooltip>{" "}
-                  {item.type}{" "}
-                  {item.thickness === "Normal" ? null : item.thickness}{" "}
-                  {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
+            {combinedOrderList.length > 0
+              ? combinedOrderList.map((item, index) => (
                   <Typography
-                    sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}
+                    key={index}
+                    variant="body1"
+                    sx={{ display: "flex", alignItems: "center" }}
                   >
-                    x{item.count}
+                    <Tooltip title="Increase Amount">
+                      <IconButton
+                        onClick={() => {
+                          addNewSameItem(item);
+                        }}
+                      >
+                        <Add />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Decrease Amount">
+                      <IconButton
+                        onClick={() => {
+                          let orderListCopy = [...orderList];
+                          orderListCopy.splice(index, 1);
+                          setOrderList(orderListCopy);
+                        }}
+                      >
+                        <Remove />
+                      </IconButton>
+                    </Tooltip>{" "}
+                    {item.type}{" "}
+                    {item.thickness === "Normal" ? null : item.thickness}{" "}
+                    {item.sugar === "Normal" ? null : item.sugar} {item.temp}{" "}
+                    <Typography
+                      sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}
+                    >
+                      x{item.count}
+                    </Typography>
                   </Typography>
-                </Typography>
-              ))
-            ) : (
-              <div>Nothing here yet...</div>
-            )}
-            <hr />
+                ))
+              : null}
             <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
               {/* {orderList.length === 0 ? "No" : orderList.length} order
               {orderList.length === 1 ? "" : "s"}{" "}
@@ -1009,9 +1070,9 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                   <Tooltip title="Decrease Amount">
                     <IconButton
                       onClick={() => {
-                        let orderListCopy = [...tehOrderList];
-                        orderListCopy.splice(index, 1);
-                        setOrderList(orderListCopy);
+                        let tehOrderListCopy = [...tehOrderList];
+                        tehOrderListCopy.splice(index, 1);
+                        setTehOrderList(tehOrderListCopy);
                       }}
                     >
                       <Remove />
@@ -1027,14 +1088,18 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                   </Typography>
                 </Typography>
               ))
-            ) : (
+            ) : orderList.concat(tehOrderList).length === 0 ? (
               <div>Nothing here yet...</div>
-            )}
+            ) : null}
             <hr />
             <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
-              {orderList.length === 0 ? "No" : orderList.length} order
-              {orderList.length === 1 ? "" : "s"}{" "}
-              {orderList.length === 0 ? "yet..." : ""}
+              {`${
+                orderList.concat(tehOrderList).length === 0
+                  ? "No"
+                  : orderList.concat(tehOrderList).length
+              } order${orderList.concat(tehOrderList).length === 1 ? "" : "s"}${
+                orderList.concat(tehOrderList).length === 0 ? " yet..." : ""
+              }`}
             </Typography>
           </Typography>
         </AccordionDetails>
