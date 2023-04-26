@@ -41,7 +41,18 @@ const defineTehThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineTehSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
 const defineTehTemp = ["", "Hot", "Peng", "Lukewarm"];
 
-const houseDrinks = ["Milo"];
+const houseDrinks = [
+  "Milo",
+  "Milo Peng",
+  "Milo Kosong",
+  "Milo Kosong Peng",
+  "Chinese Tea",
+  "Lemon Tea",
+  "Barley",
+  "Lime Juice",
+  "Bandung",
+  "Water Chestnut",
+];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
