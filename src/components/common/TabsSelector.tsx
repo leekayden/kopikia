@@ -1055,11 +1055,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                   </Typography>
                 ))
               : null}
-            <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
-              {/* {orderList.length === 0 ? "No" : orderList.length} order
-              {orderList.length === 1 ? "" : "s"}{" "}
-              {orderList.length === 0 ? "yet..." : ""} */}
-            </Typography>
           </Typography>
           <Typography>
             {combinedTehOrderList.length > 0 ? (
