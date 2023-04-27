@@ -673,6 +673,20 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     return acc;
   }, [] as Array<orderListType & { count: number }>);
 
+  const houseOrderDrinkCount: { [key: string]: number } = {};
+  houseOrderList.forEach((item) => {
+    if (houseOrderDrinkCount[item]) {
+      houseOrderDrinkCount[item]++;
+    } else {
+      houseOrderDrinkCount[item] = 1;
+    }
+  });
+
+  const houseOrderDrinkUnique: { name: string; count: number }[] = [];
+  Object.entries(houseOrderDrinkCount).forEach(([name, count]) => {
+    houseOrderDrinkUnique.push({ name, count });
+  });
+
   return (
     <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
       <Box sx={{ bgcolor: "background.paper" }}>
@@ -1081,6 +1095,40 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               : null}
           </Typography>
           <Typography>
+            {houseOrderDrinkUnique.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Tooltip title="Increase Amount">
+                  <IconButton
+                    onClick={() => {
+                      addNewSameItem(item);
+                    }}
+                  >
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Decrease Amount">
+                  <IconButton
+                    onClick={() => {
+                      let orderListCopy = [...orderList];
+                      orderListCopy.splice(index, 1);
+                      setOrderList(orderListCopy);
+                    }}
+                  >
+                    <Remove />
+                  </IconButton>
+                </Tooltip>{" "}
+                {item.name}
+                <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+                  x{item.count}
+                </Typography>
+              </Typography>
+            ))}
+          </Typography>
+          <Typography>
             {combinedTehOrderList.length > 0 ? (
               combinedTehOrderList.map((item, index) => (
                 <Typography
@@ -1118,17 +1166,37 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                   </Typography>
                 </Typography>
               ))
-            ) : orderList.concat(tehOrderList).length === 0 ? (
+            ) : orderList.length +
+                tehOrderList.length +
+                houseOrderList.length ===
+              0 ? (
               <div>Nothing here yet...</div>
             ) : null}
             <hr />
             <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
               {`${
-                orderList.concat(tehOrderList).length === 0
+                orderList.length +
+                  tehOrderList.length +
+                  houseOrderList.length ===
+                0
                   ? "No"
-                  : orderList.concat(tehOrderList).length
-              } order${orderList.concat(tehOrderList).length === 1 ? "" : "s"}${
-                orderList.concat(tehOrderList).length === 0 ? " yet..." : ""
+                  : orderList.length +
+                    tehOrderList.length +
+                    houseOrderList.length
+              } order${
+                orderList.length +
+                  tehOrderList.length +
+                  houseOrderList.length ===
+                1
+                  ? ""
+                  : "s"
+              }${
+                orderList.length +
+                  tehOrderList.length +
+                  houseOrderList.length ===
+                0
+                  ? " yet..."
+                  : ""
               }`}
             </Typography>
           </Typography>
