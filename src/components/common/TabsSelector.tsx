@@ -1102,22 +1102,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <Tooltip title="Increase Amount">
-                  <IconButton
-                    onClick={() => {
-                      addNewSameItem(item);
-                    }}
-                  >
+                  <IconButton>
                     <Add />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Decrease Amount">
-                  <IconButton
-                    onClick={() => {
-                      let orderListCopy = [...orderList];
-                      orderListCopy.splice(index, 1);
-                      setOrderList(orderListCopy);
-                    }}
-                  >
+                  <IconButton>
                     <Remove />
                   </IconButton>
                 </Tooltip>{" "}
