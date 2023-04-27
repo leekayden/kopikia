@@ -509,9 +509,22 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   const [orderList, setOrderList] = useState<orderListType[]>([]);
   const [tehOrderList, setTehOrderList] = useState<orderListType[]>([]);
+  const [houseOrderList, setHouseOrderList] = useState<string[]>([]);
 
   const [error, setError] = useState("");
   const [tehError, setTehError] = useState("");
+  const [houseDrinkError, setHouseDrinkError] = useState("");
+
+  function createHouseItem() {
+    if (selectedHouseDrink !== null) {
+      setHouseDrinkError("");
+      setHouseOrderList([...houseOrderList, selectedHouseDrink]);
+      console.log(houseOrderList);
+      setSelectedHouseDrink(null);
+    } else if (selectedHouseDrink === null) {
+      setHouseDrinkError("Please select a house drink.");
+    }
+  }
 
   function createItem() {
     if (type !== "" && thickness !== "" && sugar !== "" && temp !== "") {
@@ -999,11 +1012,22 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               options={houseDrinks}
               value={selectedHouseDrink}
               onChange={handleSelect}
-              sx={{ minHeight: 300 }}
               renderInput={(params) => (
                 <TextField {...params} label="House Drink" />
               )}
             />
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createHouseItem}
+            >
+              Add Item
+            </Button>
+            <Typography sx={{ marginTop: 1.5 }} color="error">
+              {houseDrinkError}
+            </Typography>
           </TabPanel>
         </SwipeableViews>
       </Box>
