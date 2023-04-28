@@ -273,9 +273,8 @@ function NavBar() {
               {pgClasses.map((page) => (
                 <Button
                   key={page.name}
-                  // onClick={handleCloseNavMenu}
                   onClick={page.onClick}
-                  sx={{ color: "white" }}
+                  color="secondary"
                 >
                   {page.name}
                 </Button>
