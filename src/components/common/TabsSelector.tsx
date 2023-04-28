@@ -1102,12 +1102,27 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <Tooltip title="Increase Amount">
-                  <IconButton>
+                  <IconButton
+                    onClick={() => {
+                      setHouseOrderList([...houseOrderList, item.name]);
+                    }}
+                  >
                     <Add />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Decrease Amount">
-                  <IconButton>
+                  <IconButton
+                    onClick={() => {
+                      const index = houseOrderList.indexOf(item.name);
+                      if (index !== -1) {
+                        setHouseOrderList(
+                          houseOrderList
+                            .slice(0, index)
+                            .concat(houseOrderList.slice(index + 1))
+                        );
+                      }
+                    }}
+                  >
                     <Remove />
                   </IconButton>
                 </Tooltip>{" "}
