@@ -242,7 +242,11 @@ function NavBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              <Button onClick={handleOpenUserMenu2} color="secondary">
+              <Button
+                onClick={handleOpenUserMenu2}
+                color={prefersDarkMode ? "secondary" : undefined}
+                sx={prefersDarkMode ? undefined : { color: "white" }}
+              >
                 Good Deals
               </Button>
               <Menu
