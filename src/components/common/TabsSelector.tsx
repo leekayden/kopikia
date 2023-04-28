@@ -702,6 +702,8 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             <Tab label="Kopi" {...a11yProps(0)} />
             <Tab label="Teh" {...a11yProps(1)} />
             <Tab label="House" {...a11yProps(2)} />
+            <Tab label="Canned" {...a11yProps(3)} />
+            <Tab label="Others" {...a11yProps(4)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -1043,9 +1045,14 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               {houseDrinkError}
             </Typography>
           </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
+            Panel
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
+            Panel
+          </TabPanel>
         </SwipeableViews>
       </Box>
-      <br />
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handlePanelChange("panel1")}
