@@ -58,7 +58,7 @@ class Deal {
 }
 
 const page1 = new Page(
-  "Order Now",
+  "Take Order",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     window.location.replace("/order")
   }
