@@ -18,17 +18,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#795548",
-    },
-    secondary: {
-      main: "#FFF",
-    },
-  },
-});
-
 class Page {
   name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -152,7 +141,7 @@ function NavBar() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -352,7 +341,7 @@ function NavBar() {
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider>
+    </div>
   );
 }
 
