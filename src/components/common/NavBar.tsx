@@ -16,6 +16,7 @@ import { AppName } from "../global/definitions";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Tooltip } from "@mui/material";
 
 class Page {
   name: string;
@@ -242,13 +243,20 @@ function NavBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              <Button
-                onClick={handleOpenUserMenu2}
-                color={prefersDarkMode ? "secondary" : undefined}
-                sx={prefersDarkMode ? undefined : { color: "white" }}
-              >
-                Good Deals
-              </Button>
+              <Tooltip title={"Not available yet"}>
+                <Button
+                  // onClick={handleOpenUserMenu2}
+                  color={prefersDarkMode ? "secondary" : undefined}
+                  sx={prefersDarkMode ? { color: "grey" } : { color: "grey" }}
+                  disableElevation
+                  disableFocusRipple
+                  disableTouchRipple
+                  disableRipple
+                  aria-disabled
+                >
+                  Good Deals
+                </Button>
+              </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
