@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,9 +13,9 @@ import MenuItem from "@mui/material/MenuItem";
 import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 import { isLoggedIn, initials, ownerId } from "../global/data";
 import { AppName } from "../global/definitions";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 class Page {
   name: string;
@@ -60,21 +59,21 @@ class Deal {
 const page1 = new Page(
   "Take Order",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    window.location.replace("/order")
+    window.location.replace("/order");
   }
 );
 
 const setting1 = new Setting(
   "Settings",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    window.location.pathname = "settings"
+    window.location.pathname = "settings";
   }
 );
 
 const setting2 = new Setting(
   "Logout",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
-    window.location.pathname = `logout?uid=${ownerId}`
+    window.location.pathname = `logout?uid=${ownerId}`;
   }
 );
 
@@ -139,6 +138,8 @@ function NavBar() {
   const handleCloseUserMenu2 = () => {
     setAnchorElUser2(null);
   };
+
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   return (
     <div>
@@ -274,7 +275,8 @@ function NavBar() {
                 <Button
                   key={page.name}
                   onClick={page.onClick}
-                  color="secondary"
+                  color={prefersDarkMode ? "secondary" : undefined}
+                  sx={prefersDarkMode ? undefined : { color: "white" }}
                 >
                   {page.name}
                 </Button>
