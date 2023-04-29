@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = () => {
       <ButtonWrapper style={buttonGroupAnimation}>
         <ButtonGroup size="large">
           <Button variant="contained">Learn More</Button>
-          <Button variant="contained">Start Now</Button>
+          <Button variant="outlined">Start Now</Button>
         </ButtonGroup>
       </ButtonWrapper>
     </HomeContainer>
