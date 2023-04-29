@@ -75,7 +75,7 @@ export default function TakeOrder() {
   const [verboseEnabled, setVerboseEnabled] = useState(!isMobileDevice());
   const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
   const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
-  const [orderName, setOrderName] = useState(
+  const [orderName, setOrderName] = useState<string>(
     orderAutoname ? `Order ${currentDate}` : ""
   );
   const [orderValue, setOrderValue] = useState(ordersEnabled ? 1 : Number);
