@@ -6,7 +6,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import PlusMinusTextField from "../components/PlusMinusTextfield";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
@@ -21,14 +20,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Button, IconButton, TextField, Tooltip } from "@mui/material";
-import { Add, Delete, Remove } from "@mui/icons-material";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Add, Remove } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
@@ -54,9 +48,34 @@ const houseDrinks = [
   "Water Chestnut",
 ];
 
-const cannedDrinks = ["Coke"];
+const cannedDrinks = [
+  "Coca-Cola",
+  "Pepsi",
+  "Sprite",
+  "Fanta",
+  "Mountain Dew",
+  "Dr. Pepper",
+  "Red Bull",
+  "Monster Energy",
+  "Gatorade",
+  "Arizona Iced Tea",
+  "Nestea",
+  "Schweppes Tonic Water",
+  "Lipton Brisk Iced Tea",
+  "Sunkist Orange Soda",
+  "A&W Root Beer",
+  "Canada Dry Ginger Ale",
+];
 
-const otherDrinks = ["Red Bull", "Green Tea", "Oolong Tea", "Pineapple", "Qoo", "Coconut", "Root Beer"];
+const otherDrinks = [
+  "Red Bull",
+  "Green Tea",
+  "Oolong Tea",
+  "Pineapple",
+  "Qoo",
+  "Coconut",
+  "Root Beer",
+];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
