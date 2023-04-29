@@ -192,48 +192,6 @@ export default function TakeOrder() {
               }
             />
           </Grid>
-          {verboseEnabled ? (
-            <>
-              <Grid item xs={12} sm={6} sx={{ pr: 2 }}>
-                <TextField
-                  error={orderError}
-                  fullWidth
-                  id="order-value"
-                  margin="dense"
-                  label="Number of orders"
-                  variant="filled"
-                  type="number" // set type to "number"
-                  inputProps={{ min: 0 }} // set minimum value to 0
-                  value={!ordersEnabled ? 1 : orderValue}
-                  onChange={!ordersEnabled ? undefined : handleOrderValueChange}
-                  helperText={
-                    orderError
-                      ? "We have an order limit of 20, sorry :("
-                      : ordersEnabled
-                      ? "How many people are eating together?"
-                      : "You've disabled orders."
-                  }
-                  disabled={!ordersEnabled}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} sx={{ pl: 2 }}>
-                <TextField
-                  fullWidth
-                  id="last-name"
-                  margin="dense"
-                  label="Budget"
-                  variant="filled"
-                  helperText={
-                    budgetEnabled
-                      ? "Set a budget. Currently not available."
-                      : "Set a budget. Currently not available."
-                    // : "You've disabled budgets."
-                  }
-                  disabled={!budgetEnabled}
-                />
-              </Grid>
-            </>
-          ) : null}
           <Grid item xs={12}>
             <TextField
               fullWidth
