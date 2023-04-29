@@ -1,5 +1,6 @@
 import NavBar from "./NavBar";
 import ImgBtn from "../components/ImgBtn";
+import Hero from "./Hero";
 
 let images = [
   {
@@ -33,6 +34,7 @@ function Home() {
     <div>
       <NavBar />
       <ImgBtn imgLs={images} />
+      <Hero/>
     </div>
   );
 }
