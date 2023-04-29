@@ -11,8 +11,6 @@ import TextField from "@mui/material/TextField";
 import SaveIcon from "@mui/icons-material/Save";
 import { TransitionProps } from "@mui/material/transitions";
 import Grid from "@mui/material/Grid";
-import EditableList from "../components/EditableList";
-import StepperComponent from "./ChooseOrder";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
@@ -25,7 +23,6 @@ import {
   ordersEnabledByDefault,
 } from "../global/data";
 import TabsSelector from "./TabsSelector";
-import PlusMinusTextField from "../components/PlusMinusTextfield";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
