@@ -11,15 +11,28 @@ const HomeContainer = styled.div`
 
 const Title = styled(animated.h1)`
   font-size: 4rem;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 2rem;
+  font-family: 'Secular One', sans-serif;
 `;
 
 const Subtitle = styled(animated.h2)`
   font-size: 2rem;
+  font-family: "Roboto", sans-serif;
+  font-family: 'Kalam', cursive;
 `;
 
 const ButtonWrapper = styled(animated.div)`
   display: flex;
   margin-top: 2rem;
+  button {
+    margin-right: 1rem;
+    background-color: #008cba;
+    color: white;
+    &:hover {
+      background-color: #006d8a;
+    }
+  }
 `;
 
 interface HomeProps {}
@@ -55,7 +68,7 @@ const Home: React.FC<HomeProps> = () => {
       <ButtonWrapper style={buttonGroupAnimation}>
         <ButtonGroup size="large">
           <Button variant="contained">Learn More</Button>
-          <Button variant="outlined">Start Now</Button>
+          <Button variant="contained">Start Now</Button>
         </ButtonGroup>
       </ButtonWrapper>
     </HomeContainer>
