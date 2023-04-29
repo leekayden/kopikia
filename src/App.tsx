@@ -46,6 +46,8 @@ export default function App() {
             styleOverrides: {
               root: {
                 fontFamily: "'Indie Flower', cursive",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
               },
             },
           },
