@@ -22,19 +22,6 @@ const Subtitle = styled(animated.h2)`
   font-family: "Kalam", cursive;
 `;
 
-const ButtonWrapper = styled(animated.div)`
-  display: flex;
-  margin-top: 2rem;
-  button {
-    margin-right: 1rem;
-    background-color: #008cba;
-    color: white;
-    &:hover {
-      background-color: #006d8a;
-    }
-  }
-`;
-
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
@@ -52,25 +39,16 @@ const Home: React.FC<HomeProps> = () => {
     config: { duration: 1000 },
   });
 
-  const buttonGroupAnimation = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-    delay: 1500,
-    config: { duration: 1000 },
-  });
-
   return (
     <HomeContainer>
       <Title style={titleAnimation}>Order Taking App</Title>
       <Subtitle style={subtitleAnimation}>
         Taking orders with friends made easy.
       </Subtitle>
-      <ButtonWrapper style={buttonGroupAnimation}>
-        <ButtonGroup size="large">
-          <Button variant="contained">Learn More</Button>
-          <Button variant="outlined">Start Now</Button>
-        </ButtonGroup>
-      </ButtonWrapper>
+      <ButtonGroup size="large" sx={{ marginTop: "2rem" }}>
+        <Button variant="contained">Learn More</Button>
+        <Button variant="outlined">Start Now</Button>
+      </ButtonGroup>
     </HomeContainer>
   );
 };
