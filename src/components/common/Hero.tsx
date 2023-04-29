@@ -1,11 +1,7 @@
 import { Button, ButtonGroup } from "@mui/material";
 import React from "react";
-import styled, { keyframes } from "styled-components";
-
-const fadeIn = keyframes`
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-`;
+import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -13,27 +9,55 @@ const HomeContainer = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
+const Title = styled(animated.h1)`
   font-size: 4rem;
-  animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
-const Subtitle = styled.h2`
+const Subtitle = styled(animated.h2)`
   font-size: 2rem;
-  animation: ${fadeIn} 0.5s ease-in-out;
+`;
+
+const ButtonWrapper = styled(animated.div)`
+  display: flex;
+  margin-top: 2rem;
 `;
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
+  const titleAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 500,
+    config: { duration: 1000 },
+  });
+
+  const subtitleAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 1000,
+    config: { duration: 1000 },
+  });
+
+  const buttonGroupAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 1500,
+    config: { duration: 1000 },
+  });
+
   return (
     <HomeContainer>
-      <Title>Order Taking App</Title>
-      <Subtitle>Taking orders with friends made easy.</Subtitle>
-      <ButtonGroup size="large">
-        <Button variant="contained">Learn More</Button>
-        <Button variant="outlined">Start Taking Orders</Button>
-      </ButtonGroup>
+      <Title style={titleAnimation}>Order Taking App</Title>
+      <Subtitle style={subtitleAnimation}>
+        Taking orders with friends made easy.
+      </Subtitle>
+      <ButtonWrapper style={buttonGroupAnimation}>
+        <ButtonGroup size="large">
+          <Button variant="contained">Learn More</Button>
+          <Button variant="outlined">Start Now</Button>
+        </ButtonGroup>
+      </ButtonWrapper>
     </HomeContainer>
   );
 };
