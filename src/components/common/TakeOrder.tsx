@@ -129,7 +129,7 @@ export default function TakeOrder() {
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               {`${
                 verboseEnabled
-                  ? `Take a new order (Order #${getNextOrderId()})`
+                  ? `New Order (Order #${getNextOrderId()})`
                   : ""
               } ${
                 orderName && !isOnlySpaces(orderName)
