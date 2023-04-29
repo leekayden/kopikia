@@ -13,13 +13,13 @@ const Title = styled(animated.h1)`
   font-size: 4rem;
   font-family: "Roboto", sans-serif;
   margin-bottom: 2rem;
-  font-family: 'Secular One', sans-serif;
+  font-family: "Secular One", sans-serif;
 `;
 
 const Subtitle = styled(animated.h2)`
   font-size: 2rem;
   font-family: "Roboto", sans-serif;
-  font-family: 'Kalam', cursive;
+  font-family: "Kalam", cursive;
 `;
 
 const ButtonWrapper = styled(animated.div)`

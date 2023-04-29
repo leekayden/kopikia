@@ -41,9 +41,22 @@ export default function App() {
             main: "#795548",
           },
         },
+        components: {
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                fontFamily: "'Indie Flower', cursive",
+              },
+            },
+          },
+        },
+        typography: {
+          fontFamily: "'Merienda', cursive",
+        },
       }),
     [prefersDarkMode]
   );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
