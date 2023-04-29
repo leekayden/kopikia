@@ -54,6 +54,8 @@ const houseDrinks = [
   "Water Chestnut",
 ];
 
+const cannedDrinks = ["Coke"];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -181,8 +183,19 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     null
   );
 
+  const [selectedCannedDrink, setSelectedCannedDrink] = useState<string | null>(
+    null
+  );
+
   const handleSelect = (event: React.ChangeEvent<{}>, value: string | null) => {
     setSelectedHouseDrink(value);
+  };
+
+  const handleCannedDrinkSelect = (
+    event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => {
+    setSelectedCannedDrink(value);
   };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -510,10 +523,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [orderList, setOrderList] = useState<orderListType[]>([]);
   const [tehOrderList, setTehOrderList] = useState<orderListType[]>([]);
   const [houseOrderList, setHouseOrderList] = useState<string[]>([]);
+  const [cannedOrderList, setCannedOrderList] = useState<string[]>([]);
 
   const [error, setError] = useState("");
   const [tehError, setTehError] = useState("");
   const [houseDrinkError, setHouseDrinkError] = useState("");
+  const [cannedDrinkError, setCannedDrinkError] = useState("");
 
   function createHouseItem() {
     if (selectedHouseDrink !== null) {
@@ -523,6 +538,17 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       setSelectedHouseDrink(null);
     } else if (selectedHouseDrink === null) {
       setHouseDrinkError("Please select a house drink.");
+    }
+  }
+
+  function createCannedItem() {
+    if (selectedCannedDrink !== null) {
+      setCannedDrinkError("");
+      setCannedOrderList([...cannedOrderList, selectedCannedDrink]);
+      console.log(cannedOrderList);
+      setSelectedCannedDrink(null);
+    } else if (selectedCannedDrink === null) {
+      setCannedDrinkError("Please select a canned drink.");
     }
   }
 
@@ -685,6 +711,20 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const houseOrderDrinkUnique: { name: string; count: number }[] = [];
   Object.entries(houseOrderDrinkCount).forEach(([name, count]) => {
     houseOrderDrinkUnique.push({ name, count });
+  });
+
+  const cannedOrderDrinkCount: { [key: string]: number } = {};
+  cannedOrderList.forEach((item) => {
+    if (cannedOrderDrinkCount[item]) {
+      cannedOrderDrinkCount[item]++;
+    } else {
+      cannedOrderDrinkCount[item] = 1;
+    }
+  });
+
+  const cannedOrderDrinkUnique: { name: string; count: number }[] = [];
+  Object.entries(cannedOrderDrinkCount).forEach(([name, count]) => {
+    cannedOrderDrinkUnique.push({ name, count });
   });
 
   return (
@@ -1046,7 +1086,28 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             </Typography>
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Panel
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={cannedDrinks}
+              value={selectedCannedDrink}
+              onChange={handleCannedDrinkSelect}
+              renderInput={(params) => (
+                <TextField {...params} label="Canned Drink" />
+              )}
+            />
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createCannedItem}
+            >
+              Add Item
+            </Button>
+            <Typography sx={{ marginTop: 1.5 }} color="error">
+              {cannedDrinkError}
+            </Typography>
           </TabPanel>
           <TabPanel value={value} index={4} dir={theme.direction}>
             Panel
@@ -1126,6 +1187,45 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                           houseOrderList
                             .slice(0, index)
                             .concat(houseOrderList.slice(index + 1))
+                        );
+                      }
+                    }}
+                  >
+                    <Remove />
+                  </IconButton>
+                </Tooltip>{" "}
+                {item.name}
+                <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+                  x{item.count}
+                </Typography>
+              </Typography>
+            ))}
+          </Typography>
+          <Typography>
+            {cannedOrderDrinkUnique.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Tooltip title="Increase Amount">
+                  <IconButton
+                    onClick={() => {
+                      setCannedOrderList([...cannedOrderList, item.name]);
+                    }}
+                  >
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Decrease Amount">
+                  <IconButton
+                    onClick={() => {
+                      const index = cannedOrderList.indexOf(item.name);
+                      if (index !== -1) {
+                        setCannedOrderList(
+                          cannedOrderList
+                            .slice(0, index)
+                            .concat(cannedOrderList.slice(index + 1))
                         );
                       }
                     }}
