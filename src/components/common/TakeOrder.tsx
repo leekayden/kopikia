@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -104,21 +104,6 @@ export default function TakeOrder() {
   };
 
   const orderError = orderValue > 20;
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
-  const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-    if (!orderName || !orderValue) {
-      event.preventDefault();
-      event.returnValue =
-        "You have unsaved changes. Are you sure you want to leave?";
-    }
-  };
 
   return (
     <div>
