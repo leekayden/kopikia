@@ -55,7 +55,6 @@ const cannedDrinks = [
   "Fanta",
   "Mountain Dew",
   "Dr. Pepper",
-  "Red Bull",
   "Monster Energy",
   "Gatorade",
   "Arizona Iced Tea",
@@ -63,7 +62,6 @@ const cannedDrinks = [
   "Schweppes Tonic Water",
   "Lipton Brisk Iced Tea",
   "Sunkist Orange Soda",
-  "A&W Root Beer",
   "Canada Dry Ginger Ale",
 ];
 
@@ -1399,7 +1397,9 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               ))
             ) : orderList.length +
                 tehOrderList.length +
-                houseOrderList.length ===
+                houseOrderList.length +
+                cannedOrderList.length +
+                otherOrderList.length ===
               0 ? (
               <div>Nothing here yet...</div>
             ) : null}
@@ -1408,23 +1408,31 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               {`${
                 orderList.length +
                   tehOrderList.length +
-                  houseOrderList.length ===
+                  houseOrderList.length +
+                  cannedOrderList.length +
+                  otherOrderList.length ===
                 0
                   ? "No"
                   : orderList.length +
                     tehOrderList.length +
-                    houseOrderList.length
+                    houseOrderList.length +
+                    cannedOrderList.length +
+                    otherOrderList.length
               } order${
                 orderList.length +
                   tehOrderList.length +
-                  houseOrderList.length ===
+                  houseOrderList.length +
+                  cannedOrderList.length +
+                  otherOrderList.length ===
                 1
                   ? ""
                   : "s"
               }${
                 orderList.length +
                   tehOrderList.length +
-                  houseOrderList.length ===
+                  houseOrderList.length +
+                  cannedOrderList.length +
+                  otherOrderList.length ===
                 0
                   ? " yet..."
                   : ""
