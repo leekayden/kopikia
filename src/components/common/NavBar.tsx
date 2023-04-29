@@ -229,19 +229,7 @@ function NavBar() {
             >
               {AppName}
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {/* {pgClasses.map((page) => (
-                <Button
-                  key={page.name}
-                  // onClick={handleCloseNavMenu}
-                  onClick={page.onClick}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page.name}
-                </Button>
-              ))} */}
-            </Box>
-
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
               <Tooltip title={"Not available yet"}>
                 <Button
