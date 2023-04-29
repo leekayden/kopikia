@@ -157,7 +157,7 @@ export default function TakeOrder() {
                   onChange={handleVerboseToggle}
                 />
               }
-              label={verboseEnabled ? "Desktop Mode" : "Mobile Mode"}
+              label={verboseEnabled ? "Verbose Mode" : "Minimalistic Mode"}
             />
             <FormControlLabel
               control={
