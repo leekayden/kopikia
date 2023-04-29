@@ -56,6 +56,8 @@ const houseDrinks = [
 
 const cannedDrinks = ["Coke"];
 
+const otherDrinks = ["Red Bull", "Green Tea", "Oolong Tea", "Pineapple", "Qoo", "Coconut", "Root Beer"];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -187,6 +189,10 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     null
   );
 
+  const [selectedOtherDrink, setSelectedOtherDrink] = useState<string | null>(
+    null
+  );
+
   const handleSelect = (event: React.ChangeEvent<{}>, value: string | null) => {
     setSelectedHouseDrink(value);
   };
@@ -196,6 +202,13 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     value: string | null
   ) => {
     setSelectedCannedDrink(value);
+  };
+
+  const handleOtherDrinkSelect = (
+    event: React.ChangeEvent<{}>,
+    value: string | null
+  ) => {
+    setSelectedOtherDrink(value);
   };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -524,11 +537,13 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [tehOrderList, setTehOrderList] = useState<orderListType[]>([]);
   const [houseOrderList, setHouseOrderList] = useState<string[]>([]);
   const [cannedOrderList, setCannedOrderList] = useState<string[]>([]);
+  const [otherOrderList, setOtherOrderList] = useState<string[]>([]);
 
   const [error, setError] = useState("");
   const [tehError, setTehError] = useState("");
   const [houseDrinkError, setHouseDrinkError] = useState("");
   const [cannedDrinkError, setCannedDrinkError] = useState("");
+  const [otherDrinkError, setOtherDrinkError] = useState("");
 
   function createHouseItem() {
     if (selectedHouseDrink !== null) {
@@ -549,6 +564,17 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       setSelectedCannedDrink(null);
     } else if (selectedCannedDrink === null) {
       setCannedDrinkError("Please select a canned drink.");
+    }
+  }
+
+  function createOtherItem() {
+    if (selectedOtherDrink !== null) {
+      setOtherDrinkError("");
+      setOtherOrderList([...otherOrderList, selectedOtherDrink]);
+      console.log(otherOrderList);
+      setSelectedOtherDrink(null);
+    } else if (selectedOtherDrink === null) {
+      setOtherDrinkError("Please select a drink.");
     }
   }
 
@@ -725,6 +751,20 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const cannedOrderDrinkUnique: { name: string; count: number }[] = [];
   Object.entries(cannedOrderDrinkCount).forEach(([name, count]) => {
     cannedOrderDrinkUnique.push({ name, count });
+  });
+
+  const otherOrderDrinkCount: { [key: string]: number } = {};
+  otherOrderList.forEach((item) => {
+    if (otherOrderDrinkCount[item]) {
+      otherOrderDrinkCount[item]++;
+    } else {
+      otherOrderDrinkCount[item] = 1;
+    }
+  });
+
+  const otherOrderDrinkUnique: { name: string; count: number }[] = [];
+  Object.entries(otherOrderDrinkCount).forEach(([name, count]) => {
+    otherOrderDrinkUnique.push({ name, count });
   });
 
   return (
@@ -1110,7 +1150,28 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             </Typography>
           </TabPanel>
           <TabPanel value={value} index={4} dir={theme.direction}>
-            Panel
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={otherDrinks}
+              value={selectedOtherDrink}
+              onChange={handleOtherDrinkSelect}
+              renderInput={(params) => (
+                <TextField {...params} label="Other Drinks" />
+              )}
+            />
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createOtherItem}
+            >
+              Add Item
+            </Button>
+            <Typography sx={{ marginTop: 1.5 }} color="error">
+              {otherDrinkError}
+            </Typography>
           </TabPanel>
         </SwipeableViews>
       </Box>
@@ -1226,6 +1287,45 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                           cannedOrderList
                             .slice(0, index)
                             .concat(cannedOrderList.slice(index + 1))
+                        );
+                      }
+                    }}
+                  >
+                    <Remove />
+                  </IconButton>
+                </Tooltip>{" "}
+                {item.name}
+                <Typography sx={{ fontStyle: "italic", marginLeft: "0.5rem" }}>
+                  x{item.count}
+                </Typography>
+              </Typography>
+            ))}
+          </Typography>
+          <Typography>
+            {otherOrderDrinkUnique.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Tooltip title="Increase Amount">
+                  <IconButton
+                    onClick={() => {
+                      setOtherOrderList([...otherOrderList, item.name]);
+                    }}
+                  >
+                    <Add />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Decrease Amount">
+                  <IconButton
+                    onClick={() => {
+                      const index = otherOrderList.indexOf(item.name);
+                      if (index !== -1) {
+                        setOtherOrderList(
+                          otherOrderList
+                            .slice(0, index)
+                            .concat(otherOrderList.slice(index + 1))
                         );
                       }
                     }}
