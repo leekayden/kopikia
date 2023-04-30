@@ -120,7 +120,7 @@ export default function AppFooter() {
               {', licensed by the '}
               <Link
                 href="https://unsplash.com/license/"
-                title="Creative Commons BY 3.0"
+                title="Unsplash License"
                 target="_blank"
                 rel="noopener noreferrer"
               >
