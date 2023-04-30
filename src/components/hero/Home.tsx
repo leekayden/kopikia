@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ProductCategories from './modules/views/ProductCategories';
-import ProductSmokingHero from './modules/views/ProductSmokingHero';
 import AppFooter from './modules/views/AppFooter';
 import ProductHero from './modules/views/ProductHero';
 import ProductValues from './modules/views/ProductValues';
@@ -18,7 +17,6 @@ function Index() {
       <ProductCategories />
       <ProductHowItWorks />
       <ProductCTA />
-      <ProductSmokingHero />
       <AppFooter />
     </React.Fragment>
   );

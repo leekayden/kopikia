@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
-import TextField from '../components/TextField';
+import { TextField } from '@mui/material';
 import Snackbar from '../components/Snackbar';
 import Button from '../components/Button';
+import mailinglistImg from "../../mailinglist.png";
 
 function ProductCTA() {
   const [open, setOpen] = React.useState(false);
@@ -34,14 +35,13 @@ function ProductCTA() {
           >
             <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Receive offers
+                Join Our Mailing List
               </Typography>
               <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+                Get updated on good deals, new features and more!
               </Typography>
               <TextField
-                noBorder
-                placeholder="Your email"
+                placeholder="Email"
                 variant="standard"
                 sx={{ width: '100%', mt: 3, mb: 2 }}
               />
@@ -51,7 +51,7 @@ function ProductCTA() {
                 variant="contained"
                 sx={{ width: '100%' }}
               >
-                Keep me updated
+                Subscribe
               </Button>
             </Box>
           </Box>
@@ -75,7 +75,7 @@ function ProductCTA() {
           />
           <Box
             component="img"
-            src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750"
+            src={mailinglistImg}
             alt="call to action"
             sx={{
               position: 'absolute',
@@ -92,7 +92,7 @@ function ProductCTA() {
       <Snackbar
         open={open}
         closeFunc={handleClose}
-        message="We will send you our best offers, once a week."
+        message="We will send you our best offers when we have them."
       />
     </Container>
   );

@@ -36,10 +36,10 @@ const LANGUAGES = [
     code: 'en-US',
     name: 'English',
   },
-  {
-    code: 'fr-FR',
-    name: 'Français',
-  },
+  // {
+  //   code: 'fr-FR',
+  //   name: 'Français',
+  // },
 ];
 
 export default function AppFooter() {
@@ -58,7 +58,7 @@ export default function AppFooter() {
               spacing={2}
               sx={{ height: 120 }}
             >
-              <Grid item sx={{ display: 'flex' }}>
+              {/* <Grid item sx={{ display: 'flex' }}>
                 <Box component="a" href="https://mui.com/" sx={iconStyle}>
                   <img
                     src="/static/themes/onepirate/appFooterFacebook.png"
@@ -71,7 +71,7 @@ export default function AppFooter() {
                     alt="Twitter"
                   />
                 </Box>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Copyright />
               </Grid>
@@ -112,22 +112,18 @@ export default function AppFooter() {
           </Grid>
           <Grid item>
             <Typography variant="caption">
-              {'Icons made by '}
-              <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
-                Freepik
+              {'Images from '}
+              <Link href="https://unsplash.com" rel="sponsored" title="Unsplash">
+                Unsplash
               </Link>
-              {' from '}
-              <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
-                www.flaticon.com
-              </Link>
-              {' is licensed by '}
+              {' is licensed by the '}
               <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
+                href="https://unsplash.com/license/"
                 title="Creative Commons BY 3.0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                CC 3.0 BY
+                Unsplash License
               </Link>
             </Typography>
           </Grid>
