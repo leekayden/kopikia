@@ -17,6 +17,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tooltip } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 
 class Page {
   name: string;
@@ -312,7 +313,8 @@ function NavBar() {
               {isLoggedIn ? (
                 <div>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={initials} src="/static/images/avatar/2.jpg" />
+                    {/* <Avatar alt={initials} src="/static/images/avatar/2.jpg" /> */}
+                    <AccountCircle fontSize="large" color={prefersDarkMode ? "secondary" : undefined} />
                   </IconButton>
                   <Menu
                     sx={{ mt: "45px" }}
