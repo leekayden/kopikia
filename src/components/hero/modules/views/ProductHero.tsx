@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
@@ -22,7 +21,7 @@ export default function ProductHero() {
         alt="increase priority"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        Order Taking App
       </Typography>
       <Typography
         color="inherit"
