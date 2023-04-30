@@ -69,16 +69,12 @@ export default function TakeOrder() {
     setOpen(false);
   };
 
-  // const isMobile = isMobileDevice();
-  // setVerboseEnabled(!isMobile)
-
   const [verboseEnabled, setVerboseEnabled] = useState(!isMobileDevice());
   const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
   const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
   const [orderName, setOrderName] = useState<string>(
     orderAutoname ? `Order ${currentDate}` : ""
   );
-  const [orderValue, setOrderValue] = useState(ordersEnabled ? 1 : Number);
 
   const handleVerboseToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVerboseEnabled(event.target.checked);
@@ -95,15 +91,6 @@ export default function TakeOrder() {
   const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrderName(event.target.value);
   };
-
-  const handleOrderValueChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = Number(event.target.value);
-    setOrderValue(value);
-  };
-
-  const orderError = orderValue > 20;
 
   return (
     <div>
@@ -142,7 +129,6 @@ export default function TakeOrder() {
               color="inherit"
               onClick={handleClose}
               startIcon={<SaveIcon />}
-              disabled={orderError}
             >
               save
             </Button>
@@ -202,8 +188,6 @@ export default function TakeOrder() {
               helperText="This can be anywhere, it's for your own reference :D"
             />
           </Grid>
-          {/* <EditableList list={["item1"]} type="Orders" /> */}
-          {/* <StepperComponent /> */}
           <Grid item xs={12} sx={{ pl: 2 }}>
             <TabsSelector verbose={verboseEnabled} />
           </Grid>
