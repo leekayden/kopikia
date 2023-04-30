@@ -46,7 +46,7 @@ export default function ProductHero() {
         Start Now
       </Button>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-        All services are free
+        All services are free for now as we are in a developing stage
       </Typography>
     </ProductHeroLayout>
   );
