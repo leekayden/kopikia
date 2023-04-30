@@ -143,6 +143,8 @@ function NavBar() {
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
+  console.log(window.location.pathname)
+
   return (
     <div>
       <AppBar position="static">
@@ -198,12 +200,12 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem
+                {window.location.pathname.toString() === "/" ? null : <MenuItem
                   component="button"
                   onClick={() => window.location.href = "/"}
                 >
                   <Typography textAlign="center">Home</Typography>
-                </MenuItem>
+                </MenuItem>}
                 {pgClasses.map((page) => (
                   <MenuItem
                     component="button"
