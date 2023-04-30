@@ -61,7 +61,7 @@ function ProductHowItWorks() {
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>1.</Box>
+                <Box sx={number}>1</Box>
                 <Create fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Create new order
@@ -70,7 +70,7 @@ function ProductHowItWorks() {
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>2.</Box>
+                <Box sx={number}>2</Box>
                 <HistoryEdu fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Take orders of friends
@@ -79,7 +79,7 @@ function ProductHowItWorks() {
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
-                <Box sx={number}>3.</Box>
+                <Box sx={number}>3</Box>
                 <EmojiFoodBeverage fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Enjoy!
