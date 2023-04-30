@@ -1,6 +1,7 @@
 import NavBar from "./NavBar";
 import ImgBtn from "../components/ImgBtn";
 import Hero from "./Hero";
+import Index from "../hero/Home";
 
 let images = [
   {
@@ -14,9 +15,7 @@ let images = [
 function Home() {
   return (
     <div>
-      <NavBar />
-      <ImgBtn imgLs={images} />
-      <Hero/>
+      <Index />
     </div>
   );
 }
