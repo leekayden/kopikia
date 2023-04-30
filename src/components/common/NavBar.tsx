@@ -197,6 +197,12 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
+                <MenuItem
+                  component="button"
+                  onClick={() => window.location.href = "/"}
+                >
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
                 {pgClasses.map((page) => (
                   <MenuItem
                     component="button"
