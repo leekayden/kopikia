@@ -22,6 +22,8 @@ const Subtitle = styled(animated.h2)`
   font-family: "Kalam", cursive;
 `;
 
+const AnimatedButtonGroup = animated(ButtonGroup);
+
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
@@ -35,8 +37,15 @@ const Home: React.FC<HomeProps> = () => {
   const subtitleAnimation = useSpring({
     opacity: 1,
     from: { opacity: 0 },
-    delay: 1000,
+    delay: 1111,
     config: { duration: 1000 },
+  });
+
+  const buttonAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    delay: 2000,
+    config: { duration: 1750 },
   });
 
   return (
@@ -45,10 +54,14 @@ const Home: React.FC<HomeProps> = () => {
       <Subtitle style={subtitleAnimation}>
         Taking orders with friends made easy.
       </Subtitle>
-      <ButtonGroup size="large" sx={{ marginTop: "2rem" }}>
+      <AnimatedButtonGroup
+        size="large"
+        sx={{ marginTop: "2rem" }}
+        style={buttonAnimation}
+      >
         <Button variant="contained">Learn More</Button>
         <Button variant="outlined">Start Now</Button>
-      </ButtonGroup>
+      </AnimatedButtonGroup>
     </HomeContainer>
   );
 };
