@@ -5,13 +5,14 @@ import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
 import TextField from '../components/TextField';
+import { AppName } from '../../../global/definitions';
 
 function Copyright() {
   return (
     <React.Fragment>
       {'© '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        {AppName}
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -116,7 +117,7 @@ export default function AppFooter() {
               <Link href="https://unsplash.com" rel="sponsored" title="Unsplash">
                 Unsplash
               </Link>
-              {' is licensed by the '}
+              {', licensed by the '}
               <Link
                 href="https://unsplash.com/license/"
                 title="Creative Commons BY 3.0"

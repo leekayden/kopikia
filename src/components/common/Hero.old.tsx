@@ -11,7 +11,6 @@ const HomeContainer = styled.div`
 
 const Title = styled(animated.h1)`
   font-size: 4rem;
-  font-family: "Roboto", sans-serif;
   margin-bottom: 2rem;
   font-family: "Secular One", sans-serif;
 `;

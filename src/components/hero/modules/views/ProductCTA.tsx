@@ -7,6 +7,7 @@ import { TextField } from '@mui/material';
 import Snackbar from '../components/Snackbar';
 import Button from '../components/Button';
 import mailinglistImg from "../../mailinglist.png";
+import productHeroWonder from "../../productHeroWonder.png"
 
 function ProductCTA() {
   const [open, setOpen] = React.useState(false);
@@ -70,7 +71,7 @@ function ProductCTA() {
               right: 0,
               bottom: 0,
               width: '100%',
-              background: 'url(/static/themes/onepirate/productCTAImageDots.png)',
+              background: `url(${productHeroWonder})`,
             }}
           />
           <Box
