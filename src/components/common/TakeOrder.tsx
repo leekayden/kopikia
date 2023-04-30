@@ -23,6 +23,7 @@ import {
   ordersEnabledByDefault,
 } from "../global/data";
 import TabsSelector from "./TabsSelector";
+import { useLocation } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -114,7 +115,7 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {`${
+              {/* {`${
                 verboseEnabled
                   ? `New Order (Order #${getNextOrderId()})`
                   : ""
@@ -122,7 +123,8 @@ export default function TakeOrder() {
                 orderName && !isOnlySpaces(orderName)
                   ? `${verboseEnabled ? " | " : ""}${orderName}`
                   : ""
-              }`}
+              }`} */}
+              Take Order
             </Typography>
             <Button
               autoFocus
