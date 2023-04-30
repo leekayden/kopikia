@@ -1,25 +1,25 @@
-import * as React from 'react';
-import { Theme } from '@mui/material/styles';
-import { SxProps } from '@mui/system';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Button from '../components/Button';
-import Typography from '../components/Typography';
-import { EmojiFoodBeverage } from '@mui/icons-material';
+import * as React from "react";
+import { Theme } from "@mui/material/styles";
+import { SxProps } from "@mui/system";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Button from "../components/Button";
+import Typography from "../components/Typography";
+import { Create, HistoryEdu, EmojiFoodBeverage } from "@mui/icons-material";
 
 const item: SxProps<Theme> = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   px: 5,
 };
 
 const number = {
   fontSize: 24,
-  fontFamily: 'default',
-  color: 'secondary.main',
-  fontWeight: 'medium',
+  fontFamily: "default",
+  color: "secondary.main",
+  fontWeight: "medium",
 };
 
 const image = {
@@ -31,16 +31,16 @@ function ProductHowItWorks() {
   return (
     <Box
       component="section"
-      sx={{ display: 'flex', bgcolor: 'secondary.light', overflow: 'hidden' }}
+      sx={{ display: "flex", bgcolor: "secondary.light", overflow: "hidden" }}
     >
       <Container
         sx={{
           mt: 10,
           mb: 15,
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Box
@@ -48,8 +48,8 @@ function ProductHowItWorks() {
           src="/static/themes/onepirate/productCurvyLines.png"
           alt="curvy lines"
           sx={{
-            pointerEvents: 'none',
-            position: 'absolute',
+            pointerEvents: "none",
+            position: "absolute",
             top: -180,
             opacity: 0.7,
           }}
@@ -62,12 +62,7 @@ function ProductHowItWorks() {
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <Box sx={number}>1.</Box>
-                <Box
-                  component="img"
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
-                  alt="suitcase"
-                  sx={image}
-                />
+                <Create fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Create new order
                 </Typography>
@@ -76,12 +71,7 @@ function ProductHowItWorks() {
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <Box sx={number}>2.</Box>
-                <Box
-                  component="img"
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
-                  alt="graph"
-                  sx={image}
-                />
+                <HistoryEdu fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Take orders of friends
                 </Typography>
@@ -90,7 +80,7 @@ function ProductHowItWorks() {
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <Box sx={number}>3.</Box>
-                <EmojiFoodBeverage sx={image}/>
+                <EmojiFoodBeverage fontSize="large" sx={image} />
                 <Typography variant="h5" align="center">
                   Enjoy!
                 </Typography>
