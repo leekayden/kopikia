@@ -14,14 +14,7 @@ import Grid from "@mui/material/Grid";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import {
-  budgetEnabledByDefault,
-  getNextOrderId,
-  isMobileDevice,
-  isOnlySpaces,
-  orderAutoname,
-  ordersEnabledByDefault,
-} from "../global/data";
+import { isMobileDevice, orderAutoname } from "../global/data";
 import TabsSelector from "./TabsSelector";
 import { useLocation } from "react-router-dom";
 
@@ -35,6 +28,20 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function TakeOrder() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  let predefinedOrderName = undefined;
+  let predefinedLoc = undefined;
+
+  if (queryParams.get("name")) {
+    predefinedOrderName = queryParams.get("name");
+  }
+
+  if (queryParams.get("location")) {
+    predefinedLoc = queryParams.get("location");
+  }
+
   const getCurrentDate = () => {
     const months = [
       "January",
@@ -71,26 +78,26 @@ export default function TakeOrder() {
   };
 
   const [verboseEnabled, setVerboseEnabled] = useState(!isMobileDevice());
-  const [ordersEnabled, setOrdersEnabled] = useState(ordersEnabledByDefault);
-  const [budgetEnabled, setBudgetEnabled] = useState(budgetEnabledByDefault);
   const [orderName, setOrderName] = useState<string>(
-    orderAutoname ? `Order ${currentDate}` : ""
+    predefinedOrderName
+      ? predefinedOrderName
+      : orderAutoname
+      ? `Order ${currentDate}`
+      : ""
   );
+
+  const [loc, setLoc] = useState<string>(predefinedLoc ? predefinedLoc : "");
 
   const handleVerboseToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVerboseEnabled(event.target.checked);
   };
 
-  const handleOrdersToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOrdersEnabled(event.target.checked);
-  };
-
-  const handleBudgetToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBudgetEnabled(event.target.checked);
-  };
-
   const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOrderName(event.target.value);
+  };
+
+  const handleLocChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLoc(event.target.value);
   };
 
   return (
@@ -115,15 +122,6 @@ export default function TakeOrder() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {/* {`${
-                verboseEnabled
-                  ? `New Order (Order #${getNextOrderId()})`
-                  : ""
-              } ${
-                orderName && !isOnlySpaces(orderName)
-                  ? `${verboseEnabled ? " | " : ""}${orderName}`
-                  : ""
-              }`} */}
               Take Order
             </Typography>
             <Button
@@ -132,7 +130,7 @@ export default function TakeOrder() {
               onClick={handleClose}
               startIcon={<SaveIcon />}
             >
-              save
+              Save
             </Button>
           </Toolbar>
         </AppBar>
@@ -146,22 +144,6 @@ export default function TakeOrder() {
                 />
               }
               label={verboseEnabled ? "Verbose Mode" : "Minimalistic Mode"}
-            />
-            <FormControlLabel
-              control={
-                <Switch checked={ordersEnabled} onChange={handleOrdersToggle} />
-              }
-              label={ordersEnabled ? "Orders Enabled" : "Orders Disabled"}
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={budgetEnabled}
-                  onChange={handleBudgetToggle}
-                  disabled
-                />
-              }
-              label={budgetEnabled ? "Budget Enabled" : "Budget Disabled"}
             />
           </FormGroup>
           <Grid item xs={12} sx={{ mb: 2 }}>
@@ -187,6 +169,8 @@ export default function TakeOrder() {
               margin="dense"
               label="Location"
               variant="filled"
+              value={loc}
+              onChange={handleLocChange}
               helperText="This can be anywhere, it's for your own reference :D"
             />
           </Grid>
