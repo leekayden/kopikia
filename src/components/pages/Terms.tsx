@@ -16,10 +16,10 @@ const TermsOfUse: React.FC = () => {
           justifyContent: "center",
           margin: "auto",
           marginTop: 5,
-          border: prefersDarkMode ? "5px solid white" : "5px solid light gray",
-          borderRadius: 5,
-          backgroundColor: "gray",
-          padding: 3,
+          border: prefersDarkMode ? "3px solid white" : "3px solid light gray",
+          borderRadius: 2,
+          backgroundColor: "#333",
+          padding: 2.5,
         }}
       >
         <Typography sx={{ fontSize: "9px" }} color={prefersDarkMode ? "text.primary" : "#fff"}>
