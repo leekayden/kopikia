@@ -143,8 +143,6 @@ function NavBar() {
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  console.log(window.location.pathname);
-
   return (
     <div>
       <AppBar position="static">
