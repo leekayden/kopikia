@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -24,6 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Button, IconButton, TextField, Tooltip } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
+import { isMobileDevice } from "../global/data";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -793,8 +794,14 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             onChange={handleChange}
             indicatorColor="secondary"
             textColor="inherit"
-            variant="fullWidth"
-            aria-label="full width tabs example"
+            variant={isMobileDevice() ? "scrollable" : "fullWidth"}
+            aria-label="Drink Selector"
+            visibleScrollbar
+            sx={{
+              [`& .${tabsClasses.scrollButtons}`]: {
+                '&.Mui-disabled': { opacity: 0.3 },
+              },
+            }}
           >
             <Tab label="Kopi" {...a11yProps(0)} />
             <Tab label="Teh" {...a11yProps(1)} />
