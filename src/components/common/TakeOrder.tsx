@@ -174,7 +174,7 @@ export default function TakeOrder() {
               helperText="This can be anywhere, it's for your own reference :D"
             />
           </Grid>
-          <Grid item xs={12} sx={{ pl: 2 }}>
+          <Grid item xs={12}>
             <TabsSelector verbose={verboseEnabled} />
           </Grid>
         </Grid>
