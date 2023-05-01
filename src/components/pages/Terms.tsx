@@ -15,17 +15,25 @@ const TermsOfUse: React.FC = () => {
           width: "90vw",
           justifyContent: "center",
           margin: "auto",
-          marginTop: 5,
+          mt: 5,
           border: prefersDarkMode ? "3px solid white" : "3px solid light gray",
           borderRadius: 2,
           backgroundColor: "#333",
           padding: 2.5,
         }}
       >
-        <Typography sx={{ fontSize: "9px" }} color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ fontSize: "9px" }}
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           LAST UPDATED: 1 May 2023
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           1. ACCEPTANCE OF TERMS
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">
@@ -44,7 +52,12 @@ const TermsOfUse: React.FC = () => {
           on the Site. Your use of the Site following changes to these Terms of
           Use will constitute your acceptance of those changes.
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           2. ABILITY TO ACCEPT TERMS OF USE
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">
@@ -54,7 +67,12 @@ const TermsOfUse: React.FC = () => {
           affirmations, representations, and warranties set forth in these Terms
           of Use, and to abide by and comply with these Terms of Use.
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           3. SITE ACCESS
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">
@@ -69,7 +87,12 @@ const TermsOfUse: React.FC = () => {
           periods when we are implementing upgrades or carrying our essential
           maintenance on the Site.
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           4. ACCESS TO SITE OUTSIDE OF SINGAPORE
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">
@@ -80,7 +103,12 @@ const TermsOfUse: React.FC = () => {
           Singapore, you do so at your own risk and are responsible for
           compliance with local laws.
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           5. USER CONTENT
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">
@@ -107,7 +135,12 @@ const TermsOfUse: React.FC = () => {
           including reasonable attorneys' fees, arising out of or in any way
           related to your User Content or your use of the Site.
         </Typography>
-        <Typography variant="h6" gutterBottom color={prefersDarkMode ? "text.primary" : "#fff"}>
+        <Typography
+          sx={{ mt: 2 }}
+          variant="h6"
+          gutterBottom
+          color={prefersDarkMode ? "text.primary" : "#fff"}
+        >
           6. INTELLECTUAL PROPERTY RIGHTS
         </Typography>
         <Typography sx={{ fontSize: "12px", color: "#fff" }} component="p">

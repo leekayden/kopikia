@@ -121,7 +121,7 @@ export default function AppFooter() {
               >
                 Unsplash
               </Link>
-              {", licensed by the "}
+              {", licensed under the "}
               <Link
                 href="https://unsplash.com/license/"
                 title="Unsplash License"
