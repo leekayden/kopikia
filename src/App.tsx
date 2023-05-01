@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Error from "./components/common/Error";
 import Home from "./components/common/Home";
 import Order from "./components/common/Order";
+import TermsOfUse from "./components/pages/Terms";
 import TestServer from "./components/TestServer";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
   {
     path: "/order",
     element: <Order />,
+  },
+  {
+    path: "/terms",
+    element: <TermsOfUse />,
   },
   {
     path: "/test",

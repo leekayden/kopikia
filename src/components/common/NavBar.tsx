@@ -143,7 +143,7 @@ function NavBar() {
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  console.log(window.location.pathname)
+  console.log(window.location.pathname);
 
   return (
     <div>
@@ -200,12 +200,14 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {window.location.pathname.toString() === "/" ? null : <MenuItem
-                  component="button"
-                  onClick={() => window.location.href = "/"}
-                >
-                  <Typography textAlign="center">Home</Typography>
-                </MenuItem>}
+                {window.location.pathname.toString() === "/" ? null : (
+                  <MenuItem
+                    component="button"
+                    onClick={() => (window.location.href = "/")}
+                  >
+                    <Typography textAlign="center">Home</Typography>
+                  </MenuItem>
+                )}
                 {pgClasses.map((page) => (
                   <MenuItem
                     component="button"
@@ -314,10 +316,22 @@ function NavBar() {
               )}
               {isLoggedIn ? (
                 <div>
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    {/* <Avatar alt={initials} src="/static/images/avatar/2.jpg" /> */}
-                    <AccountCircle fontSize="large" color={prefersDarkMode ? "secondary" : undefined} />
-                  </IconButton>
+                  <Tooltip title="Not available yet">
+                    <IconButton
+                      aria-disabled
+                      disableFocusRipple
+                      disableTouchRipple
+                      disableRipple
+                      // onClick={handleOpenUserMenu}
+                      sx={{ p: 0 }}
+                    >
+                      {/* <Avatar alt={initials} src="/static/images/avatar/2.jpg" /> */}
+                      <AccountCircle
+                        fontSize="large"
+                        color={prefersDarkMode ? "secondary" : undefined}
+                      />
+                    </IconButton>
+                  </Tooltip>
                   <Menu
                     sx={{ mt: "45px" }}
                     id="menu-appbar"
