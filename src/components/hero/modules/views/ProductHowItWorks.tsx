@@ -5,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
-import { Create, HistoryEdu, EmojiFoodBeverage } from "@mui/icons-material";
+import { Create, HistoryEdu, EmojiFoodBeverage } from "@mui/icons-material"
+import productCurvyLines from "../../productCurvyLines.png";
 
 const item: SxProps<Theme> = {
   display: "flex",
@@ -44,7 +45,7 @@ function ProductHowItWorks() {
       >
         <Box
           component="img"
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src={productCurvyLines}
           alt="curvy lines"
           sx={{
             pointerEvents: "none",
