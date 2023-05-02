@@ -10,7 +10,6 @@ import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
-import { red } from "@mui/material/colors";
 
 export const router = createBrowserRouter([
   {

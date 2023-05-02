@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,17 +18,21 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tooltip } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 class Page {
   name: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  path: string;
 
   constructor(
     name: string,
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    path: string
   ) {
     this.name = name;
     this.onClick = onClick;
+    this.path = path;
   }
 }
 
@@ -62,7 +66,8 @@ const page1 = new Page(
   "Take Order",
   (event: React.MouseEvent<HTMLButtonElement>): void => {
     window.location.replace("/order");
-  }
+  },
+  "/order"
 );
 
 const setting1 = new Setting(
@@ -151,24 +156,22 @@ function NavBar() {
             <EmojiFoodBeverageIcon
               sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
             />
+
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
               }}
             >
-              {AppName}
+              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                {AppName}
+              </Link>
             </Typography>
-
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -281,14 +284,16 @@ function NavBar() {
                 ))}
               </Menu>
               {pgClasses.map((page) => (
-                <Button
-                  key={page.name}
-                  onClick={page.onClick}
-                  color={prefersDarkMode ? "secondary" : undefined}
-                  sx={prefersDarkMode ? undefined : { color: "white" }}
-                >
-                  {page.name}
-                </Button>
+                <Link to={page.path}>
+                  <Button
+                    key={page.name}
+                    // onClick={page.onClick}
+                    color={prefersDarkMode ? "secondary" : undefined}
+                    sx={prefersDarkMode ? undefined : { color: "white" }}
+                  >
+                    {page.name}
+                  </Button>
+                </Link>
               ))}
               <div style={{ width: 15 }}></div>
               {isLoggedIn ? null : (
@@ -368,4 +373,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default memo(NavBar);
