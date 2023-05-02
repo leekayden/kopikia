@@ -131,7 +131,7 @@ export default function TakeOrder() {
             </Typography>
             <Button
               autoFocus
-              color="inherit"
+              color="secondary"
               onClick={handleClose}
               startIcon={<SaveIcon />}
             >

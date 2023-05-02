@@ -156,7 +156,6 @@ function NavBar() {
             <EmojiFoodBeverageIcon
               sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
             />
-
             <Typography
               variant="h6"
               noWrap
@@ -202,20 +201,27 @@ function NavBar() {
                 }}
               >
                 {window.location.pathname.toString() === "/" ? null : (
-                  <MenuItem
-                    component="button"
-                    onClick={() => (window.location.href = "/")}
-                  >
-                    <Typography textAlign="center">Home</Typography>
+                  <MenuItem component="button">
+                    <Link
+                      to="/"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography textAlign="center">Home</Typography>
+                    </Link>
                   </MenuItem>
                 )}
                 {pgClasses.map((page) => (
                   <MenuItem
                     component="button"
                     key={page.name}
-                    onClick={page.onClick}
+                    // onClick={page.onClick}
                   >
-                    <Typography textAlign="center">{page.name}</Typography>
+                    <Link
+                      to={page.path}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography textAlign="center">{page.name}</Typography>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -226,8 +232,6 @@ function NavBar() {
             <Typography
               variant="h5"
               noWrap
-              component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -239,7 +243,9 @@ function NavBar() {
                 textDecoration: "none",
               }}
             >
-              {AppName}
+              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                {AppName}
+              </Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
