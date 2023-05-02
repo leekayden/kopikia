@@ -17,7 +17,7 @@ function ProductCTA() {
     setOpen(true);
     setTimeout(() => {
       setOpen(false);
-    }, 6000);
+    }, 4500);
   };
 
   const handleClose = () => {
