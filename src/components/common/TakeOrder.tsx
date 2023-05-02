@@ -167,6 +167,7 @@ export default function TakeOrder() {
                   ? "This autofills as autonaming of orders is on. Please visit the settings page to turn off."
                   : undefined
               }
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
@@ -179,6 +180,7 @@ export default function TakeOrder() {
               value={loc}
               onChange={handleLocChange}
               helperText="This can be anywhere, it's for your own reference :D"
+              color="secondary"
             />
           </Grid>
           <Grid item xs={12}>
