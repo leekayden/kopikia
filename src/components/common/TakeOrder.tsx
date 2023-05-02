@@ -102,7 +102,12 @@ export default function TakeOrder() {
 
   return (
     <div>
-      <Button variant="contained" size="large" onClick={handleClickOpen}>
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
+        onClick={handleClickOpen}
+      >
         Take new order
       </Button>
       <Dialog
