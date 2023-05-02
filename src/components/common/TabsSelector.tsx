@@ -355,6 +355,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTypeChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -372,6 +373,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleThicknessChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -389,6 +391,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleSugarChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -406,6 +409,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTempChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
