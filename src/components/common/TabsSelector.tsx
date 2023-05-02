@@ -50,20 +50,17 @@ const houseDrinks = [
 ];
 
 const cannedDrinks = [
-  "Coca-Cola",
+  "Coke",
   "Pepsi",
   "Sprite",
-  "Fanta",
+  "100 Plus",
+  "Mineral Water",
+  "Chrysanthemum Tea",
+  "Kickapoo",
+  "China Apple",
+  "Jia Jia",
   "Mountain Dew",
-  "Dr. Pepper",
-  "Monster Energy",
-  "Gatorade",
-  "Arizona Iced Tea",
-  "Nestea",
-  "Schweppes Tonic Water",
-  "Lipton Brisk Iced Tea",
-  "Sunkist Orange Soda",
-  "Canada Dry Ginger Ale",
+  "Fanta",
 ];
 
 const otherDrinks = [
