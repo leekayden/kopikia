@@ -10,7 +10,7 @@ import { AppName } from "../../../global/definitions";
 function Copyright() {
   return (
     <React.Fragment>
-      {"© "}
+      {"\u00A9 "}
       <Link color="inherit" href="/">
         {AppName}
       </Link>{" "}
