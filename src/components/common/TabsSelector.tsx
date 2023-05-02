@@ -872,6 +872,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                     size="large"
                     startIcon={<Add />}
                     onClick={createItem}
+                    color="secondary"
                   >
                     Add Item
                   </Button>
@@ -960,6 +961,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                     size="large"
                     startIcon={<Add />}
                     onClick={createItem}
+                    color="secondary"
                   >
                     Add Item
                   </Button>
@@ -1027,6 +1029,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                     size="large"
                     startIcon={<Add />}
                     onClick={createTehItem}
+                    color="secondary"
                   >
                     Add Item
                   </Button>
@@ -1115,6 +1118,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                     size="large"
                     startIcon={<Add />}
                     onClick={createTehItem}
+                    color="secondary"
                   >
                     Add Item
                   </Button>

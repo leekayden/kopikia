@@ -141,9 +141,11 @@ export default function TakeOrder() {
                 <Switch
                   checked={verboseEnabled}
                   onChange={handleVerboseToggle}
+                  color="secondary"
                 />
               }
-              label={verboseEnabled ? "Verbose Mode" : "Minimalistic Mode"}
+              // label={verboseEnabled ? "Verbose Mode" : "Minimalistic Mode"}
+              label="Desktop Mode"
             />
           </FormGroup>
           <Grid item xs={12} sx={{ mb: 2 }}>

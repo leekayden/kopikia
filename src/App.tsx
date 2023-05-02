@@ -10,6 +10,7 @@ import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
+import { red } from "@mui/material/colors";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +44,14 @@ export default function App() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: "#795548",
+            light: '#69696a',
+            main: '#28282a',
+            dark: '#1e1e1f',
+          },
+          secondary: {
+            light: '#fff5f8',
+            main: '#ff3366',
+            dark: '#e62958',
           },
         },
         components: {
