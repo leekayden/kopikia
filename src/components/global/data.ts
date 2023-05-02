@@ -22,10 +22,18 @@ export function isMobileDevice() {
     "windows phone",
   ];
 
+  const screenWidth = window.screen.width;
+  const screenHeight = window.screen.height;
+  const isScreenSmall = Math.min(screenWidth, screenHeight) < 768;
+
   for (let i = 0; i < mobileKeywords.length; i++) {
     if (userAgent.includes(mobileKeywords[i])) {
       return true;
     }
+  }
+
+  if (isScreenSmall) {
+    return true;
   }
 
   return false;
