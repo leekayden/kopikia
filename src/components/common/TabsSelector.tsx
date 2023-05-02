@@ -811,7 +811,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             <Tab label="Teh" {...a11yProps(1)} />
             <Tab label="House" {...a11yProps(2)} />
             <Tab label="Canned" {...a11yProps(3)} />
-            <Tab label="Others" {...a11yProps(4)} />
+            <Tab label="Others" {...a11yProps(4)} disabled />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -1150,6 +1150,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               size="large"
               startIcon={<Add />}
               onClick={createHouseItem}
+              color="secondary"
             >
               Add Item
             </Button>
@@ -1174,6 +1175,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               size="large"
               startIcon={<Add />}
               onClick={createCannedItem}
+              color="secondary"
             >
               Add Item
             </Button>
@@ -1198,6 +1200,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               size="large"
               startIcon={<Add />}
               onClick={createOtherItem}
+              color="secondary"
             >
               Add Item
             </Button>
