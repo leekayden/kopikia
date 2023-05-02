@@ -17,6 +17,7 @@ import Switch from "@mui/material/Switch";
 import { isMobileDevice, orderAutoname } from "../global/data";
 import TabsSelector from "./TabsSelector";
 import { useLocation } from "react-router-dom";
+import Snackbar from "../hero/modules/components/Snackbar";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -132,7 +133,9 @@ export default function TakeOrder() {
             <Button
               autoFocus
               color="secondary"
-              onClick={handleClose}
+              onClick={() => {
+                handleClose();
+              }}
               startIcon={<SaveIcon />}
             >
               Save

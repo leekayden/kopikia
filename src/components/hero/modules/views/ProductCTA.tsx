@@ -15,6 +15,9 @@ function ProductCTA() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 6000);
   };
 
   const handleClose = () => {
