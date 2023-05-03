@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, ReactNode, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -21,7 +21,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
-import { Button, IconButton, TextField, Tooltip } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputLabel,
+  Radio,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { isMobileDevice } from "../global/data";
@@ -208,8 +220,11 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     null
   );
 
-  const handleSelect = (event: React.ChangeEvent<{}>, value: string | null) => {
-    setSelectedHouseDrink(value);
+  const handleSelect = (
+    event: SelectChangeEvent<string | null>,
+    value: ReactNode
+  ) => {
+    setSelectedHouseDrink(event.target.value);
   };
 
   const handleCannedDrinkSelect = (
@@ -564,6 +579,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [cannedDrinkError, setCannedDrinkError] = useState("");
   const [otherDrinkError, setOtherDrinkError] = useState("");
 
+  const [selectedHouseDrinkRadio, setSelectedHouseDrinkRadio] = useState(houseDrinks[0]);
+
+  const handleHouseDrinkChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedHouseDrinkRadio(event.target.value);
+  };
+
   function createHouseItem() {
     if (selectedHouseDrink !== null) {
       setHouseDrinkError("");
@@ -800,7 +821,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             visibleScrollbar
             sx={{
               [`& .${tabsClasses.scrollButtons}`]: {
-                '&.Mui-disabled': { opacity: 0.3 },
+                "&.Mui-disabled": { opacity: 0.3 },
               },
             }}
           >
@@ -1139,30 +1160,50 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             )}
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={houseDrinks}
-              value={selectedHouseDrink}
-              onChange={handleSelect}
-              renderInput={(params) => (
-                <TextField {...params} label="House Drink" />
-              )}
-            />
+            <Grid container spacing={2}>
+              {houseDrinks.map((option, index) => (
+                <Grid key={index} item xs={12} sm={4}>
+                  <FormControlLabel
+                    value={option}
+                    control={<Radio />}
+                    label={option}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+            <Grid container spacing={2}>
+              {houseDrinks.map((option, index) => (
+                <Grid key={index} item xs={12} sm={4}>
+                  <FormControlLabel
+                    value={option}
+                    control={
+                      <Radio
+                        checked={selectedHouseDrinkRadio === option}
+                        onChange={handleHouseDrinkChange}
+                      />
+                    }
+                    label={option}
+                  />
+                </Grid>
+              ))}
+            </Grid>
             <Button
-              sx={{ marginTop: 1.5 }}
               variant="contained"
               size="large"
               startIcon={<Add />}
               onClick={createHouseItem}
               color="secondary"
+              sx={{ marginBottom: 2 }}
             >
               Add Item
             </Button>
-            <Typography sx={{ marginTop: 1.5 }} color="error">
-              {houseDrinkError}
-            </Typography>
+            {houseDrinkError && (
+              <Typography color="error" sx={{ marginBottom: 2 }}>
+                {houseDrinkError}
+              </Typography>
+            )}
           </TabPanel>
+
           <TabPanel value={value} index={3} dir={theme.direction}>
             <Autocomplete
               disablePortal
