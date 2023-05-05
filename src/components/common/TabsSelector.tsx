@@ -837,7 +837,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             <Tab label="Teh" {...a11yProps(1)} />
             <Tab label="House" {...a11yProps(2)} />
             <Tab label="Canned" {...a11yProps(3)} />
-            <Tab label="Others" {...a11yProps(4)} disabled />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -1244,31 +1243,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             </Button>
             <Typography sx={{ marginTop: 1.5 }} color="error">
               {cannedDrinkError}
-            </Typography>
-          </TabPanel>
-          <TabPanel value={value} index={4} dir={theme.direction}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={otherDrinks}
-              value={selectedOtherDrink}
-              onChange={handleOtherDrinkSelect}
-              renderInput={(params) => (
-                <TextField {...params} label="Other Drinks" />
-              )}
-            />
-            <Button
-              sx={{ marginTop: 1.5 }}
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
-              onClick={createOtherItem}
-              color="secondary"
-            >
-              Add Item
-            </Button>
-            <Typography sx={{ marginTop: 1.5 }} color="error">
-              {otherDrinkError}
             </Typography>
           </TabPanel>
         </SwipeableViews>
