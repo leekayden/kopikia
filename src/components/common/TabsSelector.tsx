@@ -34,7 +34,7 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
+import { Add, Remove, RestartAlt } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { isMobileDevice } from "../global/data";
 import { pink } from "@mui/material/colors";
@@ -1494,6 +1494,21 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               }`}
             </Typography>
           </Typography>
+          <Button
+            sx={{ marginTop: 2 }}
+            variant="contained"
+            color="secondary"
+            size="large"
+            startIcon={<RestartAlt />}
+            onClick={() => {
+              setOrderList([]);
+              setTehOrderList([]);
+              setHouseOrderList([]);
+              setCannedOrderList([]);
+            }}
+          >
+            Reset
+          </Button>
         </AccordionDetails>
       </Accordion>
     </Box>
