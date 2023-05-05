@@ -217,30 +217,9 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     null
   );
 
-  const [selectedOtherDrink, setSelectedOtherDrink] = useState<string | null>(
-    null
+  const [selectedOtherDrink, setSelectedOtherDrink] = useState<string>(
+    ""
   );
-
-  const handleSelect = (
-    event: SelectChangeEvent<string | null>,
-    value: ReactNode
-  ) => {
-    setSelectedHouseDrink(event.target.value);
-  };
-
-  const handleCannedDrinkSelect = (
-    event: React.ChangeEvent<{}>,
-    value: string | null
-  ) => {
-    setSelectedCannedDrink(value);
-  };
-
-  const handleOtherDrinkSelect = (
-    event: React.ChangeEvent<{}>,
-    value: string | null
-  ) => {
-    setSelectedOtherDrink(value);
-  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -596,6 +575,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     setSelectedCannedDrinkRadio(event.target.value);
   };
 
+  const handleOtherDrinkChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSelectedOtherDrink(event.target.value);
+  };
+
   function createHouseItem() {
     if (selectedHouseDrinkRadio !== null) {
       setHouseDrinkError("");
@@ -617,12 +602,12 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function createOtherItem() {
-    if (selectedOtherDrink !== null) {
+    if (selectedOtherDrink !== "") {
       setOtherDrinkError("");
       setOtherOrderList([...otherOrderList, selectedOtherDrink]);
-      setSelectedOtherDrink(null);
-    } else if (selectedOtherDrink === null) {
-      setOtherDrinkError("Please select a drink.");
+      setSelectedOtherDrink("");
+    } else if (selectedOtherDrink === "") {
+      setOtherDrinkError("Please input a drink.");
     }
   }
 
@@ -837,6 +822,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             <Tab label="Teh" {...a11yProps(1)} />
             <Tab label="House" {...a11yProps(2)} />
             <Tab label="Canned" {...a11yProps(3)} />
+            <Tab label="Others" {...a11yProps(4)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -1190,7 +1176,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 </Grid>
               ))}
             </Grid>
-            <hr/>
+            <hr />
             <Button
               variant="contained"
               size="large"
@@ -1207,7 +1193,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               </Typography>
             )}
           </TabPanel>
-
           <TabPanel value={value} index={3} dir={theme.direction}>
             <Grid container spacing={2}>
               {cannedDrinks.map((option, index) => (
@@ -1232,7 +1217,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 </Grid>
               ))}
             </Grid>
-            <hr/>
+            <hr />
             <Button
               sx={{ marginTop: 1.5 }}
               variant="contained"
@@ -1245,6 +1230,35 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             </Button>
             <Typography sx={{ marginTop: 1.5 }} color="error">
               {cannedDrinkError}
+            </Typography>
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  sx={{width: "100%"}}
+                  id="other-drink-input"
+                  label="Other Drink"
+                  color="secondary"
+                  variant="filled"
+                  value={selectedOtherDrink}
+                  onChange={handleOtherDrinkChange}
+                />
+              </Grid>
+            </Grid>
+            <hr />
+            <Button
+              sx={{ marginTop: 1.5 }}
+              variant="contained"
+              size="large"
+              startIcon={<Add />}
+              onClick={createOtherItem}
+              color="secondary"
+            >
+              Add Item
+            </Button>
+            <Typography sx={{ marginTop: 1.5 }} color="error">
+              {otherDrinkError}
             </Typography>
           </TabPanel>
         </SwipeableViews>
