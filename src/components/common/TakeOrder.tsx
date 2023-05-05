@@ -17,7 +17,6 @@ import Switch from "@mui/material/Switch";
 import { isMobileDevice, orderAutoname } from "../global/data";
 import TabsSelector from "./TabsSelector";
 import { useLocation } from "react-router-dom";
-import Snackbar from "../hero/modules/components/Snackbar";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -142,53 +141,8 @@ export default function TakeOrder() {
             </Button>
           </Toolbar>
         </AppBar>
-        <Grid container sx={{ p: 3 }}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={verboseEnabled}
-                  onChange={handleVerboseToggle}
-                  color="secondary"
-                />
-              }
-              // label={verboseEnabled ? "Verbose Mode" : "Minimalistic Mode"}
-              label="Desktop Mode"
-            />
-          </FormGroup>
-          <Grid item xs={12} sx={{ mb: 2 }}>
-            <TextField
-              fullWidth
-              id="order-name"
-              margin="dense"
-              label="Order Name"
-              variant="filled"
-              value={orderName}
-              onChange={handleOrderChange}
-              helperText={
-                orderAutoname
-                  ? "This autofills as autonaming of orders is on. Please visit the settings page to turn off."
-                  : undefined
-              }
-              color="secondary"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="location"
-              margin="dense"
-              label="Location"
-              variant="filled"
-              value={loc}
-              onChange={handleLocChange}
-              helperText="This can be anywhere, it's for your own reference :D"
-              color="secondary"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TabsSelector verbose={verboseEnabled} />
-          </Grid>
+        <Grid container sx={{ p: 3 }} xs={12}>
+          <TabsSelector verbose={verboseEnabled} />
         </Grid>
       </Dialog>
     </div>
