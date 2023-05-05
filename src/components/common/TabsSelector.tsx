@@ -580,32 +580,38 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [cannedDrinkError, setCannedDrinkError] = useState("");
   const [otherDrinkError, setOtherDrinkError] = useState("");
 
-  const [selectedHouseDrinkRadio, setSelectedHouseDrinkRadio] = useState(
-    houseDrinks[0]
-  );
+  const [selectedHouseDrinkRadio, setSelectedHouseDrinkRadio] = useState<
+    string | null
+  >(null);
+
+  const [selectedCannedDrinkRadio, setSelectedCannedDrinkRadio] = useState<
+    string | null
+  >(null);
 
   const handleHouseDrinkChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedHouseDrinkRadio(event.target.value);
+  };
+
+  const handleCannedDrinkChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedCannedDrinkRadio(event.target.value);
   };
 
   function createHouseItem() {
     if (selectedHouseDrinkRadio !== null) {
       setHouseDrinkError("");
       setHouseOrderList([...houseOrderList, selectedHouseDrinkRadio]);
-      console.log(houseOrderList);
-      setSelectedHouseDrink(null);
+      setSelectedHouseDrinkRadio(null);
     } else if (selectedHouseDrinkRadio === null) {
       setHouseDrinkError("Please select a house drink.");
     }
   }
 
   function createCannedItem() {
-    if (selectedCannedDrink !== null) {
+    if (selectedCannedDrinkRadio !== null) {
       setCannedDrinkError("");
-      setCannedOrderList([...cannedOrderList, selectedCannedDrink]);
-      console.log(cannedOrderList);
-      setSelectedCannedDrink(null);
-    } else if (selectedCannedDrink === null) {
+      setCannedOrderList([...cannedOrderList, selectedCannedDrinkRadio]);
+      setSelectedCannedDrinkRadio(null);
+    } else if (selectedCannedDrinkRadio === null) {
       setCannedDrinkError("Please select a canned drink.");
     }
   }
@@ -614,7 +620,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     if (selectedOtherDrink !== null) {
       setOtherDrinkError("");
       setOtherOrderList([...otherOrderList, selectedOtherDrink]);
-      console.log(otherOrderList);
       setSelectedOtherDrink(null);
     } else if (selectedOtherDrink === null) {
       setOtherDrinkError("Please select a drink.");
@@ -1204,16 +1209,29 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
           </TabPanel>
 
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={cannedDrinks}
-              value={selectedCannedDrink}
-              onChange={handleCannedDrinkSelect}
-              renderInput={(params) => (
-                <TextField {...params} label="Canned Drink" />
-              )}
-            />
+            <Grid container spacing={2}>
+              {cannedDrinks.map((option, index) => (
+                <Grid key={index} item xs={12} sm={4}>
+                  <FormControlLabel
+                    value={option}
+                    control={
+                      <Radio
+                        checked={selectedCannedDrinkRadio === option}
+                        onChange={handleCannedDrinkChange}
+                        sx={{
+                          color: pink[800],
+                          "&.Mui-checked": {
+                            color: pink[600],
+                          },
+                        }}
+                      />
+                    }
+                    label={option}
+                    color="secondary"
+                  />
+                </Grid>
+              ))}
+            </Grid>
             <Button
               sx={{ marginTop: 1.5 }}
               variant="contained"
