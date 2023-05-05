@@ -1190,6 +1190,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 </Grid>
               ))}
             </Grid>
+            <hr/>
             <Button
               variant="contained"
               size="large"
@@ -1231,6 +1232,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 </Grid>
               ))}
             </Grid>
+            <hr/>
             <Button
               sx={{ marginTop: 1.5 }}
               variant="contained"
