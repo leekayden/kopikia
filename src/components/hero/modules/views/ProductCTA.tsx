@@ -100,7 +100,7 @@ function ProductCTA() {
       <Snackbar
         open={open}
         closeFunc={handleClose}
-        message="We are very sorry, we do not have our mailing list set up yet! However, feel free to check back, or read out blog when it's up!"
+        message="We are very sorry, but we do not have our mailing list set up yet! However, feel free to check back, or read out blog when it's up!"
         // message="We will send you our best offers when we have them."
       />
     </Container>
