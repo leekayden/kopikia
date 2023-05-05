@@ -37,6 +37,7 @@ import {
 import { Add, Remove } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { isMobileDevice } from "../global/data";
+import { pink } from "@mui/material/colors";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
 const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
@@ -579,19 +580,21 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [cannedDrinkError, setCannedDrinkError] = useState("");
   const [otherDrinkError, setOtherDrinkError] = useState("");
 
-  const [selectedHouseDrinkRadio, setSelectedHouseDrinkRadio] = useState(houseDrinks[0]);
+  const [selectedHouseDrinkRadio, setSelectedHouseDrinkRadio] = useState(
+    houseDrinks[0]
+  );
 
   const handleHouseDrinkChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedHouseDrinkRadio(event.target.value);
   };
 
   function createHouseItem() {
-    if (selectedHouseDrink !== null) {
+    if (selectedHouseDrinkRadio !== null) {
       setHouseDrinkError("");
-      setHouseOrderList([...houseOrderList, selectedHouseDrink]);
+      setHouseOrderList([...houseOrderList, selectedHouseDrinkRadio]);
       console.log(houseOrderList);
       setSelectedHouseDrink(null);
-    } else if (selectedHouseDrink === null) {
+    } else if (selectedHouseDrinkRadio === null) {
       setHouseDrinkError("Please select a house drink.");
     }
   }
@@ -1165,24 +1168,20 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
                 <Grid key={index} item xs={12} sm={4}>
                   <FormControlLabel
                     value={option}
-                    control={<Radio />}
-                    label={option}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-            <Grid container spacing={2}>
-              {houseDrinks.map((option, index) => (
-                <Grid key={index} item xs={12} sm={4}>
-                  <FormControlLabel
-                    value={option}
                     control={
                       <Radio
                         checked={selectedHouseDrinkRadio === option}
                         onChange={handleHouseDrinkChange}
+                        sx={{
+                          color: pink[800],
+                          "&.Mui-checked": {
+                            color: pink[600],
+                          },
+                        }}
                       />
                     }
                     label={option}
+                    color="secondary"
                   />
                 </Grid>
               ))}
