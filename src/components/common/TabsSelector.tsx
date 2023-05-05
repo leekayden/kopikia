@@ -36,7 +36,7 @@ import {
 } from "@mui/material";
 import { Add, Remove, RestartAlt } from "@mui/icons-material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { isMobileDevice } from "../global/data";
+import { isMobileDevice, isOnlySpaces } from "../global/data";
 import { pink } from "@mui/material/colors";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
@@ -217,9 +217,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     null
   );
 
-  const [selectedOtherDrink, setSelectedOtherDrink] = useState<string>(
-    ""
-  );
+  const [selectedOtherDrink, setSelectedOtherDrink] = useState<string>("");
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -602,11 +600,17 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function createOtherItem() {
-    if (selectedOtherDrink !== "") {
+    if (
+      selectedOtherDrink !== "" &&
+      !isOnlySpaces(selectedOtherDrink) === true
+    ) {
       setOtherDrinkError("");
       setOtherOrderList([...otherOrderList, selectedOtherDrink]);
       setSelectedOtherDrink("");
-    } else if (selectedOtherDrink === "") {
+    } else if (
+      selectedOtherDrink === "" &&
+      !isOnlySpaces(selectedOtherDrink) === true
+    ) {
       setOtherDrinkError("Please input a drink.");
     }
   }
@@ -1236,7 +1240,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  sx={{width: "100%"}}
+                  sx={{ width: "100%" }}
                   id="other-drink-input"
                   label="Other Drink"
                   color="secondary"
