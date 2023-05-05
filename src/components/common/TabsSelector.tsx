@@ -1521,6 +1521,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
               setTehOrderList([]);
               setHouseOrderList([]);
               setCannedOrderList([]);
+              setOtherOrderList([]);
             }}
           >
             Reset
