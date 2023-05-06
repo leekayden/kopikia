@@ -601,15 +601,13 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   function createOtherItem() {
     if (
-      selectedOtherDrink !== "" &&
-      !isOnlySpaces(selectedOtherDrink) === true
+      selectedOtherDrink !== ""
     ) {
       setOtherDrinkError("");
       setOtherOrderList([...otherOrderList, selectedOtherDrink]);
       setSelectedOtherDrink("");
     } else if (
-      selectedOtherDrink === "" &&
-      !isOnlySpaces(selectedOtherDrink) === true
+      selectedOtherDrink === ""
     ) {
       setOtherDrinkError("Please input a drink.");
     }
