@@ -15,7 +15,6 @@ import { isLoggedIn, initials, ownerId } from "../global/data";
 import { AppName } from "../global/definitions";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tooltip } from "@mui/material";
 import { AccountCircle, DarkMode, LightMode } from "@mui/icons-material";
 import { Link } from "react-router-dom";
