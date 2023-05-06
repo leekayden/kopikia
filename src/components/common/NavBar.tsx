@@ -263,7 +263,7 @@ function NavBar() {
               {globalState.darkMode ? <LightMode /> : <DarkMode />}
             </IconButton>
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              <Tooltip title={"Not available yet"}>
+              {/* <Tooltip title={"Not available yet"}>
                 <Button
                   // onClick={handleOpenUserMenu2}
                   color={globalState.darkMode ? "secondary" : undefined}
@@ -278,7 +278,7 @@ function NavBar() {
                 >
                   Good Deals
                 </Button>
-              </Tooltip>
+              </Tooltip> */}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -317,7 +317,7 @@ function NavBar() {
                 </Link>
               ))}
               <div style={{ width: 15 }}></div>
-              {isLoggedIn ? null : (
+              {/* {isLoggedIn ? null : (
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
@@ -337,8 +337,8 @@ function NavBar() {
                     Sign Up
                   </Button>
                 </div>
-              )}
-              {isLoggedIn ? (
+              )} */}
+              {/* {isLoggedIn ? (
                 <div>
                   <Tooltip title="Not available yet">
                     <IconButton
@@ -349,7 +349,7 @@ function NavBar() {
                       // onClick={handleOpenUserMenu}
                       sx={{ p: 0 }}
                     >
-                      {/* <Avatar alt={initials} src="/static/images/avatar/2.jpg" /> */}
+                      <Avatar alt={initials} src="/static/images/avatar/2.jpg" />
                       <AccountCircle
                         fontSize="large"
                         color={globalState.darkMode ? "secondary" : undefined}
@@ -385,7 +385,7 @@ function NavBar() {
                     ))}
                   </Menu>
                 </div>
-              ) : null}
+              ) : null} */}
             </Box>
           </Toolbar>
         </Container>
