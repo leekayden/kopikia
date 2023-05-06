@@ -10,6 +10,7 @@ import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
+import { AppContext, GlobalState } from "./AppContext";
 
 export const router = createBrowserRouter([
   {
@@ -43,14 +44,14 @@ export default function App() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            light: '#69696a',
-            main: '#28282a',
-            dark: '#1e1e1f',
+            light: "#69696a",
+            main: "#28282a",
+            dark: "#1e1e1f",
           },
           secondary: {
-            light: '#fff5f8',
-            main: '#ff3366',
-            dark: '#e62958',
+            light: "#fff5f8",
+            main: "#ff3366",
+            dark: "#e62958",
           },
         },
         components: {
@@ -71,10 +72,16 @@ export default function App() {
     [prefersDarkMode]
   );
 
+  const [globalState, setGlobalState] = React.useState<GlobalState>({
+    darkMode: prefersDarkMode,
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={router} />
+      <AppContext.Provider value={{ globalState, setGlobalState }}>
+        <RouterProvider router={router} />
+      </AppContext.Provider>
     </ThemeProvider>
   );
 }
