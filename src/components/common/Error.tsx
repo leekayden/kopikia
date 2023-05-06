@@ -1,8 +1,10 @@
+import React, { useContext } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./Error.css";
 import { Home } from "@mui/icons-material";
 import NavBar from "./NavBar";
+import { AppContext } from "../../AppContext";
 
 export interface ErrorProps {
   errorCode: number;
@@ -10,6 +12,7 @@ export interface ErrorProps {
 }
 
 export default function Error(props: ErrorProps) {
+  const { globalState, setGlobalState } = useContext(AppContext);
   const { errorCode, message } = props;
   const handleHomeClick = () => {
     window.location.href = "/";
@@ -47,7 +50,7 @@ export default function Error(props: ErrorProps) {
                 Back Home
               </Button>
             </Grid>
-            {errorCode === 404 ? (
+            {errorCode === 404 && !globalState.darkMode ? (
               <Grid xs={6}>
                 <img
                   src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
