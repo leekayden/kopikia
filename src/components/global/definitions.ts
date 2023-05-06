@@ -1,2 +1,2 @@
 export const AppName = "KopiKia"
-export const apiHost = "http://localhost:3003/";
+export const apiHost = "http://express-kopikia.vercel.app/";
