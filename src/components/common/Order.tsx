@@ -1,4 +1,6 @@
+import { isMobileDevice } from "../global/data";
 import NavBar from "./NavBar";
+import TabsSelector from "./TabsSelector";
 import TakeOrder from "./TakeOrder";
 import { Grid } from "@mui/material";
 
@@ -14,7 +16,10 @@ function Order() {
         alignItems="center"
         justifyContent="center"
       >
-        <TakeOrder />
+        {/* <TakeOrder /> */}
+        <Grid container sx={{ p: 3 }} xs={12}>
+          <TabsSelector verbose={!isMobileDevice()} />
+        </Grid>
       </Grid>
     </div>
   );
