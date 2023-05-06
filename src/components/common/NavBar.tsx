@@ -251,7 +251,16 @@ function NavBar() {
               </Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
-            <IconButton color="secondary" onClick={() => setGlobalState({...globalState, darkMode: !globalState.darkMode})}>
+            <IconButton
+              sx={{ display: "none" }}
+              color="secondary"
+              onClick={() =>
+                setGlobalState({
+                  ...globalState,
+                  darkMode: !globalState.darkMode,
+                })
+              }
+            >
               {globalState.darkMode ? <LightMode /> : <DarkMode />}
             </IconButton>
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
@@ -259,7 +268,9 @@ function NavBar() {
                 <Button
                   // onClick={handleOpenUserMenu2}
                   color={globalState.darkMode ? "secondary" : undefined}
-                  sx={globalState.darkMode ? { color: "grey" } : { color: "grey" }}
+                  sx={
+                    globalState.darkMode ? { color: "grey" } : { color: "grey" }
+                  }
                   disableElevation
                   disableFocusRipple
                   disableTouchRipple
