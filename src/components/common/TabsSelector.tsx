@@ -266,7 +266,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   const handleTehTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTehType(event.target.value as "" | "Teh-O" | "Teh" | "Teh-C");
-    console.log(tehType);
   };
   const handleTehThicknessChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -629,7 +628,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       setThickness("Normal");
       setSugar("Normal");
       setTemp("Hot");
-      console.log(orderList);
     } else {
       let unfilled = [];
       if (type === "") {
@@ -649,7 +647,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function addNewSameItem(item: orderListType & { count: number }) {
-    console.log(item.type, item.thickness, item.sugar, item.temp);
     setOrderList([
       ...orderList,
       {
@@ -686,7 +683,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       setTehThickness("Normal");
       setTehSugar("Normal");
       setTehTemp("Hot");
-      console.log(tehOrderList);
     } else {
       let unfilledTeh = [];
       if (type === "") {
@@ -708,7 +704,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function addNewSameTehItem(item: orderListType & { count: number }) {
-    console.log(item.type, item.thickness, item.sugar, item.temp);
     setTehOrderList([
       ...tehOrderList,
       {

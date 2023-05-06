@@ -307,7 +307,7 @@ function NavBar() {
                 ))}
               </Menu>
               {pgClasses.map((page) => (
-                <Link to={page.path}>
+                <Link to={page.path} key={page.name}>
                   <Button
                     key={page.name}
                     color={globalState.darkMode ? "secondary" : undefined}
