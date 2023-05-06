@@ -36,13 +36,17 @@ export const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [globalState, setGlobalState] = React.useState<GlobalState>({
+    darkMode: useMediaQuery("(prefers-color-scheme: dark)"),
+  });
+
+  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: prefersDarkMode ? "dark" : "light",
+          mode: globalState.darkMode ? "dark" : "light",
           primary: {
             light: "#69696a",
             main: "#28282a",
@@ -69,19 +73,15 @@ export default function App() {
           fontFamily: "'Merienda', cursive",
         },
       }),
-    [prefersDarkMode]
+    [globalState.darkMode]
   );
 
-  const [globalState, setGlobalState] = React.useState<GlobalState>({
-    darkMode: prefersDarkMode,
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppContext.Provider value={{ globalState, setGlobalState }}>
+    <AppContext.Provider value={{ globalState, setGlobalState }}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         <RouterProvider router={router} />
-      </AppContext.Provider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 }

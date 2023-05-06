@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,8 +17,9 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Tooltip } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { AccountCircle, DarkMode, LightMode } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../AppContext";
 
 class Page {
   name: string;
@@ -146,7 +147,9 @@ function NavBar() {
     setAnchorElUser2(null);
   };
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const { globalState, setGlobalState } = useContext(AppContext);
 
   return (
     <div>
@@ -248,12 +251,15 @@ function NavBar() {
               </Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
+            <IconButton color="secondary" onClick={() => setGlobalState({...globalState, darkMode: !globalState.darkMode})}>
+              {globalState.darkMode ? <LightMode /> : <DarkMode />}
+            </IconButton>
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
               <Tooltip title={"Not available yet"}>
                 <Button
                   // onClick={handleOpenUserMenu2}
-                  color={prefersDarkMode ? "secondary" : undefined}
-                  sx={prefersDarkMode ? { color: "grey" } : { color: "grey" }}
+                  color={globalState.darkMode ? "secondary" : undefined}
+                  sx={globalState.darkMode ? { color: "grey" } : { color: "grey" }}
                   disableElevation
                   disableFocusRipple
                   disableTouchRipple
@@ -293,9 +299,8 @@ function NavBar() {
                 <Link to={page.path}>
                   <Button
                     key={page.name}
-                    // onClick={page.onClick}
-                    color={prefersDarkMode ? "secondary" : undefined}
-                    sx={prefersDarkMode ? undefined : { color: "white" }}
+                    color={globalState.darkMode ? "secondary" : undefined}
+                    sx={globalState.darkMode ? undefined : { color: "white" }}
                   >
                     {page.name}
                   </Button>
@@ -337,7 +342,7 @@ function NavBar() {
                       {/* <Avatar alt={initials} src="/static/images/avatar/2.jpg" /> */}
                       <AccountCircle
                         fontSize="large"
-                        color={prefersDarkMode ? "secondary" : undefined}
+                        color={globalState.darkMode ? "secondary" : undefined}
                       />
                     </IconButton>
                   </Tooltip>
