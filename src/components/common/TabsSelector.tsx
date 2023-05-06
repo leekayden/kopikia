@@ -39,7 +39,7 @@ const defineThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
 const defineTemp = ["", "Hot", "Peng", "Lukewarm"];
 
-const defineTehTypes = ["", "Teh-O", "Teh", "Teh-C"];
+const defineTehTypes = ["", "Teh-O", "Teh", "Teh-C", "Teh Tarik", "Teh Halia"];
 const defineTehThickness = ["", "Po", "Gau", "Di Lo", "Normal"];
 const defineTehSugar = ["", "Gah Dai", "Siew Dai", "Kosong", "Normal"];
 const defineTehTemp = ["", "Hot", "Peng", "Lukewarm"];
@@ -230,7 +230,9 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
     setTemp(event.target.value as "" | "Hot" | "Peng" | "Lukewarm");
   };
 
-  const [tehType, setTehType] = useState<"" | "Teh-O" | "Teh" | "Teh-C">("");
+  const [tehType, setTehType] = useState<
+    "" | "Teh-O" | "Teh" | "Teh-C" | "Teh Tarik" | "Teh Halia"
+  >("");
   const [tehThickness, setTehThickness] = useState<
     "" | "Po" | "Gau" | "Di Lo" | "Normal"
   >("Normal");
@@ -242,7 +244,15 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   );
 
   const handleTehTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTehType(event.target.value as "" | "Teh-O" | "Teh" | "Teh-C");
+    setTehType(
+      event.target.value as
+        | ""
+        | "Teh-O"
+        | "Teh"
+        | "Teh-C"
+        | "Teh Tarik"
+        | "Teh Halia"
+    );
   };
   const handleTehThicknessChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -433,13 +443,23 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
       </Typography>
     ),
     createTehData(
-      null,
+      <Typography color={tehType === "Teh Tarik" ? "secondary" : undefined}>
+        Teh Tarik
+      </Typography>,
       <Typography color={tehThickness === "Normal" ? "secondary" : undefined}>
         Normal
       </Typography>,
       <Typography color={tehSugar === "Normal" ? "secondary" : undefined}>
         Normal
       </Typography>,
+      null
+    ),
+    createTehData(
+      <Typography color={tehType === "Teh Halia" ? "secondary" : undefined}>
+        Teh Halia
+      </Typography>,
+      null,
+      null,
       null
     ),
     createTehData(
@@ -450,6 +470,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTehTypeChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -467,6 +488,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTehThicknessChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -484,6 +506,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTehSugarChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -501,6 +524,7 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
         onChange={handleTehTempChange}
         variant="filled"
         sx={{ width: 250 }}
+        color="secondary"
       >
         <MenuItem value="" disabled selected>
           <em>Select</em>
@@ -576,15 +600,11 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   }
 
   function createOtherItem() {
-    if (
-      selectedOtherDrink !== ""
-    ) {
+    if (selectedOtherDrink !== "") {
       setOtherDrinkError("");
       setOtherOrderList([...otherOrderList, selectedOtherDrink]);
       setSelectedOtherDrink("");
-    } else if (
-      selectedOtherDrink === ""
-    ) {
+    } else if (selectedOtherDrink === "") {
       setOtherDrinkError("Please input a drink.");
     }
   }
