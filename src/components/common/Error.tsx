@@ -1,6 +1,7 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./Error.css";
+import { Home } from "@mui/icons-material";
 
 export interface ErrorProps {
   errorCode: number;
@@ -11,7 +12,7 @@ export default function Error(props: ErrorProps) {
   const { errorCode, message } = props;
   const handleHomeClick = () => {
     window.location.href = "/";
-  }
+  };
   return (
     <div>
       <Box
@@ -33,10 +34,14 @@ export default function Error(props: ErrorProps) {
                   ? message
                   : "An unknown error occurred, we will get to it as soon as possible."}
               </Typography>
-              <Button variant="contained" onClick={handleHomeClick}>
-                {/* <Link color="inherit" underline="none" href="/">
-                  Back Home
-                </Link> */}
+              <Button
+                sx={{ marginTop: 2 }}
+                size="large"
+                color="secondary"
+                variant="contained"
+                startIcon={<Home />}
+                onClick={handleHomeClick}
+              >
                 Back Home
               </Button>
             </Grid>
