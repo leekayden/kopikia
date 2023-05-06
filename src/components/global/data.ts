@@ -21,7 +21,6 @@ export function isMobileDevice() {
     "ipad",
     "windows phone",
   ];
-
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
   const isScreenSmall = Math.min(screenWidth, screenHeight) < 768;
