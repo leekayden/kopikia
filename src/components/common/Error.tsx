@@ -2,6 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./Error.css";
 import { Home } from "@mui/icons-material";
+import NavBar from "./NavBar";
 
 export interface ErrorProps {
   errorCode: number;
@@ -15,12 +16,13 @@ export default function Error(props: ErrorProps) {
   };
   return (
     <div>
+      <NavBar />
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          minHeight: "100vh",
+          minHeight: "80vh",
         }}
       >
         <Container maxWidth="md">
