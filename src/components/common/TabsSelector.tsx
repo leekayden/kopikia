@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -23,20 +23,15 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import {
   Button,
-  FormControl,
   FormControlLabel,
   Grid,
   IconButton,
-  InputLabel,
   Radio,
-  Select,
-  SelectChangeEvent,
   TextField,
   Tooltip,
 } from "@mui/material";
 import { Add, Remove, RestartAlt } from "@mui/icons-material";
-import Autocomplete from "@mui/material/Autocomplete";
-import { isMobileDevice, isOnlySpaces } from "../global/data";
+import { isMobileDevice } from "../global/data";
 import { pink } from "@mui/material/colors";
 
 const defineTypes = ["", "Kopi-O", "Kopi", "Kopi-C"];
@@ -74,16 +69,6 @@ const cannedDrinks = [
   "Jia Jia",
   "Mountain Dew",
   "Fanta",
-];
-
-const otherDrinks = [
-  "Red Bull",
-  "Green Tea",
-  "Oolong Tea",
-  "Pineapple",
-  "Qoo",
-  "Coconut",
-  "Root Beer",
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -208,14 +193,6 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
 
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-
-  const [selectedHouseDrink, setSelectedHouseDrink] = useState<string | null>(
-    null
-  );
-
-  const [selectedCannedDrink, setSelectedCannedDrink] = useState<string | null>(
-    null
-  );
 
   const [selectedOtherDrink, setSelectedOtherDrink] = useState<string>("");
 
