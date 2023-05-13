@@ -11,8 +11,9 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AppContext, GlobalState } from "./AppContext";
+import QRCodeGenerator from "./components/components/QRCodeGenerator";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
   {
     path: "/order",
     element: <Order />,
+  },
+  {
+    path: "/qr",
+    element: <QRCodeGenerator />,
   },
   {
     path: "/terms",
@@ -39,8 +44,6 @@ export default function App() {
   const [globalState, setGlobalState] = React.useState<GlobalState>({
     darkMode: useMediaQuery("(prefers-color-scheme: dark)"),
   });
-
-  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
     () =>

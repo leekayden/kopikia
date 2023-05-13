@@ -551,6 +551,44 @@ export default function TabsSelector({ verbose = true }: TabsSelectorProps) {
   const [cannedOrderList, setCannedOrderList] = useState<string[]>([]);
   const [otherOrderList, setOtherOrderList] = useState<string[]>([]);
 
+  interface EncodedOrderList {
+    orderList: number;
+    tehOrderList: number;
+    houseOrderList: number;
+    cannedOrderList: number;
+    otherOrderList: number;
+  }
+  
+  const encodeOrderLists = (lists: EncodedOrderList): number => {
+    // We'll use the first 10 bits for each list, which allows us to store up to 1024 values per list
+    const orderListBits = lists.orderList & 0x3FF;
+    const tehOrderListBits = (lists.tehOrderList & 0x3FF) << 10;
+    const houseOrderListBits = (lists.houseOrderList & 0x3FF) << 20;
+    const cannedOrderListBits = (lists.cannedOrderList & 0x3FF) << 30;
+    const otherOrderListBits = (lists.otherOrderList & 0x3FF) << 40;
+  
+    // Combine the bits into a single number using bitwise OR
+    return orderListBits | tehOrderListBits | houseOrderListBits | cannedOrderListBits | otherOrderListBits;
+  };
+  
+  const decodeOrderLists = (encoded: number): EncodedOrderList => {
+    // Extract each set of bits using bitwise AND and right shifts
+    const orderList = encoded & 0x3FF;
+    const tehOrderList = (encoded >> 10) & 0x3FF;
+    const houseOrderList = (encoded >> 20) & 0x3FF;
+    const cannedOrderList = (encoded >> 30) & 0x3FF;
+    const otherOrderList = (encoded >> 40) & 0x3FF;
+  
+    // Return the decoded values as an object
+    return {
+      orderList,
+      tehOrderList,
+      houseOrderList,
+      cannedOrderList,
+      otherOrderList,
+    };
+  };
+
   const [error, setError] = useState("");
   const [tehError, setTehError] = useState("");
   const [houseDrinkError, setHouseDrinkError] = useState("");
